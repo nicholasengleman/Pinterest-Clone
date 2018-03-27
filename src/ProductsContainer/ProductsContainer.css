@@ -1,0 +1,7 @@
+.productContainer {
+	border: 1px solid black;
+	width: 80%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
