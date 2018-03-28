@@ -1,4 +1,5 @@
 import React from 'react';
+import Highlight from 'react-highlight-words';
 import './Product.css';
 
 class Product extends React.Component {
@@ -20,10 +21,18 @@ class Product extends React.Component {
 				<div className="editPanel">
 					<button onClick={this.removeProduct}>Remove</button>
 				</div>
-				<div className="productPic"><img src={this.props.productImage} alt="" /></div>
-				<h1>{this.props.productName}</h1>
+				<div className="productPic"><img src={this.props.productImage} alt=""/></div>
+				<h1>
+					<Highlight
+						searchWords={[this.props.searchString]}
+						textToHighlight={this.props.productName}
+					/>
+				</h1>
 				<p>{this.props.productPrice}</p>
-				<p>{this.props.productDescription}</p>
+				<Highlight
+					searchWords={[this.props.searchString]}
+					textToHighlight={this.props.productDescription}
+				/>
 			</div>
 		)
 	}

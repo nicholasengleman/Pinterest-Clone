@@ -59,7 +59,7 @@ class App extends Component {
 				return false;
 			}
 		});
-		this.setState({filteredProducts: filteredProductList });
+		this.setState({filteredProducts: filteredProductList, searchString: [searchInput] });
 	}
 
 	removeProduct(productToRemove) {
@@ -82,6 +82,7 @@ class App extends Component {
 				<main className="homepage">
 					<Sidebar/>
 					<ProductsContainer products={this.state.filteredProducts}
+									   searchString={this.state.searchString}
 									   removeProduct={this.removeProduct}
 					/>
 				</main>

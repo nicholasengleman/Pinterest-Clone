@@ -24,7 +24,7 @@ class Header extends React.Component {
 						   className="searchInput"
 						   ref="searchInput"
 						   onChange={this.searchInputChange}
-						   placeholder="search"/>
+						   placeholder=" realtime search"/>
 				</form>
 			</header>
 		)
