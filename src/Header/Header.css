@@ -1,0 +1,18 @@
+header {
+	border: 1px solid black;
+	height: 120px;
+}
+
+h1 {
+	text-align: center;
+}
+
+.headerSearchAddInput {
+	float: right;
+	margin-right: 50px;
+}
+
+.searchInput {
+	border: 1px solid black;
+	height: 30px;
+}
