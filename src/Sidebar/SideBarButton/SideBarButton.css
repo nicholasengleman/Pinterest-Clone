@@ -1,0 +1,44 @@
+.sideBarButton {
+	width: 90%;
+	margin: 5px auto;
+	height: 30px;
+	position: relative;
+}
+
+.sideBarButton button:hover {
+	background: #e8e8e8;
+	cursor: pointer;
+}
+
+.sideBarButton button {
+	width: 100%;
+	line-height: 30px;
+	font-size: 16px;
+	border: none;
+	outline: none;
+	font-weight: bold;
+}
+
+.sideBarButton__NotSelected button {
+	background: lightgrey;
+}
+
+.sideBarButton__Selected button {
+	background: #ababab;
+}
+
+.filterBadge {
+	display: inline-block;
+	border: 1px solid black;
+	height: 16px;
+	width: 16px;
+	line-height: 16px;
+	font-size: 12px;
+	border-radius: 25%;
+	background: #ff8477;
+	color: white;
+	float: right;
+	position: absolute;
+	top: 7px;
+	right: 7px;
+}

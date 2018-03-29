@@ -24,13 +24,13 @@ class Product extends React.Component {
 				<div className="productPic"><img src={this.props.productImage} alt=""/></div>
 				<h1>
 					<Highlight
-						searchWords={[this.props.searchString]}
+						searchWords={[this.props.searchString.toString()]}
 						textToHighlight={this.props.productName}
 					/>
 				</h1>
 				<p>{this.props.productPrice}</p>
 				<Highlight
-					searchWords={[this.props.searchString]}
+					searchWords={[this.props.searchString.toString()]}
 					textToHighlight={this.props.productDescription}
 				/>
 			</div>

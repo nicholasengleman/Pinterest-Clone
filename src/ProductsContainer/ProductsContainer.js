@@ -7,7 +7,7 @@ class ProductsContainer extends React.Component {
 	render() {
 		return (
 			<div className="productContainer">
-				{
+				{this.props.products.length> 0 ?
 					this.props.products.map(product => (
 						<Product
 							key = {product.productKey}
@@ -19,7 +19,7 @@ class ProductsContainer extends React.Component {
 							searchString={this.props.searchString}
 							publicKey = {product.productKey}
 						/>
-					))
+					)) : <p>Sorry, we are out of products!</p>
 				}
 			</div>
 		)
