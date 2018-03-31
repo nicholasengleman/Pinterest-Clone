@@ -12,6 +12,7 @@ class ProductsContainer extends React.Component {
 						<Product
 							key = {product.productKey}
 							removeProduct = {this.props.removeProduct}
+							submitNewProductInfo={this.props.submitNewProductInfo}
 							productImage = {product.productImageAddress}
 							productName = {product.productName}
 							productPrice = {product.productPrice}

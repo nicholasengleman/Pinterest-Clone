@@ -1,7 +1,6 @@
 .productContainer {
-	border: 1px solid black;
 	width: 80%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
+	column-count: 4;
+	column-gap: 0;
+	padding: 20px 0 0 20px;
 }

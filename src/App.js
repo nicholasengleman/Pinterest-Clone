@@ -19,7 +19,109 @@ const initialData = [
 		productName: 'trees',
 		productPrice: 20,
 		productDescription: 'good oxygen',
-		productTags: ['plants', 'decor'],
+		productTags: ['plants', 'decor', 'bernadette'],
+		productKey: 6778678
+	},
+	{
+		productImageAddress: 'https://www.cats.org.uk/uploads/images/featurebox_sidebar_kids/grief-and-loss.jpg',
+		productName: 'cats',
+		productPrice: 5000,
+		productDescription: 'good for protecting you',
+		productTags: ['pets', 'gift'],
+		productKey: 12361
+
+	},
+	{
+		productImageAddress: 'https://media.mercola.com/assets/images/food-facts/apple.jpg',
+		productName: 'apples',
+		productPrice: 87,
+		productDescription: 'good for keeping the doctor away',
+		productTags: ['food', 'health', 'gift'],
+		productKey: 6438678
+	},
+	{
+		productImageAddress: 'https://www.villagehatshop.com/photos/product/giant/4511390S61354/alt/61354.jpg',
+		productName: 'hat',
+		productPrice: 5,
+		productDescription: 'goes on your head',
+		productTags: ['clothes', 'hats', 'fashion', 'pets', 'bernadette'],
+		productKey: 123123
+
+	},
+	{
+		productImageAddress: 'https://images-na.ssl-images-amazon.com/images/I/71QpFBDc2CL._SL1000_.jpg',
+		productName: 'trees',
+		productPrice: 20,
+		productDescription: 'good oxygen',
+		productTags: ['plants', 'decor', 'bernadette'],
+		productKey: 6778678
+	},
+	{
+		productImageAddress: 'https://www.cats.org.uk/uploads/images/featurebox_sidebar_kids/grief-and-loss.jpg',
+		productName: 'cats',
+		productPrice: 5000,
+		productDescription: 'good for protecting you',
+		productTags: ['pets', 'gift'],
+		productKey: 12361
+
+	},
+	{
+		productImageAddress: 'https://media.mercola.com/assets/images/food-facts/apple.jpg',
+		productName: 'apples',
+		productPrice: 87,
+		productDescription: 'good for keeping the doctor away',
+		productTags: ['food', 'health', 'gift'],
+		productKey: 6438678
+	},
+	{
+		productImageAddress: 'https://www.villagehatshop.com/photos/product/giant/4511390S61354/alt/61354.jpg',
+		productName: 'hat',
+		productPrice: 5,
+		productDescription: 'goes on your head',
+		productTags: ['clothes', 'hats', 'fashion', 'pets', 'bernadette'],
+		productKey: 123123
+
+	},
+	{
+		productImageAddress: 'https://images-na.ssl-images-amazon.com/images/I/71QpFBDc2CL._SL1000_.jpg',
+		productName: 'trees',
+		productPrice: 20,
+		productDescription: 'good oxygen',
+		productTags: ['plants', 'decor', 'bernadette'],
+		productKey: 6778678
+	},
+	{
+		productImageAddress: 'https://www.cats.org.uk/uploads/images/featurebox_sidebar_kids/grief-and-loss.jpg',
+		productName: 'cats',
+		productPrice: 5000,
+		productDescription: 'good for protecting you',
+		productTags: ['pets', 'gift'],
+		productKey: 12361
+
+	},
+	{
+		productImageAddress: 'https://media.mercola.com/assets/images/food-facts/apple.jpg',
+		productName: 'apples',
+		productPrice: 87,
+		productDescription: 'good for keeping the doctor away',
+		productTags: ['food', 'health', 'gift'],
+		productKey: 6438678
+	},
+	{
+		productImageAddress: 'https://www.villagehatshop.com/photos/product/giant/4511390S61354/alt/61354.jpg',
+		productName: 'hat',
+		productPrice: 5,
+		productDescription: 'goes on your head',
+		productTags: ['clothes', 'hats', 'fashion', 'pets', 'bernadette'],
+		productKey: 123123
+
+	},
+	{
+		productImageAddress: 'https://images-na.ssl-images-amazon.com/images/I/71QpFBDc2CL._SL1000_.jpg',
+		productName: 'trees',
+		productPrice: 20,
+		productDescription: 'good oxygen',
+		productTags: ['plants', 'decor', 'bernadette'],
 		productKey: 6778678
 	},
 	{
@@ -63,11 +165,14 @@ class App extends Component {
 		};
 
 		this.removeProduct = this.removeProduct.bind(this);
+		this.editProduct = this.editProduct.bind(this);
 		this.findNumPoductsMatchPriceFilter = this.findNumPoductsMatchPriceFilter.bind(this);
 		this.findNumPoductsMatchTagFilter = this.findNumPoductsMatchTagFilter.bind(this);
 		this.updatePriceFilter = this.updatePriceFilter.bind(this);
 		this.updateTagFilter = this.updateTagFilter.bind(this);
 		this.updateSearchParameter = this.updateSearchParameter.bind(this);
+		this.addNewContent = this.addNewContent.bind(this);
+		this.submitNewProductInfo = this.submitNewProductInfo.bind(this);
 	}
 
 	componentWillMount() {
@@ -93,8 +198,19 @@ class App extends Component {
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 	}
 
+	editProduct(productToRemove) {
+		this.baseproductList = this.baseproductList.filter(product => {
+			if (product.productKey !== productToRemove) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+	}
 
-	updateSearchParameter(searchParameter) {
+
+
+		updateSearchParameter(searchParameter) {
 		this.searchFilterParameter = searchParameter;
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
@@ -128,7 +244,6 @@ class App extends Component {
 			}
 		}
 
-		console.log(this.TagFilterParameters);
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
@@ -264,11 +379,41 @@ class App extends Component {
 		this.setState({MeetsTagFilters: tagsCount});
 	}
 
+	addNewContent() {
+		this.baseproductList.unshift({
+				productImageAddress: '',
+				productName: 'aaa',
+				productPrice: 5,
+				productDescription: 'adasdasd',
+				productTags: ['barbies', 'zoos'],
+				productKey: 16783
+			});
+		this.basetags = [];
+		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
+		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
+		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
+	}
+
+	submitNewProductInfo(productKey, newImgSrc, newName, newPrice, newDescription) {
+		this.baseproductList.forEach(product => {
+			if (product.productKey === productKey) {
+				product.productImageAddress = newImgSrc;
+				product.productName = newName;
+				product.productPrice = newPrice;
+				product.productDescription = newDescription;
+			}
+		});
+		this.basetags = [];
+		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
+		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
+		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
+	}
+
 
 	render() {
 		return (
 			<div>
-				<Header filterProducts={this.updateSearchParameter}/>
+				<Header filterProducts={this.updateSearchParameter} addNewContent={this.addNewContent}/>
 				<main className="homepage">
 					<Sidebar priceUnder25={this.state.MeetsPriceFilters.priceUnder25}
 							 price25to50={this.state.MeetsPriceFilters.price25to50}
@@ -282,6 +427,8 @@ class App extends Component {
 					<ProductsContainer products={this.state.DisplayedProductList}
 									   searchString={this.searchFilterParameter}
 									   removeProduct={this.removeProduct}
+									   editProduct={this.editProduct}
+									   submitNewProductInfo={this.submitNewProductInfo}
 					/>
 				</main>
 			</div>

@@ -6,10 +6,16 @@ class Header extends React.Component {
 		super(props);
 
 		this.searchInputChange = this.searchInputChange.bind(this);
+		this.addNewContent = this.addNewContent.bind(this);
 	}
 
 	searchInputChange(event) {
 		this.props.filterProducts(this.refs.searchInput.value);
+		event.preventDefault();
+	}
+
+	addNewContent(event) {
+		this.props.addNewContent();
 		event.preventDefault();
 	}
 
@@ -18,6 +24,7 @@ class Header extends React.Component {
 			<header>
 				<h1>React</h1>
 				<form id="search" className="headerSearchAddInput">
+					<button onClick={this.addNewContent}>add new content</button>
 					<input type="search"
 						   id="search"
 						   name="search"
