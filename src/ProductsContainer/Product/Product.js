@@ -1,6 +1,7 @@
 import React from 'react';
 import Highlight from 'react-highlight-words';
 import './Product.css';
+import Tag from './Tag/Tag';
 
 class Product extends React.Component {
 	constructor(props) {
@@ -21,6 +22,11 @@ class Product extends React.Component {
 				<div className="editPanel">
 					<button onClick={this.removeProduct}>Remove</button>
 				</div>
+				<div className='tagContainer'>
+					{this.props.productTags.map(tag => (
+						<Tag text={tag} key={tag}/>
+					))}
+				</div>
 				<div className="productPic"><img src={this.props.productImage} alt=""/></div>
 				<h1>
 					<Highlight
@@ -28,6 +34,7 @@ class Product extends React.Component {
 						textToHighlight={this.props.productName}
 					/>
 				</h1>
+
 				<p>{this.props.productPrice}</p>
 				<Highlight
 					searchWords={[this.props.searchString.toString()]}

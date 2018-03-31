@@ -10,14 +10,16 @@ const initialData = [
 		productName: 'hat',
 		productPrice: 5,
 		productDescription: 'goes on your head',
+		productTags: ['clothes', 'hats', 'fashion', 'pets', 'bernadette'],
 		productKey: 123123
 
 	},
 	{
 		productImageAddress: 'https://images-na.ssl-images-amazon.com/images/I/71QpFBDc2CL._SL1000_.jpg',
 		productName: 'trees',
-		productPrice: 35,
+		productPrice: 20,
 		productDescription: 'good oxygen',
+		productTags: ['plants', 'decor'],
 		productKey: 6778678
 	},
 	{
@@ -25,6 +27,7 @@ const initialData = [
 		productName: 'cats',
 		productPrice: 5000,
 		productDescription: 'good for protecting you',
+		productTags: ['pets', 'gift'],
 		productKey: 12361
 
 	},
@@ -33,6 +36,7 @@ const initialData = [
 		productName: 'apples',
 		productPrice: 87,
 		productDescription: 'good for keeping the doctor away',
+		productTags: ['food', 'health', 'gift'],
 		productKey: 6438678
 	}
 ];
@@ -41,7 +45,10 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.baseproductList = [];
+		this.basetags = [];
 		this.searchFilterParameter = '';
+		this.TagFilterParameters = [];
+		this.FilteredProductList = [];
 		this.PriceFilterParameters = {
 			'Under $25': false,
 			'$25 to $50': false,
@@ -50,26 +57,24 @@ class App extends Component {
 			'$200 & above': false
 		};
 		this.state = {
-			filteredproductList: [],
-			QuantityThatMeetPriceFilters: {
-				priceUnder25: 0,
-				price25to50: 0,
-				price50to100: 0,
-				price100to200: 0,
-				priceOver200: 0
-			}
+			DisplayedProductList: [],
+			MeetsPriceFilters: {},
+			MeetsTagFilters: []
 		};
 
 		this.removeProduct = this.removeProduct.bind(this);
-		this.findNumberOfPoductsThatMatchEachFilter = this.findNumberOfPoductsThatMatchEachFilter.bind(this);
+		this.findNumPoductsMatchPriceFilter = this.findNumPoductsMatchPriceFilter.bind(this);
+		this.findNumPoductsMatchTagFilter = this.findNumPoductsMatchTagFilter.bind(this);
 		this.updatePriceFilter = this.updatePriceFilter.bind(this);
+		this.updateTagFilter = this.updateTagFilter.bind(this);
 		this.updateSearchParameter = this.updateSearchParameter.bind(this);
 	}
 
 	componentWillMount() {
-		this.findNumberOfPoductsThatMatchEachFilter(initialData);
+		this.findNumPoductsMatchPriceFilter(initialData);
+		this.findNumPoductsMatchTagFilter(initialData);
 		this.baseproductList = initialData;
-		this.setState({filteredproductList: initialData});
+		this.setState({DisplayedProductList: initialData});
 	}
 
 
@@ -81,13 +86,19 @@ class App extends Component {
 				return false;
 			}
 		});
-		this.findNumberOfPoductsThatMatchEachFilter(this.filterProductsByPrice(this.filterProductsBySearch()));
+
+		this.basetags = [];
+		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
+		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
+		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 	}
 
 
 	updateSearchParameter(searchParameter) {
 		this.searchFilterParameter = searchParameter;
-		this.findNumberOfPoductsThatMatchEachFilter(this.filterProductsByPrice(this.filterProductsBySearch()));
+		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
+		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
+		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 	}
 
 	updatePriceFilter(filter) {
@@ -95,7 +106,32 @@ class App extends Component {
 			...this.PriceFilterParameters,
 			[filter]: !this.PriceFilterParameters[filter]
 		};
-		this.findNumberOfPoductsThatMatchEachFilter(this.filterProductsByPrice(this.filterProductsBySearch()));
+		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
+		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
+		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
+	}
+
+	updateTagFilter(filter) {
+		let filterAdded = false;
+		if (this.TagFilterParameters.length < 1) {
+			this.TagFilterParameters.push([filter, true]);
+		} else {
+			for (let e = 0; e < this.TagFilterParameters.length; e++) {
+				if (this.TagFilterParameters[e][0] === filter) {
+					this.TagFilterParameters[e] = [filter, !this.TagFilterParameters[e][1]];
+					filterAdded = true;
+					break;
+				}
+			}
+			if(!filterAdded) {
+				this.TagFilterParameters.push([filter, true]);
+			}
+		}
+
+		console.log(this.TagFilterParameters);
+		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
+		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
+		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 	}
 
 	filterProductsBySearch() {
@@ -120,7 +156,7 @@ class App extends Component {
 		} else {
 			alwaysReturnTrue = false;
 		}
-		let filteredProductList = editedproductList.filter(product => {
+		let FilteredProductList = editedproductList.filter(product => {
 			if (params['Under $25'] || alwaysReturnTrue) {
 				if (product.productPrice < 25) {
 					return true;
@@ -147,14 +183,38 @@ class App extends Component {
 				}
 			}
 		});
-		this.setState({filteredproductList: filteredProductList});
-		return filteredProductList;
+		return FilteredProductList;
+	}
+
+	filterProductsByTag(editedproductList) {
+		let alwaysReturnTrue = false;
+		let params = this.TagFilterParameters;
+		if (params.length === 0) {
+			alwaysReturnTrue = true;
+		} else if (params.every(tag => tag[1] === false)) {
+			alwaysReturnTrue = true;
+		} else {
+			alwaysReturnTrue = false;
+		}
+		let FilteredProductList = editedproductList.filter(product => {
+			if (alwaysReturnTrue) {
+				return true;
+			}
+			for (let e = 0; e < params.length; e++) {
+
+				if (params[e][1] && (product.productTags.find(tag => tag === params[e][0]))) {
+					return true;
+				}
+			}
+		});
+		this.FilteredProductList = FilteredProductList;
+		return FilteredProductList;
 	}
 
 
-	findNumberOfPoductsThatMatchEachFilter(filteredProductList) {
+	findNumPoductsMatchPriceFilter(FilteredProductList) {
 		let priceUnder25 = 0, price25to50 = 0, price50to100 = 0, price100to200 = 0, priceOver200 = 0;
-		for (let product of filteredProductList) {
+		for (let product of FilteredProductList) {
 			if (product.productPrice < 25) {
 				priceUnder25++;
 			}
@@ -172,7 +232,7 @@ class App extends Component {
 			}
 		}
 		this.setState({
-			QuantityThatMeetPriceFilters: {
+			MeetsPriceFilters: {
 				priceUnder25,
 				price25to50,
 				price50to100,
@@ -182,19 +242,44 @@ class App extends Component {
 		})
 	}
 
+	findNumPoductsMatchTagFilter(FilteredProductList) {
+		let tagsCount;
+		if(this.basetags.length>0) {
+			tagsCount = this.basetags;
+			tagsCount.forEach(element => element[1] = 0);
+		} else {
+			tagsCount = [];
+		}
+		for (let product of FilteredProductList) {
+			for (let tag of product.productTags) {
+				let index = tagsCount.findIndex(element => (element[0] === tag));
+				if (index > -1) {
+					tagsCount[index][1]++;
+				} else {
+					tagsCount.push([tag, 1]);
+				}
+			}
+		}
+		this.basetags = tagsCount;
+		this.setState({MeetsTagFilters: tagsCount});
+	}
+
 
 	render() {
 		return (
 			<div>
 				<Header filterProducts={this.updateSearchParameter}/>
 				<main className="homepage">
-					<Sidebar priceUnder25={this.state.QuantityThatMeetPriceFilters.priceUnder25}
-							 price25to50={this.state.QuantityThatMeetPriceFilters.price25to50}
-							 price50to100={this.state.QuantityThatMeetPriceFilters.price50to100}
-							 price100to200={this.state.QuantityThatMeetPriceFilters.price100to200}
-							 priceOver200={this.state.QuantityThatMeetPriceFilters.priceOver200}
-							 updatePriceFilter={this.updatePriceFilter}/>
-					<ProductsContainer products={this.state.filteredproductList}
+					<Sidebar priceUnder25={this.state.MeetsPriceFilters.priceUnder25}
+							 price25to50={this.state.MeetsPriceFilters.price25to50}
+							 price50to100={this.state.MeetsPriceFilters.price50to100}
+							 price100to200={this.state.MeetsPriceFilters.price100to200}
+							 priceOver200={this.state.MeetsPriceFilters.priceOver200}
+							 updatePriceFilter={this.updatePriceFilter}
+							 updateTagFilter={this.updateTagFilter}
+							 MeetsTagFilters={this.basetags}
+					/>
+					<ProductsContainer products={this.state.DisplayedProductList}
 									   searchString={this.searchFilterParameter}
 									   removeProduct={this.removeProduct}
 					/>

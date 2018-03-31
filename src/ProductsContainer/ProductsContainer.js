@@ -16,6 +16,7 @@ class ProductsContainer extends React.Component {
 							productName = {product.productName}
 							productPrice = {product.productPrice}
 							productDescription = {product.productDescription}
+							productTags = {product.productTags}
 							searchString={this.props.searchString}
 							publicKey = {product.productKey}
 						/>

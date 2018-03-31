@@ -27,3 +27,10 @@
 .productBox:hover .editPanel {
 	opacity: 1;
 }
+
+.tagContainer {
+	display: flex;
+	justify-content: center;
+	width: 70%;
+	margin: 0 auto;
+}
