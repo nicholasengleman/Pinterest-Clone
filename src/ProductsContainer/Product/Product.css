@@ -57,3 +57,7 @@
 	border: 2px solid lightskyblue;
 }
 
+.optionalWarning {
+	text-decoration: underline;
+}
+

@@ -382,25 +382,26 @@ class App extends Component {
 	addNewContent() {
 		this.baseproductList.unshift({
 				productImageAddress: '',
-				productName: 'aaa',
-				productPrice: 5,
-				productDescription: 'adasdasd',
-				productTags: ['barbies', 'zoos'],
-				productKey: 16783
+				productName: '',
+				productPrice: '',
+				productDescription: '',
+				productTags: [],
+				productKey: Math.random()
 			});
-		this.basetags = [];
-		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
-		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
-		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
+		this.setState({DisplayedProductList: this.baseproductList });
 	}
 
-	submitNewProductInfo(productKey, newImgSrc, newName, newPrice, newDescription) {
+	submitNewProductInfo(productKey, newTags, newImgSrc, newName, newPrice, newDescription) {
 		this.baseproductList.forEach(product => {
 			if (product.productKey === productKey) {
 				product.productImageAddress = newImgSrc;
+				newTags.length>0 && newTags[0]!== ""
+					? product.productTags = newTags.split(',')
+					: product.productTags = [];
 				product.productName = newName;
 				product.productPrice = newPrice;
 				product.productDescription = newDescription;
+
 			}
 		});
 		this.basetags = [];
