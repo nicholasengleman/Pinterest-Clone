@@ -1,15 +1,64 @@
 .productBox {
-	border: 1px solid black;
+	background: #e8e8e8;
 	border-radius: 10px;
-	text-align: center;
+	text-align: left;
 	break-inside: avoid;
 	box-sizing: border-box;
 	margin: 0 20px 20px 0;
 }
 
-.productPic img {
-	width: 50%;
+/*Edit Mode Styles */
+
+.optionalWarning {
+	text-decoration: underline;
 }
+
+.productBox input, .productBox textarea{
+	display: block;
+	margin: 15px auto;
+	border-radius: 7px;
+	outline: none;
+	width: 80%;
+	padding: 5px 15px;
+	background: #EFEFEF;
+	border: 2px solid transparent;
+	transition: all 0.2s;
+}
+
+.productBox input:focus, .productBox textarea:focus {
+	border: 2px solid lightskyblue;
+}
+
+/*Regular Mode Styles */
+
+.productPic img {
+	width: 100%;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.tagContainer {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	align-items: flex-start;
+	justify-content: center;
+	width: 85%;
+	margin: 5px auto;
+}
+
+.productBox h1 {
+	margin: 10px;
+	font-size: 18px;
+	color: #555555;
+}
+
+.productText {
+	margin: 10px;
+	color: #555555;
+	font-size: 14px;
+}
+/*Edit Panel Styles */
 
 .editPanel {
 	width: 100%;
@@ -19,9 +68,9 @@
 	border-bottom-left-radius: 10px;
 	opacity: 0;
 	transition: all 0.25s;
-	border-bottom: 1px solid black;
 	margin-top: 15px;
 	line-height: 30px;
+	text-align: center;
 }
 
 .editPanel button {
@@ -40,24 +89,5 @@
 	opacity: 1;
 }
 
-.tagContainer {
-	display: flex;
-	justify-content: center;
-	width: 70%;
-	margin: 0 auto;
-}
 
-.productBox input, .productBox textarea{
-	display: block;
-	margin: 15px auto;
-	border-radius: 5px;
-	outline: none;
-	width: 80%;
-	padding: 5px 15px;
-	border: 2px solid lightskyblue;
-}
-
-.optionalWarning {
-	text-decoration: underline;
-}
 

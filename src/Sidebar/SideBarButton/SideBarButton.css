@@ -33,12 +33,13 @@
 	height: 16px;
 	width: 16px;
 	line-height: 16px;
-	font-size: 12px;
+	font-size: 13px;
 	border-radius: 25%;
-	background: #ff8477;
-	color: white;
+	background: darkslategrey;
+	color: lightskyblue;
 	float: right;
 	position: absolute;
 	top: 7px;
 	right: 7px;
 }
+
