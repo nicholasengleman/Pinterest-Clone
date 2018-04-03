@@ -30,9 +30,17 @@ class Header extends React.Component {
 						   ref="searchInput"
 						   onChange={this.searchInputChange}
 						   placeholder="Search"/>
-					<button onClick={this.addNewContent}>add new content</button>
-
 				</form>
+				<button className='favoritesSummary'>
+
+					{this.props.favoritesQuantity < 1
+						? 'Favorite a Product!'
+						: this.props.favoritesQuantity < 2
+							? `See your favorited product!`
+							: `See your ${this.props.favoritesQuantity} favorite products!`
+					}
+				</button>
+				<button className='addNewContent' onClick={this.addNewContent}>add new content</button>
 			</header>
 		)
 	}

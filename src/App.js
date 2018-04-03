@@ -148,7 +148,7 @@ const initialData = [
 		productPrice: 69,
 		productDescription: 'Elegant Men\'s wallet in whiskey color',
 		productTags: ['wallet', 'fashion'],
-		productKey:17
+		productKey: 17
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/c3/9b/90/c39b9037deffd751c2918faae259e41c.jpg',
@@ -156,7 +156,7 @@ const initialData = [
 		productPrice: 149,
 		productDescription: 'Fossil Men’s Derrick Front Pocket Bifold ',
 		productTags: ['wallet', 'fashion', 'gifts'],
-		productKey:18
+		productKey: 18
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/45/07/ed/4507ed4ff2e9318b6e9d25f1a4e8f846.jpg',
@@ -164,7 +164,7 @@ const initialData = [
 		productPrice: 26,
 		productDescription: 'Chocolate Cookies and Cream flavored pancakes are stacked together with layers of whipped cream to resemble Oreos',
 		productTags: ['food', 'dessert'],
-		productKey:19
+		productKey: 19
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/16/d6/af/16d6af4304a6292bcd06933eacddd78b.jpg',
@@ -172,7 +172,7 @@ const initialData = [
 		productPrice: 12,
 		productDescription: 'Smoky kielbasa sizzled with sweet bell pepper, onions and garlic in vibrant tomato sauce. This quick and easy sausage, pepper and rice skillet is downright delicious!',
 		productTags: ['food', 'lunch'],
-		productKey:20
+		productKey: 20
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/28/c0/32/28c032453ec18263e3b56a44e024a85a.jpg',
@@ -180,7 +180,7 @@ const initialData = [
 		productPrice: 9,
 		productDescription: 'These homemade honey corn dogs are perfect as snack or appetizer and are ready to go in just 45 minutes! You\'ll never go back to the freezer kind!',
 		productTags: ['food', 'lunch'],
-		productKey:21
+		productKey: 21
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/1e/96/33/1e9633fa4beabc3865781386db8c65d8.jpg',
@@ -204,7 +204,7 @@ const initialData = [
 		productPrice: 13,
 		productDescription: 'Fun S\'mores milkshakes with chocolate, graham cracker and toasted marshmallow. Make this recipe just in time for National S\'mores Day!',
 		productTags: ['food', 'dessert'],
-		productKey:24
+		productKey: 24
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/15/6c/8a/156c8adea90b4e91786e8c3004e1b180.jpg',
@@ -212,7 +212,7 @@ const initialData = [
 		productPrice: 29,
 		productDescription: 'Mexican Rice is just like they serve in the Mexican restaurants and it is so easy to make at home. I love serving it with every Mexican dish I fix.',
 		productTags: ['food', 'lunch'],
-		productKey:25
+		productKey: 25
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/76/50/a3/7650a3bec472bd3a871189617c6beef4.jpg',
@@ -220,7 +220,7 @@ const initialData = [
 		productPrice: 29,
 		productDescription: 'This really is the best BBQ Chicken Kebabs recipe! There are a few easy extra steps that really add a depth of flavor that you can\'t get from just BBQ sauce. One word...BACON.',
 		productTags: ['food', 'lunch'],
-		productKey:26
+		productKey: 26
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/f3/3b/57/f33b57f5e969c40a1ea0ffecae07306c.jpg',
@@ -228,7 +228,7 @@ const initialData = [
 		productPrice: 16,
 		productDescription: 'We skipped the deep fryer and made baked churros instead! They’re great for parties or as a taco night dessert.',
 		productTags: ['food', 'snacks'],
-		productKey:27
+		productKey: 27
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/c9/6d/0d/c96d0dc1a700b6eff9195c8a3e87a5a5.jpg',
@@ -236,7 +236,7 @@ const initialData = [
 		productPrice: 33,
 		productDescription: 'The delicious beverage of witches and wizards. Found in Diagon Alley, Hogsmeade Village and the Wizarding World of Harry Potter at Universal Studios.',
 		productTags: ['drinks'],
-		productKey:28
+		productKey: 28
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/e8/73/f2/e873f2579e54551f2d4efab9f631d50c.jpg',
@@ -244,7 +244,7 @@ const initialData = [
 		productPrice: 88,
 		productDescription: 'Ipega PG-9023 Wireless Bluetooth Telescopic Controller Gamepad Joystick for iOS Android Tablet iPad',
 		productTags: ['electronics'],
-		productKey:29
+		productKey: 29
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/62/73/4c/62734cfec33a84a506d3e557d55bd663.jpg',
@@ -252,7 +252,7 @@ const initialData = [
 		productPrice: 98,
 		productDescription: '',
 		productTags: ['jewelry', 'necklaces', 'gifts'],
-		productKey:30
+		productKey: 30
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/c5/cf/f4/c5cff48e587fa8453760e997613eb1da.jpg',
@@ -260,15 +260,15 @@ const initialData = [
 		productPrice: 139,
 		productDescription: 'Gold Plated Punk Necklaces Geometric Triangle Faux Marble Stone Necklace Vintage Jewelry',
 		productTags: ['jewelry', 'necklaces'],
-		productKey:31
+		productKey: 31
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/c6/d1/cb/c6d1cbdd998873cd4d52b7ac985664d0.jpg',
 		productName: 'Mermaid Opal Ring',
 		productPrice: 229,
 		productDescription: '',
-		productTags: ['jewelry','rings', 'gifts'],
-		productKey:32
+		productTags: ['jewelry', 'rings', 'gifts'],
+		productKey: 32
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/55/c7/0c/55c70cf8f5e4502f227631e1d200245c.jpg',
@@ -276,15 +276,15 @@ const initialData = [
 		productPrice: 79,
 		productDescription: '',
 		productTags: ['jewelry', 'rings'],
-		productKey:33
+		productKey: 33
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/49/cc/7e/49cc7e47b1581b3c14d33c4c3ca6b4e4.jpg',
 		productName: 'Mermaid Engagement Ring',
 		productPrice: 499,
 		productDescription: 'Cushion Cut Garnet Rhodium Plated Sterling Silver Mermaid Engagement Ring',
-		productTags: ['jewlery','rings'],
-		productKey:34
+		productTags: ['jewlery', 'rings'],
+		productKey: 34
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/95/d7/45/95d74527544e760fe1d1191e1d9ce169.jpg',
@@ -293,15 +293,15 @@ const initialData = [
 		productDescription: 'Small Sideways Gold Heart Necklace in 14K Gold Fill. This Heart Shape can be left blank' +
 		' or with one custom uppercase or lowercase initial!',
 		productTags: ['jewelry', 'necklaces'],
-		productKey:35
+		productKey: 35
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/84/54/1c/84541c529aa88021941cd477623c0718.jpg',
 		productName: 'Gold Streak Trinity Ring',
 		productPrice: 599,
 		productDescription: 'Made of intertwined 3 textured solid 14k gold rings with 0.75mm thickness',
-		productTags: ['jewlery','rings'],
-		productKey:36
+		productTags: ['jewlery', 'rings'],
+		productKey: 36
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/originals/75/54/48/755448e71180765482a4d17d7bdec2ab.jpg',
@@ -309,7 +309,7 @@ const initialData = [
 		productPrice: 89,
 		productDescription: 'Off the shoulder dresses are all the rage this season! Show off your amazing fashion sense with this dress that features an elastic off the shoulder neckline, a short sleeve, a slim fitting bodice and a super cute skater skirt with a hi low hem.',
 		productTags: ['fashion', 'dresses'],
-		productKey:37
+		productKey: 37
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/59/6b/6b/596b6b48bf155a3fa3a9e6987ef68a9a.jpg',
@@ -317,7 +317,7 @@ const initialData = [
 		productPrice: 33,
 		productDescription: 'Sexy Perspective Irregular Mesh Stitching Chiffon Party Dress',
 		productTags: ['fashion', 'dresses'],
-		productKey:38
+		productKey: 38
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/ba/f1/ed/baf1ed0d0fb908a2b4c7c639a6a863d5.jpg',
@@ -325,7 +325,7 @@ const initialData = [
 		productPrice: 1299,
 		productDescription: 'Essense of Australia brings us pretty wedding dresses designed to give the romantic bride a look that combines that WOW factor with timeless sophistication.',
 		productTags: ['fashion', 'dresses'],
-		productKey:39
+		productKey: 39
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/c2/34/45/c23445be6a50950b4470872ec4050423.jpg',
@@ -333,7 +333,7 @@ const initialData = [
 		productPrice: 233,
 		productDescription: 'Xenia Boutique Splended Angel 2.0 Dress Homecoming Prom dresse',
 		productTags: ['fashion', 'dresses'],
-		productKey:40
+		productKey: 40
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/77/8e/53/778e5381f533262a68636a5708b23396.jpg',
@@ -341,7 +341,7 @@ const initialData = [
 		productPrice: 1399,
 		productDescription: 'Dell\'s revised XPS 15 includes gorgeous Infinity display, Windows 10',
 		productTags: ['electronics', 'laptops'],
-		productKey:41
+		productKey: 41
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/0a/b2/31/0ab2311d19b40777bd1e72f645d4f3b9.jpg',
@@ -349,7 +349,7 @@ const initialData = [
 		productPrice: 899,
 		productDescription: 'HP brand new laptop is the best gaming machine on the market',
 		productTags: ['electronics', 'laptops'],
-		productKey:42
+		productKey: 42
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/10/e2/24/10e224b516dba43c272161036a54c93b.jpg',
@@ -357,7 +357,7 @@ const initialData = [
 		productPrice: 1699,
 		productDescription: 'Gold blau Marmor Case Macbook Air',
 		productTags: ['electronics', 'laptops'],
-		productKey:43
+		productKey: 43
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/4d/e5/28/4de528e6d32070a82484664198906cf7.jpg',
@@ -365,7 +365,7 @@ const initialData = [
 		productPrice: 999,
 		productDescription: 'The best gaming laptop under $1000',
 		productTags: ['electronics', 'laptops'],
-		productKey:44
+		productKey: 44
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/3d/01/88/3d018824796f77a9a5d27158c439f064.jpg',
@@ -373,7 +373,7 @@ const initialData = [
 		productPrice: 495,
 		productDescription: 'A beast of a camera. In production from 1980 to 2001',
 		productTags: ['electronics', 'cameras'],
-		productKey:45
+		productKey: 45
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/da/fa/b2/dafab29613ef9e8852de7e8be3a33784.jpg',
@@ -381,7 +381,7 @@ const initialData = [
 		productPrice: 249,
 		productDescription: '',
 		productTags: ['electronics', 'cameras'],
-		productKey:46
+		productKey: 46
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/f4/81/d3/f481d35734a60877b55d7e043c67b968.jpg',
@@ -389,7 +389,7 @@ const initialData = [
 		productPrice: 99,
 		productDescription: ' Monitor your home with this Canary security system. The 1080p HD camera streams live video to a smartphone through the Canary app',
 		productTags: ['electronics', 'cameras'],
-		productKey:47
+		productKey: 47
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/30/94/46/30944696deecb6954eab7b4bbc016219.jpg',
@@ -397,7 +397,7 @@ const initialData = [
 		productPrice: 699,
 		productDescription: '',
 		productTags: ['electronics', 'cameras'],
-		productKey:48
+		productKey: 48
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/07/2e/d4/072ed4ab6359b357a32ae13fcf68079e.jpg',
@@ -405,7 +405,7 @@ const initialData = [
 		productPrice: 199,
 		productDescription: 'Tablet Samsung Galaxy Tab A 16GB 8" 4G Wi-Fi - Android 5.0 Proc. Quad Core Câmera Integrada',
 		productTags: ['electronics', 'tablets'],
-		productKey:49
+		productKey: 49
 	},
 	{
 		productImageAddress: 'https://i.pinimg.com/564x/3f/10/33/3f103343ec2565b761c731ef936f88fd.jpg',
@@ -413,7 +413,7 @@ const initialData = [
 		productPrice: 230,
 		productDescription: 'IPad Air 2 16GB WiFi',
 		productTags: ['electronics', 'tablets'],
-		productKey:50
+		productKey: 50
 	},
 ];
 
@@ -434,6 +434,7 @@ class App extends Component {
 			'$500 & above': false
 		};
 		this.state = {
+			Favorites: [],
 			DisplayedProductList: [],
 			MeetsPriceFilters: {},
 			MeetsTagFilters: []
@@ -448,6 +449,8 @@ class App extends Component {
 		this.updateSearchParameter = this.updateSearchParameter.bind(this);
 		this.addNewContent = this.addNewContent.bind(this);
 		this.submitNewProductInfo = this.submitNewProductInfo.bind(this);
+		this.addToFavorites = this.addToFavorites.bind(this);
+		this.removeFromFavorites = this.removeFromFavorites.bind(this);
 	}
 
 	componentWillMount() {
@@ -455,6 +458,20 @@ class App extends Component {
 		this.findNumPoductsMatchTagFilter(initialData);
 		this.baseproductList = initialData;
 		this.setState({DisplayedProductList: initialData});
+	}
+
+	addToFavorites(productKey) {
+		if (!this.state.Favorites.includes(productKey)) {
+			this.setState(prevState => ({
+				Favorites: [...prevState.Favorites, productKey]
+			}));
+		}
+	}
+
+	removeFromFavorites(productKey) {
+		this.setState(prevState => ({
+			Favorites: prevState.Favorites.filter(favoritedProductKeys => favoritedProductKeys !== productKey)
+		}));
 	}
 
 
@@ -484,8 +501,7 @@ class App extends Component {
 	}
 
 
-
-		updateSearchParameter(searchParameter) {
+	updateSearchParameter(searchParameter) {
 		this.searchFilterParameter = searchParameter;
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
@@ -498,7 +514,7 @@ class App extends Component {
 			[filter]: !this.PriceFilterParameters[filter]
 		};
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
-		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
+	//	this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 	}
 
@@ -514,14 +530,14 @@ class App extends Component {
 					break;
 				}
 			}
-			if(!filterAdded) {
+			if (!filterAdded) {
 				this.TagFilterParameters.push([filter, true]);
 			}
 		}
 
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
-		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
+	//	this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 	}
 
 	filterProductsBySearch() {
@@ -578,7 +594,7 @@ class App extends Component {
 				}
 			}
 		});
-		return FilteredProductList;
+		return [FilteredProductList, alwaysReturnTrue];
 	}
 
 	filterProductsByTag(editedproductList) {
@@ -603,7 +619,7 @@ class App extends Component {
 			}
 		});
 		this.FilteredProductList = FilteredProductList;
-		return FilteredProductList;
+		return [FilteredProductList, alwaysReturnTrue];
 	}
 
 
@@ -643,7 +659,7 @@ class App extends Component {
 
 	findNumPoductsMatchTagFilter(FilteredProductList) {
 		let tagsCount;
-		if(this.basetags.length>0) {
+		if (this.basetags.length > 0) {
 			tagsCount = this.basetags;
 			tagsCount.forEach(element => element[1] = 0);
 		} else {
@@ -665,21 +681,21 @@ class App extends Component {
 
 	addNewContent() {
 		this.baseproductList.unshift({
-				productImageAddress: '',
-				productName: '',
-				productPrice: '',
-				productDescription: '',
-				productTags: [],
-				productKey: Math.random()
-			});
-		this.setState({DisplayedProductList: this.baseproductList });
+			productImageAddress: '',
+			productName: '',
+			productPrice: '',
+			productDescription: '',
+			productTags: [],
+			productKey: Math.random()
+		});
+		this.setState({DisplayedProductList: this.baseproductList});
 	}
 
 	submitNewProductInfo(productKey, newTags, newImgSrc, newName, newPrice, newDescription) {
 		this.baseproductList.forEach(product => {
 			if (product.productKey === productKey) {
 				product.productImageAddress = newImgSrc;
-				newTags.length>0 && newTags[0]!== ""
+				newTags.length > 0 && newTags[0] !== ""
 					? product.productTags = newTags.split(',')
 					: product.productTags = [];
 				product.productName = newName;
@@ -698,7 +714,9 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Header filterProducts={this.updateSearchParameter} addNewContent={this.addNewContent}/>
+				<Header filterProducts={this.updateSearchParameter}
+						addNewContent={this.addNewContent}
+						favoritesQuantity={this.state.Favorites.length}/>
 				<main className="homepage">
 					<Sidebar updatePriceFilter={this.updatePriceFilter}
 							 updateTagFilter={this.updateTagFilter}
@@ -710,6 +728,8 @@ class App extends Component {
 									   removeProduct={this.removeProduct}
 									   editProduct={this.editProduct}
 									   submitNewProductInfo={this.submitNewProductInfo}
+									   addToFavorites={this.addToFavorites}
+									   removeFromFavorites={this.removeFromFavorites}
 					/>
 				</main>
 			</div>

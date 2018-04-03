@@ -10,15 +10,18 @@ class ProductsContainer extends React.Component {
 				{this.props.products.length> 0 ?
 					this.props.products.map(product => (
 						<Product
-							key = {product.productKey}
 							removeProduct = {this.props.removeProduct}
 							submitNewProductInfo={this.props.submitNewProductInfo}
+							addToFavorites={this.props.addToFavorites}
+							removeFromFavorites={this.props.removeFromFavorites}
+							searchString={this.props.searchString}
+
+							key = {product.productKey}
 							productImage = {product.productImageAddress}
 							productName = {product.productName}
 							productPrice = {product.productPrice}
 							productDescription = {product.productDescription}
 							productTags = {product.productTags}
-							searchString={this.props.searchString}
 							publicKey = {product.productKey}
 						/>
 					)) : <p>Sorry, we are out of products!</p>
