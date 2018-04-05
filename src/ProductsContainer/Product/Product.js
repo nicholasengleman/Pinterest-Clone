@@ -2,12 +2,12 @@ import React from 'react';
 import Highlight from 'react-highlight-words';
 import './Product.css';
 import Tag from './Tag/Tag';
-import ReactTags from 'react-tag-autocomplete';
 import heartImg from '../../img/64px-Love_Heart_SVG.svg.png';
 
 class Product extends React.Component {
 	constructor(props) {
 		super(props);
+		this.cancelEditRestoreThisData = {};
 		this.state = {
 			Favorited: {
 				status: false,
@@ -26,6 +26,7 @@ class Product extends React.Component {
 		this.submitNewProductInfo = this.submitNewProductInfo.bind(this);
 		this.toggleFavorite = this.toggleFavorite.bind(this);
 		this.edit = this.edit.bind(this);
+		this.cancelEdit = this.cancelEdit.bind(this);
 	}
 
 	componentDidMount() {
@@ -72,6 +73,29 @@ class Product extends React.Component {
 	}
 
 	toggleEditMode(event) {
+		if(this.state.editMode === false) {
+			this.cancelEditRestoreThisData = {
+				tags: this.state.tags,
+				imageSrc: this.state.imageSrc,
+				name: this.state.name,
+				price: this.state.price,
+				description: this.state.description
+			}
+		}
+		this.setState(prevState => ({
+			editMode: !prevState.editMode
+		}));
+		event.preventDefault();
+	}
+
+	cancelEdit(event) {
+		this.setState({
+			tags: this.cancelEditRestoreThisData.tags,
+			imageSrc: this.cancelEditRestoreThisData.imageSrc,
+			name: this.cancelEditRestoreThisData.name,
+			price: this.cancelEditRestoreThisData.price,
+			description: this.cancelEditRestoreThisData.description
+		});
 		this.setState(prevState => ({
 			editMode: !prevState.editMode
 		}));
@@ -146,10 +170,13 @@ class Product extends React.Component {
 				<div className="editPanel">
 					{
 						this.state.editMode
-							? <button onClick={this.submitNewProductInfo}>Submit</button>
+							? <div>
+								<button onClick={this.submitNewProductInfo}>submit</button>
+								<button onClick={this.cancelEdit}>cancel</button>
+							 </div>
 							: <div>
-								<button onClick={this.toggleEditMode}>Edit</button>
-								<button onClick={this.removeProduct}>Remove</button>
+								<button onClick={this.toggleEditMode}>edit</button>
+								<button onClick={this.removeProduct}>remove</button>
 							</div>
 					}
 				</div>
