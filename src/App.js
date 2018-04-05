@@ -66,7 +66,7 @@ const initialData = [
 
 	},
 	{
-		productImageAddress: 'https://i.pinimg.com/564x/8d/de/97/8dde977030404ab69c540848e1c5ca32.jpgg',
+		productImageAddress: 'https://i.pinimg.com/564x/8d/de/97/8dde977030404ab69c540848e1c5ca32.jpg',
 		productName: 'Wonder Woman Poster',
 		productPrice: 29,
 		productDescription: 'featuring the Amazonian princess kneeling at the ready with her shield and sword, awash in decidedly wondrous and warm hues of orange and red',
@@ -461,16 +461,19 @@ class App extends Component {
 	}
 
 	addToFavorites(productKey) {
-		if (!this.state.Favorites.includes(productKey)) {
-			this.setState(prevState => ({
-				Favorites: [...prevState.Favorites, productKey]
-			}));
+		for (let product of this.baseproductList) {
+			if (product.productKey === productKey) {
+				this.setState(prevState => ({
+					Favorites: [...prevState.Favorites, product ]
+				}));
+			}
 		}
 	}
 
+
 	removeFromFavorites(productKey) {
 		this.setState(prevState => ({
-			Favorites: prevState.Favorites.filter(favoritedProductKeys => favoritedProductKeys !== productKey)
+			Favorites: prevState.Favorites.filter(product => product.productKey !== productKey)
 		}));
 	}
 
@@ -483,6 +486,8 @@ class App extends Component {
 				return false;
 			}
 		});
+
+		this.removeFromFavorites(productToRemove);
 
 		this.basetags = [];
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
@@ -514,7 +519,7 @@ class App extends Component {
 			[filter]: !this.PriceFilterParameters[filter]
 		};
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
-	//	this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
+		//	this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 	}
 
@@ -537,7 +542,7 @@ class App extends Component {
 
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
-	//	this.findNumPoductsMatchTagFilter(this.FilteredProductList);
+		//	this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 	}
 
 	filterProductsBySearch() {
@@ -594,7 +599,7 @@ class App extends Component {
 				}
 			}
 		});
-		return [FilteredProductList, alwaysReturnTrue];
+		return FilteredProductList;
 	}
 
 	filterProductsByTag(editedproductList) {
@@ -619,7 +624,7 @@ class App extends Component {
 			}
 		});
 		this.FilteredProductList = FilteredProductList;
-		return [FilteredProductList, alwaysReturnTrue];
+		return FilteredProductList;
 	}
 
 
@@ -716,7 +721,10 @@ class App extends Component {
 			<div>
 				<Header filterProducts={this.updateSearchParameter}
 						addNewContent={this.addNewContent}
-						favoritesQuantity={this.state.Favorites.length}/>
+						favoritesQuantity={this.state.Favorites.length}
+						removeFromFavorites={this.removeFromFavorites}
+						favorites={this.state.Favorites}/>
+
 				<main className="homepage">
 					<Sidebar updatePriceFilter={this.updatePriceFilter}
 							 updateTagFilter={this.updateTagFilter}
@@ -724,6 +732,7 @@ class App extends Component {
 							 MeetsTagFilters={this.basetags}
 					/>
 					<ProductsContainer products={this.state.DisplayedProductList}
+									   favorites={this.state.Favorites}
 									   searchString={this.searchFilterParameter}
 									   removeProduct={this.removeProduct}
 									   editProduct={this.editProduct}

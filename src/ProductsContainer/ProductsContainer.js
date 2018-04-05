@@ -13,6 +13,7 @@ class ProductsContainer extends React.Component {
 							removeProduct = {this.props.removeProduct}
 							submitNewProductInfo={this.props.submitNewProductInfo}
 							addToFavorites={this.props.addToFavorites}
+							favorites={this.props.favorites}
 							removeFromFavorites={this.props.removeFromFavorites}
 							searchString={this.props.searchString}
 
@@ -22,7 +23,7 @@ class ProductsContainer extends React.Component {
 							productPrice = {product.productPrice}
 							productDescription = {product.productDescription}
 							productTags = {product.productTags}
-							publicKey = {product.productKey}
+							productKey = {product.productKey}
 						/>
 					)) : <p>Sorry, we are out of products!</p>
 				}

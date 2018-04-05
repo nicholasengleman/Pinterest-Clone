@@ -34,16 +34,17 @@ class Product extends React.Component {
 		}
 	}
 
-	toggleFavorite(event) {
-		if (!this.state.Favorited.status) {
-			this.props.addToFavorites(this.props.publicKey);
-			this.setState({Favorited: {status: true, message: 'added to favorites!'}});
-		} else {
-			this.props.removeFromFavorites(this.props.publicKey);
+	UNSAFE_componentWillReceiveProps(nextProps) {
+		if(this.state.Favorited.status === true) {
+			for (let favorite of nextProps.favorites) {
+				if (nextProps.productKey === favorite.productKey) {
+					return null;
+				}
+			}
 			this.setState({Favorited: {status: false, message: 'removed from favorites!'}});
 		}
-		event.preventDefault();
 	}
+
 
 	componentDidUpdate() {
 		if (this.state.newProduct === true) {
@@ -54,8 +55,19 @@ class Product extends React.Component {
 		}
 	}
 
+	toggleFavorite(event) {
+		if (!this.state.Favorited.status) {
+			this.props.addToFavorites(this.props.productKey);
+			this.setState({Favorited: {status: true, message: 'added to favorites!'}});
+		} else {
+			this.props.removeFromFavorites(this.props.productKey);
+			this.setState({Favorited: {status: false, message: 'removed from favorites!'}});
+		}
+		event.preventDefault();
+	}
+
 	removeProduct(event) {
-		this.props.removeProduct(this.props.publicKey);
+		this.props.removeProduct(this.props.productKey);
 		event.preventDefault();
 	}
 
@@ -67,7 +79,7 @@ class Product extends React.Component {
 	}
 
 	submitNewProductInfo(event) {
-		this.props.submitNewProductInfo(this.props.publicKey, this.state.tags, this.state.imageSrc, this.state.name, this.state.price, this.state.description);
+		this.props.submitNewProductInfo(this.props.productKey, this.state.tags, this.state.imageSrc, this.state.name, this.state.price, this.state.description);
 		this.toggleEditMode(event);
 		if (this.state.newProduct === true) {
 			this.setState({newProduct: false});

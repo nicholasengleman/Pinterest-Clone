@@ -1,12 +1,29 @@
 import React from 'react';
 import './Header.css';
+import Modal from 'react-modal';
+import FavoriteItem from './FavoriteItem/FavoriteItem';
 
 class Header extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.state = {
+			modalIsOpen: false,
+		};
+
 		this.searchInputChange = this.searchInputChange.bind(this);
 		this.addNewContent = this.addNewContent.bind(this);
+		this.openModal = this.openModal.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+	}
+
+	openModal() {
+		this.setState({modalIsOpen: true});
+	}
+
+
+	closeModal() {
+		this.setState({modalIsOpen: false});
 	}
 
 	searchInputChange(event) {
@@ -31,15 +48,37 @@ class Header extends React.Component {
 						   onChange={this.searchInputChange}
 						   placeholder="Search"/>
 				</form>
-				<button className='favoritesSummary'>
+				<button className='favoritesSummary' onClick={this.openModal}>
 
 					{this.props.favoritesQuantity < 1
-						? 'Favorite a Product!'
+						? 'Favorite something!'
 						: this.props.favoritesQuantity < 2
-							? `See your favorited product!`
-							: `See your ${this.props.favoritesQuantity} favorite products!`
+							? `See your favorite item!`
+							: `See your ${this.props.favoritesQuantity} favorites!`
 					}
 				</button>
+				<Modal
+					isOpen={this.state.modalIsOpen}
+					onRequestClose={this.closeModal}
+					contentLabel="Favorites"
+					className="Modal"
+					overlayClassName="Overlay"
+					closeTimeoutMS={150}
+				>
+					{ this.props.favorites.length > 0
+						? this.props.favorites.map(favorite => (
+							<FavoriteItem key={favorite.productKey}
+									  favoriteImg={favorite.productImageAddress}
+									  favoriteName={favorite.productName}
+									  favoriteDescription={favorite.productDescription}
+									  favoritePrice={favorite.productPrice}
+									  favoriteProductKey={favorite.productKey}
+									  removeFromFavorites={this.props.removeFromFavorites}
+							/>))
+						: <p>You have no favorites!</p>
+					}
+					<button className='closeModalButton' onClick={this.closeModal}>Close</button>
+				</Modal>
 				<button className='addNewContent' onClick={this.addNewContent}>add new content</button>
 			</header>
 		)
