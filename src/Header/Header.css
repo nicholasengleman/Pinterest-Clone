@@ -5,7 +5,7 @@ header {
 	width: 100%;
 	z-index: 2;
 	background: #f5f5f5;
-	box-shadow: 2px 2px 2px darkslategrey;
+	box-shadow: 0 2px 2px darkslategrey;
 }
 
 .headerSearchAddInput {
@@ -35,38 +35,49 @@ header {
 .addNewContent {
 	display: inline-block;
 	background: #ffa390;
+	box-shadow: 0 2px 2px lightgrey;
 	padding: 8px 16px;
 	border-radius: 5px;
 	font-size: 14px;
+	font-family: Arial, serif;
 	color: darkslategrey;
 	border: none;
 	outline: none;
 	cursor: pointer;
 	float: right;
 	margin: 20px 50px 0 0;
+	transition: all 0.1s;
+	letter-spacing: 1px;
 }
 
 .addNewContent:hover {
 	background: #ff7763;
+	box-shadow: 0 2px 2px grey;
 	color: black;
 }
 
 .favoritesSummary {
-	display: inline-block;
-	background: grey;
+	height: 40px;
+	background:left 15px top 6px/30px url('../img/64px-Love_Heart_SVG.svg.png') no-repeat;
 	font-size: 20px;
-	padding: 8px 16px;
-	border-radius: 5px;
+	padding: 2px 16px;
+	border-radius: 7px;
 	letter-spacing: 1px;
 	font-weight: bold;
-	border: none;
 	outline: none;
-	transition: all .4s;
+	transition: all .1s;
 	cursor: pointer;
+	color: darkslategrey;
+	border: 1px solid transparent;
+
+}
+
+.favoritesSummary i {
+	margin-left: 40px;
 }
 
 .favoritesSummary:hover {
-	background: #616161;
+	border: 1px solid lightgrey;
 }
 
 
@@ -80,9 +91,11 @@ header {
 	right: 0;
 	background-color: white;
 	width: 50%;
+	max-height: 500px;
 	padding: 50px;
 	border: 5px solid #969696;
 	outline: none;
+	overflow-y: scroll;
 }
 
 .Overlay {

@@ -2,6 +2,7 @@ import React from 'react';
 import './Header.css';
 import Modal from 'react-modal';
 import FavoriteItem from './FavoriteItem/FavoriteItem';
+import heartImg from '../img/64px-Love_Heart_SVG.svg.png';
 
 class Header extends React.Component {
 	constructor(props) {
@@ -49,13 +50,12 @@ class Header extends React.Component {
 						   placeholder="Search"/>
 				</form>
 				<button className='favoritesSummary' onClick={this.openModal}>
-
-					{this.props.favoritesQuantity < 1
-						? 'Favorite something!'
+					<i>{this.props.favoritesQuantity < 1
+						? 'save a favorite!'
 						: this.props.favoritesQuantity < 2
-							? `See your favorite item!`
-							: `See your ${this.props.favoritesQuantity} favorites!`
-					}
+							? `see your favorite item!`
+							: `see your ${this.props.favoritesQuantity} favorites!`
+					}</i>
 				</button>
 				<Modal
 					isOpen={this.state.modalIsOpen}
@@ -77,7 +77,7 @@ class Header extends React.Component {
 							/>))
 						: <p>You have no favorites!</p>
 					}
-					<button className='closeModalButton' onClick={this.closeModal}>Close</button>
+					<button className='closeModalButton' onClick={this.closeModal}>close</button>
 				</Modal>
 				<button className='addNewContent' onClick={this.addNewContent}>add new content</button>
 			</header>
