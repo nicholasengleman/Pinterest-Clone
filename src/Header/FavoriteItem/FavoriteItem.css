@@ -5,6 +5,10 @@
 	border-bottom: 1px solid #969696;
 }
 
+.favoriteSummaryRow:last-of-type {
+	border-bottom: 1px solid transparent;
+}
+
 .favoriteSummary__pic {
 	width: 10%;
 	overflow: hidden;
@@ -19,12 +23,12 @@
 
 .favoriteSummary__name {
 	width: 25%;
-	padding: 10px;
+	padding: 10px 40px;
 }
 
 .favoriteSummary__description {
 	width: 45%;
-	padding: 10px;
+	padding: 10px 40px;
 }
 
 .favoriteSummary__price {
@@ -47,6 +51,7 @@
 	box-shadow: 0 2px 2px lightgrey;
 	letter-spacing: 1px;
 	cursor: pointer;
+	transition: box-shadow 0.3s;
 }
 
 .favoriteSummary__remove button:hover {

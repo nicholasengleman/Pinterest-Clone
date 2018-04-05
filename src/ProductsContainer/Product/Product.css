@@ -3,6 +3,7 @@
 	border-radius: 10px;
 	text-align: left;
 	break-inside: avoid;
+	page-break-inside: avoid;
 	box-sizing: border-box;
 	margin: 0 20px 20px 0;
 	border: 1px solid transparent;
@@ -101,15 +102,21 @@
 	margin: 5px auto;
 }
 
-.productBox h1 {
+.productBox h1,.productPrice, .productDescription  {
 	margin: 10px;
-	font-size: 18px;
 	color: #555555;
 }
 
-.productText {
-	margin: 10px;
-	color: #555555;
+.productBox h1  {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.productPrice {
+	font-size: 24px;
+}
+
+.productDescription {
 	font-size: 14px;
 }
 /*Edit Panel Styles */
@@ -121,8 +128,6 @@
 	padding-bottom: 10px;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
-	opacity: 0;
-	transition: all 0.25s;
 	line-height: 30px;
 	text-align: center;
 }
@@ -138,6 +143,12 @@
 	box-shadow: 0 2px 2px lightgrey;
 	cursor: pointer;
 	letter-spacing: 1px;
+	opacity: 0;
+	transition: all 0.25s;
+}
+
+.productBox:hover button {
+	opacity: 1;
 }
 
 .editPanel button:hover {
@@ -146,7 +157,7 @@
 	color: black;
 }
 
-.productBox:hover .editPanel {
+.editPanel button.alwaysShow {
 	opacity: 1;
 }
 

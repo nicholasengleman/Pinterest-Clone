@@ -122,13 +122,30 @@ class Product extends React.Component {
 				{this.state.editMode
 					? <div>
 						<p className="optionalWarning">all fields optional</p>
-						<input id='imageSrc' type='text' placeholder='Image URL' onChange={this.edit}
+						<input id='imageSrc'
+							   type='text'
+							   placeholder='Image URL'
+							   onChange={this.edit}
 							   value={this.state.imageSrc}/>
-						<input id='tags' type='text' placeholder='Tags seperated by comma' onChange={this.edit}
+						<input id='tags'
+							   type='text'
+							   placeholder='Tags seperated by comma'
+							   onChange={this.edit}
 							   value={this.state.tags}/>
-						<input id='name' type='text' placeholder='Name' onChange={this.edit} value={this.state.name}/>
-						<input id='price' type='number' placeholder='Price' value={this.state.price}/>
-						<textarea id='description' rows='5' placeholder='Description' value={this.state.description}
+						<input id='name'
+							   type='text'
+							   placeholder='Name'
+							   onChange={this.edit}
+							   value={this.state.name}/>
+						<input id='price'
+							   type='number'
+							   placeholder='Price'
+							   onChange={this.edit}
+							   value={this.state.price}/>
+						<textarea id='description'
+								  rows='5'
+								  placeholder='Description'
+								  value={this.state.description}
 								  onChange={this.edit}/>
 					</div>
 
@@ -141,14 +158,8 @@ class Product extends React.Component {
 							? <div className='Message'>{this.state.Favorited.message}</div>
 							: null
 						}
-						{this.state.name.length > 0
-							? <img src={heartImg} onClick={this.toggleFavorite}
-								   className={this.state.Favorited.status ? 'heartIcon favorited__heartIcon' : 'heartIcon'}
-								   alt='heartIcon'/>
-							: null
-						}
 						<div className="productPic"><img src={this.props.productImage} alt=""/></div>
-						{this.state.tags.length > 0
+						{this.state.tags
 							? <div className='tagContainer'>
 								{this.props.productTags.map(tag => (
 									<Tag text={tag} key={tag}/>
@@ -156,14 +167,32 @@ class Product extends React.Component {
 							</div>
 							: null
 						}
-						<h1><Highlight searchWords={[this.props.searchString.toString()]}
-									   textToHighlight={this.props.productName}/></h1>
-						{this.state.price.length > 0
-							? <p className='productText'>${this.props.productPrice}</p>
+						{this.state.name
+							? <img src={heartImg} onClick={this.toggleFavorite}
+								   className={this.state.Favorited.status ? 'heartIcon favorited__heartIcon' : 'heartIcon'}
+								   alt='heartIcon'/>
 							: null
 						}
-						<div className='productText'><Highlight searchWords={[this.props.searchString.toString()]}
-																textToHighlight={this.props.productDescription}/></div>
+						<h1>
+							{console.log(this.props.searchString)}
+							<Highlight
+								caseSensitive={false}
+								searchWords={[this.props.searchString]}
+								textToHighlight={this.props.productName}/>
+						</h1>
+						{this.state.price
+							? <div className='productPrice'>${this.props.productPrice}</div>
+							: null
+						}
+						{this.state.description
+							? <div className='productDescription'>
+								<Highlight
+									caseSensitive={false}
+									searchWords={[this.props.searchString]}
+									textToHighlight={this.props.productDescription}/>
+							</div>
+							: null
+						}
 					</div>
 				}
 
@@ -171,8 +200,8 @@ class Product extends React.Component {
 					{
 						this.state.editMode
 							? <div>
-								<button onClick={this.submitNewProductInfo}>submit</button>
-								<button onClick={this.cancelEdit}>cancel</button>
+								<button className='alwaysShow' onClick={this.submitNewProductInfo}>submit</button>
+								<button className='alwaysShow' onClick={this.cancelEdit}>cancel</button>
 							 </div>
 							: <div>
 								<button onClick={this.toggleEditMode}>edit</button>

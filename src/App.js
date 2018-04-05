@@ -519,8 +519,10 @@ class App extends Component {
 			[filter]: !this.PriceFilterParameters[filter]
 		};
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
-		//	this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
+		if(this.FilteredProductList.length === this.baseproductList.length) {
+			this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
+		}
 	}
 
 	updateTagFilter(filter) {
@@ -542,7 +544,9 @@ class App extends Component {
 
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
-		//	this.findNumPoductsMatchTagFilter(this.FilteredProductList);
+		if(this.FilteredProductList.length === this.baseproductList.length) {
+			this.findNumPoductsMatchTagFilter(this.FilteredProductList);
+		}
 	}
 
 	filterProductsBySearch() {
@@ -598,6 +602,7 @@ class App extends Component {
 					return true;
 				}
 			}
+			return false;
 		});
 		return FilteredProductList;
 	}
@@ -622,6 +627,7 @@ class App extends Component {
 					return true;
 				}
 			}
+			return false;
 		});
 		this.FilteredProductList = FilteredProductList;
 		return FilteredProductList;

@@ -119,6 +119,7 @@ header {
 	margin-top: 50px;
 	border-radius: 5px;
 	box-shadow: 0 2px 2px lightgrey;
+	transition: box-shadow 0.3s;
 }
 
  p {

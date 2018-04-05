@@ -2,7 +2,6 @@ import React from 'react';
 import './Header.css';
 import Modal from 'react-modal';
 import FavoriteItem from './FavoriteItem/FavoriteItem';
-import heartImg from '../img/64px-Love_Heart_SVG.svg.png';
 
 class Header extends React.Component {
 	constructor(props) {
