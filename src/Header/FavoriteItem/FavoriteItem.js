@@ -14,16 +14,20 @@ class FavoriteItem extends React.Component {
 
 	render() {
 		return (
-			<div className='favoriteSummaryRow'>
+			<div className='favoritesSummary__Container'>
 				<div className='favoriteSummary__pic'><img src={this.props.favoriteImg} alt=""/></div>
-				<div className='favoriteSummary__name'>{this.props.favoriteName}</div>
-				<div className='favoriteSummary__description'>
-					{this.props.favoriteDescription.length > 0
-						? this.props.favoriteDescription
-						: 'this product has no desciption'
-					}</div>
-				<div className='favoriteSummary__price'>${this.props.favoritePrice}</div>
-				<div className='favoriteSummary__remove'><button onClick={this.removeFromFavorites}>remove</button></div>
+				<div className='favoriteSummaryRow'>
+					<div className='favoriteSummary__name'>{this.props.favoriteName}</div>
+					<div className='favoriteSummary__description'>
+						{this.props.favoriteDescription.length > 0
+							? this.props.favoriteDescription
+							: 'this product has no desciption'
+						}</div>
+					<div className='favoriteSummary__price'>${this.props.favoritePrice}</div>
+				</div>
+				<div className='favoriteSummary__remove'>
+					<button onClick={this.removeFromFavorites}>remove</button>
+				</div>
 			</div>
 		)
 	}

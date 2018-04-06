@@ -1,8 +1,39 @@
-.favoriteSummaryRow {
-	padding: 15px 0;
+.favoritesSummary__Container {
 	width: 100%;
 	display: flex;
+}
+
+.favoriteSummary__remove {
+	padding: 15px 0;
+}
+
+.favoriteSummary__remove button {
+	background: red;
+	margin-top: 40%;
+	padding: 5px 15px;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+	color: lightgrey;
+	font-size: 0.8em;
+	font-weight: bold;
+	box-shadow: 0 2px 2px lightgrey;
+	letter-spacing: 1px;
+	cursor: pointer;
+	transition: box-shadow 0.3s;
+}
+
+.favoriteSummary__remove button:hover {
+	box-shadow: 0 2px 2px grey;
+}
+
+
+.favoriteSummaryRow {
+	padding: 15px 0;
+	width: 80%;
+	display: flex;
 	border-bottom: 1px solid #969696;
+	font-size: 14px;
 }
 
 .favoriteSummaryRow:last-of-type {
@@ -10,9 +41,10 @@
 }
 
 .favoriteSummary__pic {
+	padding: 10px 0;
 	width: 10%;
+	min-width: 75px;
 	overflow: hidden;
-
 }
 
 .favoriteSummary__pic img {
@@ -23,39 +55,48 @@
 
 .favoriteSummary__name {
 	width: 25%;
-	padding: 10px 40px;
+	padding: 10px 20px;
+	font-size: 1em;
 }
 
 .favoriteSummary__description {
 	width: 45%;
-	padding: 10px 40px;
+	padding: 10px 20px;
+	font-size: 0.8em;
 }
 
 .favoriteSummary__price {
 	width: 10%;
-	padding: 10px;
+	padding: 10px 20px;
+	font-size: 0.8em;
 }
 
-.favoriteSummary__remove {
-	width: 10%;
+
+
+@media (max-width: 1050px) {
+	.favoriteSummaryRow {
+		font-size: 12px;
+	}
 }
 
-.favoriteSummary__remove button {
-	background: red;
-	padding: 5px 15px;
-	border-radius: 5px;
-	border: none;
-	outline: none;
-	color: lightgrey;
-	font-weight: bold;
-	box-shadow: 0 2px 2px lightgrey;
-	letter-spacing: 1px;
-	cursor: pointer;
-	transition: box-shadow 0.3s;
+@media (max-width: 650px) {
+	.favoriteSummaryRow {
+		justify-content: center;
+		font-size: 10px;
+		flex-wrap: wrap;
+		border: none;
+	}
+	.favoriteSummaryRow > div {
+		width: 80%;
+	}
+	.favoriteSummary__name, .favoriteSummary__description, .favoriteSummary__price {
+		padding: 10px;
+	}
+	.favoriteSummary__remove button {
+		padding: 5px 5px;
+		font-size: 0.5em;
+	}
+
 }
 
-.favoriteSummary__remove button:hover {
-	box-shadow: 0 2px 2px grey;
-
-}
 

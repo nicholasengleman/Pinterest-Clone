@@ -49,12 +49,12 @@ class Header extends React.Component {
 						   placeholder="Search"/>
 				</form>
 				<button className='favoritesSummary' onClick={this.openModal}>
-					<i>{this.props.favoritesQuantity < 1
+					{this.props.favoritesQuantity < 1
 						? 'save a favorite!'
 						: this.props.favoritesQuantity < 2
 							? `see your favorite item!`
 							: `see your ${this.props.favoritesQuantity} favorites!`
-					}</i>
+					}
 				</button>
 				<Modal
 					isOpen={this.state.modalIsOpen}

@@ -9,7 +9,7 @@
 .sideBarButton button {
 	width: 100%;
 	line-height: 30px;
-	font-size: 16px;
+	font-size: 1em;
 	border: none;
 	outline: none;
 	cursor: pointer;
@@ -38,12 +38,18 @@
 	height: 16px;
 	width: 16px;
 	line-height: 16px;
-	font-size: 13px;
+	font-size: 0.7em;
 	border-radius: 25%;
 	background: darkslategrey;
 	color: lightskyblue;
 	position: absolute;
 	top: 7px;
 	right: 7px;
+}
+
+@media (max-width: 600px) {
+	.sideBarButton {
+		width: 95%;
+	}
 }
 
