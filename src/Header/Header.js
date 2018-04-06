@@ -78,7 +78,7 @@ class Header extends React.Component {
 					}
 					<button className='closeModalButton' onClick={this.closeModal}>close</button>
 				</Modal>
-				<button className='addNewContent' onClick={this.addNewContent}>add new content</button>
+				<button className='addNewContent' onClick={this.addNewContent}>add new product</button>
 			</header>
 		)
 	}
