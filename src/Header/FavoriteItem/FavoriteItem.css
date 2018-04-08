@@ -1,6 +1,7 @@
 .favoritesSummary__Container {
 	width: 100%;
 	display: flex;
+	border-bottom: 1px solid #969696;
 }
 
 .favoriteSummary__remove {
@@ -32,12 +33,11 @@
 	padding: 15px 0;
 	width: 80%;
 	display: flex;
-	border-bottom: 1px solid #969696;
-	font-size: 14px;
+	font-size: 18px;
 }
 
-.favoriteSummaryRow:last-of-type {
-	border-bottom: 1px solid transparent;
+.favoritesSummary__Container:last-of-type {
+	border-bottom: none;
 }
 
 .favoriteSummary__pic {
