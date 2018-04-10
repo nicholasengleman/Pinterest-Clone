@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './FavoriteItem.css';
 
 class FavoriteItem extends React.Component {
@@ -7,6 +8,16 @@ class FavoriteItem extends React.Component {
 
 		this.removeFromFavorites = this.removeFromFavorites.bind(this);
 	}
+
+	static propTypes = {
+		key: PropTypes.number,
+		favoriteImg: PropTypes.string,
+		favoriteName: PropTypes.string,
+		favoriteDescription: PropTypes.string,
+		favoritePrice: PropTypes.string,
+		favoriteProductKey: PropTypes.number,
+		removeFromFavorites: PropTypes.func
+	};
 
 	removeFromFavorites() {
 		this.props.removeFromFavorites(this.props.favoriteProductKey);

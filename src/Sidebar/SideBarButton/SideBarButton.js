@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './SideBarButton.css';
 
 class SideBarButton extends React.Component {
@@ -10,6 +11,13 @@ class SideBarButton extends React.Component {
 		this.filterPrice = this.filterPrice.bind(this);
 		this.filterTag = this.filterTag.bind(this);
 	}
+
+	static propTypes = {
+		text: PropTypes.string,
+		ProductsThatMeetFilter: PropTypes.number,
+		updatePriceFilter: PropTypes.func,
+		typeOfFilter: PropTypes.string
+	};
 
 	filterPrice(event) {
 		this.props.updatePriceFilter(this.props.text);

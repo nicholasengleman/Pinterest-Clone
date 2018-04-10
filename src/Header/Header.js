@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Header.css';
 import Modal from 'react-modal';
 import FavoriteItem from './FavoriteItem/FavoriteItem';
@@ -16,6 +17,13 @@ class Header extends React.Component {
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 	}
+
+	static propTypes = {
+		filterProducts: PropTypes.func,
+		addNewContent: PropTypes.func,
+		favoritesQuantity: PropTypes.number,
+		favorites: PropTypes.array
+	};
 
 	openModal() {
 		this.setState({modalIsOpen: true});
@@ -83,5 +91,7 @@ class Header extends React.Component {
 		)
 	}
 }
+
+
 
 export default Header;

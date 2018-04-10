@@ -1,21 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ProductsContainer.css';
 import Product from './Product/Product';
 
-class ProductsContainer extends React.Component {
-
-	render() {
+const ProductsContainer = (props) => {
 		return (
 			<div className="productContainer">
-				{this.props.products.length> 0 ?
-					this.props.products.map(product => (
+				{props.products.length> 0 ?
+					props.products.map(product => (
 						<Product
-							removeProduct = {this.props.removeProduct}
-							submitNewProductInfo={this.props.submitNewProductInfo}
-							addToFavorites={this.props.addToFavorites}
-							favorites={this.props.favorites}
-							removeFromFavorites={this.props.removeFromFavorites}
-							searchString={this.props.searchString}
+							removeProduct = {props.removeProduct}
+							submitNewProductInfo={props.submitNewProductInfo}
+							addToFavorites={props.addToFavorites}
+							favorites={props.favorites}
+							removeFromFavorites={props.removeFromFavorites}
+							searchString={props.searchString}
 
 							key = {product.productKey}
 							productImage = {product.productImageAddress}
@@ -29,8 +28,18 @@ class ProductsContainer extends React.Component {
 				}
 			</div>
 		)
-	}
-}
+	};
+
+ProductsContainer.propTypes = {
+	products: PropTypes.array,
+	favorites: PropTypes.array,
+	searchString: PropTypes.string,
+	removeProduct: PropTypes.func,
+	editProduct: PropTypes.func,
+	submitNewProductInfo: PropTypes.func,
+	addToFavorites: PropTypes.func,
+	removeFromFavorites: PropTypes.func
+};
 
 export default ProductsContainer;
 

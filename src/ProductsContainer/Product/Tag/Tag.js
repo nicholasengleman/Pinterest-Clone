@@ -1,14 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Tag.css';
 
-class Tag extends React.Component{
-	render() {
+const Tag = (props) => {
 		return (
 			<div className="tag">
-				{this.props.text}
+				{props.text}
 			</div>
 		)
-	}
-}
+	};
+
+Tag.propTypes = {
+	text: PropTypes.string
+};
+
 
 export default Tag;

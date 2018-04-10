@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Highlight from 'react-highlight-words';
 import './Product.css';
 import Tag from './Tag/Tag';
@@ -28,6 +29,22 @@ class Product extends React.Component {
 		this.edit = this.edit.bind(this);
 		this.cancelEdit = this.cancelEdit.bind(this);
 	}
+
+	static propTypes = {
+		removeProduct: PropTypes.func,
+		submitNewProductInfo: PropTypes.func,
+		addToFavorites: PropTypes.func,
+		favorites: PropTypes.array,
+		removeFromFavorites: PropTypes.func,
+		searchString: PropTypes.string,
+
+		productImage: PropTypes.string,
+		productName: PropTypes.string,
+		productPrice: PropTypes.number,
+		productDescription: PropTypes.string,
+		productTags: PropTypes.array,
+		productKey: PropTypes.number
+	};
 
 	componentDidMount() {
 		if (this.state.tags.length === 0) {
@@ -174,7 +191,6 @@ class Product extends React.Component {
 							: null
 						}
 						<h1>
-							{console.log(this.props.searchString)}
 							<Highlight
 								caseSensitive={false}
 								searchWords={[this.props.searchString]}
