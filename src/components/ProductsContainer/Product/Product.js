@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Highlight from 'react-highlight-words';
 import './Product.css';
 import Tag from './Tag/Tag';
-import heartImg from '../../img/64px-Love_Heart_SVG.svg.png';
+import heartImg from '../../../img/64px-Love_Heart_SVG.svg.png';
 
 class Product extends React.Component {
 	constructor(props) {

@@ -59,7 +59,7 @@ header {
 
 .favoritesSummary {
 	height: 40px;
-	background:left 15px top 6px/30px url('../img/64px-Love_Heart_SVG.svg.png') no-repeat;
+	background:left 15px top 6px/30px url('../../img/64px-Love_Heart_SVG.svg.png') no-repeat;
 	font-size: 1.5em;
 	padding: 2px 5px 2px 60px;
 	border-radius: 7px;

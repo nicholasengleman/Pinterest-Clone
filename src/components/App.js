@@ -3,7 +3,7 @@ import './App.css';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import ProductsContainer from './ProductsContainer/ProductsContainer';
-import ProjectData from './ProjectData.json';
+import ProjectData from '../ProjectData.json';
 
 class App extends Component {
 	constructor(props) {
@@ -138,7 +138,7 @@ class App extends Component {
 	}
 
 	filterProductsBySearch() {
-		let editedproductList = this.baseproductList.filter(product => {
+		return this.baseproductList.filter(product => {
 			if (product.productName.search(this.searchFilterParameter) > -1) {
 				return true;
 			} else if (product.productDescription.search(this.searchFilterParameter) > -1) {
@@ -147,7 +147,6 @@ class App extends Component {
 				return false;
 			}
 		});
-		return editedproductList;
 	}
 
 
@@ -159,40 +158,42 @@ class App extends Component {
 		} else {
 			alwaysReturnTrue = false;
 		}
-		let FilteredProductList = editedproductList.filter(product => {
-			if (params['Under $25'] || alwaysReturnTrue) {
+		return editedproductList.filter(product => {
+			if(alwaysReturnTrue) {
+				return true;
+			}
+			if (params['Under $25']) {
 				if (product.productPrice < 25) {
 					return true;
 				}
 			}
-			if (params['$25 to $50'] || alwaysReturnTrue) {
+			if (params['$25 to $50']) {
 				if (25 < product.productPrice && product.productPrice < 50) {
 					return true;
 				}
 			}
-			if (params['$50 to $100'] || alwaysReturnTrue) {
+			if (params['$50 to $100']) {
 				if (50 < product.productPrice && product.productPrice < 100) {
 					return true;
 				}
 			}
-			if (params['$100 to $200'] || alwaysReturnTrue) {
+			if (params['$100 to $200']) {
 				if (100 < product.productPrice && product.productPrice < 200) {
 					return true;
 				}
 			}
-			if (params['$200 to $500'] || alwaysReturnTrue) {
+			if (params['$200 to $500']) {
 				if (200 < product.productPrice && product.productPrice < 500) {
 					return true;
 				}
 			}
-			if (params['$500 & above'] || alwaysReturnTrue) {
+			if (params['$500 & above']) {
 				if (500 < product.productPrice) {
 					return true;
 				}
 			}
 			return false;
 		});
-		return FilteredProductList;
 	}
 
 	filterProductsByTag(editedproductList) {
@@ -317,7 +318,9 @@ class App extends Component {
 						addNewContent={this.addNewContent}
 						favoritesQuantity={this.state.Favorites.length}
 						removeFromFavorites={this.removeFromFavorites}
-						favorites={this.state.Favorites}/>
+						favorites={this.state.Favorites}
+						{...this.props}
+						/>
 
 				<main className="homepage">
 					<Sidebar updatePriceFilter={this.updatePriceFilter}
