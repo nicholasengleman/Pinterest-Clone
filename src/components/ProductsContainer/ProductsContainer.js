@@ -15,6 +15,8 @@ const ProductsContainer = (props) => {
 							favorites={props.favorites}
 							removeFromFavorites={props.removeFromFavorites}
 							searchString={props.searchString}
+							adminMode={props.adminMode}
+
 
 							key = {product.productKey}
 							productImage = {product.productImageAddress}
@@ -23,6 +25,7 @@ const ProductsContainer = (props) => {
 							productDescription = {product.productDescription}
 							productTags = {product.productTags}
 							productKey = {product.productKey}
+
 						/>
 					)) : <p>Sorry, we are out of products!</p>
 				}

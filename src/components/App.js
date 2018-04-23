@@ -25,7 +25,8 @@ class App extends Component {
 			Favorites: [],
 			DisplayedProductList: [],
 			MeetsPriceFilters: {},
-			MeetsTagFilters: []
+			MeetsTagFilters: [],
+			adminMode: false
 		};
 
 		this.removeProduct = this.removeProduct.bind(this);
@@ -39,6 +40,7 @@ class App extends Component {
 		this.submitNewProductInfo = this.submitNewProductInfo.bind(this);
 		this.addToFavorites = this.addToFavorites.bind(this);
 		this.removeFromFavorites = this.removeFromFavorites.bind(this);
+		this.toggleAdminMode = this.toggleAdminMode.bind(this);
 	}
 
 	componentWillMount() {
@@ -46,6 +48,10 @@ class App extends Component {
 		this.findNumPoductsMatchTagFilter(ProjectData);
 		this.baseproductList = ProjectData;
 		this.setState({DisplayedProductList: ProjectData});
+	}
+
+	toggleAdminMode() {
+		this.setState({ adminMode: !this.state.adminMode });
 	}
 
 	addToFavorites(productKey) {
@@ -314,28 +320,37 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Header filterProducts={this.updateSearchParameter}
-						addNewContent={this.addNewContent}
-						favoritesQuantity={this.state.Favorites.length}
-						removeFromFavorites={this.removeFromFavorites}
-						favorites={this.state.Favorites}
-						{...this.props}
-						/>
+				<Header
+					favorites={this.state.Favorites}
+					adminMode={this.state.adminMode}
+
+					filterProducts={this.updateSearchParameter}
+					favoritesQuantity={this.state.Favorites.length}
+					removeFromFavorites={this.removeFromFavorites}
+					toggleAdminMode={this.toggleAdminMode}
+				/>
 
 				<main className="homepage">
-					<Sidebar updatePriceFilter={this.updatePriceFilter}
-							 updateTagFilter={this.updateTagFilter}
-							 MeetsPriceFilters={this.state.MeetsPriceFilters}
-							 MeetsTagFilters={this.basetags}
+					<Sidebar
+						MeetsPriceFilters={this.state.MeetsPriceFilters}
+						adminMode={this.state.adminMode}
+
+						updatePriceFilter={this.updatePriceFilter}
+						updateTagFilter={this.updateTagFilter}
+						addNewContent={this.addNewContent}
+						MeetsTagFilters={this.basetags}
 					/>
-					<ProductsContainer products={this.state.DisplayedProductList}
-									   favorites={this.state.Favorites}
-									   searchString={this.searchFilterParameter}
-									   removeProduct={this.removeProduct}
-									   editProduct={this.editProduct}
-									   submitNewProductInfo={this.submitNewProductInfo}
-									   addToFavorites={this.addToFavorites}
-									   removeFromFavorites={this.removeFromFavorites}
+					<ProductsContainer
+						products={this.state.DisplayedProductList}
+						favorites={this.state.Favorites}
+						adminMode={this.state.adminMode}
+
+						searchString={this.searchFilterParameter}
+						removeProduct={this.removeProduct}
+						editProduct={this.editProduct}
+						submitNewProductInfo={this.submitNewProductInfo}
+						addToFavorites={this.addToFavorites}
+						removeFromFavorites={this.removeFromFavorites}
 					/>
 				</main>
 			</div>

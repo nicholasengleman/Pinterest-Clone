@@ -33,29 +33,7 @@ header {
 	border: 4px solid lightskyblue;
 }
 
-.addNewContent {
-	display: inline-block;
-	background: #ffa390;
-	box-shadow: 0 2px 2px lightgrey;
-	padding: 8px 16px;
-	border-radius: 5px;
-	font-size: 1em;
-	font-family: Arial, serif;
-	color: darkslategrey;
-	border: none;
-	outline: none;
-	cursor: pointer;
-	float: right;
-	margin: 20px 50px 0 0;
-	transition: all 0.1s;
-	letter-spacing: 1px;
-}
 
-.addNewContent:hover {
-	background: #ff7763;
-	box-shadow: 0 2px 2px grey;
-	color: black;
-}
 
 .favoritesSummary {
 	height: 40px;
@@ -78,6 +56,12 @@ header {
 	border: 1px solid lightgrey;
 }
 
+.adminHeader {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid black;
+	width: 400px;
+}
 
 /*Modal Styles */
 

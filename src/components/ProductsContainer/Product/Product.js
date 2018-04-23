@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Highlight from 'react-highlight-words';
-import './Product.css';
 import Tag from './Tag/Tag';
-import heartImg from '../../../img/64px-Love_Heart_SVG.svg.png';
+import { Button } from 'gestalt';
+
+import 'gestalt/dist/gestalt.css';
+import './Product.css';
 
 class Product extends React.Component {
 	constructor(props) {
@@ -185,9 +187,14 @@ class Product extends React.Component {
 							: null
 						}
 						{this.state.name
-							? <img src={heartImg} onClick={this.toggleFavorite}
-								   className={this.state.Favorited.status ? 'heartIcon favorited__heartIcon' : 'heartIcon'}
-								   alt='heartIcon'/>
+							? <div className='saveIcon'>
+								<Button onClick={this.toggleFavorite}
+									  text='Save'
+									  color='red'
+									  inline
+								      alt='save this product'
+								/>
+							</div>
 							: null
 						}
 						<h1>
@@ -220,8 +227,10 @@ class Product extends React.Component {
 								<button className='alwaysShow' onClick={this.cancelEdit}>cancel</button>
 							 </div>
 							: <div>
-								<button onClick={this.toggleEditMode}>edit</button>
-								<button onClick={this.removeProduct}>remove</button>
+								<button onClick={this.toggleEditMode}
+										className={this.props.adminMode ? 'alwaysShow' : ''}>edit</button>
+								<button onClick={this.removeProduct}
+										className={this.props.adminMode ? 'alwaysShow' : ''}>remove</button>
 							</div>
 					}
 				</div>

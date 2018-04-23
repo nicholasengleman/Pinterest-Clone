@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Header.css';
+
 import Modal from 'react-modal';
 import FavoriteItem from './FavoriteItem/FavoriteItem';
+import {Switch, Label, Text, Box} from 'gestalt';
+
+import 'gestalt/dist/gestalt.css';
+import './Header.css';
+
 
 class Header extends React.Component {
 	constructor(props) {
@@ -10,12 +15,13 @@ class Header extends React.Component {
 
 		this.state = {
 			modalIsOpen: false,
+			switched: false
 		};
 
 		this.searchInputChange = this.searchInputChange.bind(this);
-		this.addNewContent = this.addNewContent.bind(this);
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
+		this.toggleAdminMode = this.toggleAdminMode.bind(this);
 	}
 
 	static propTypes = {
@@ -24,6 +30,11 @@ class Header extends React.Component {
 		favoritesQuantity: PropTypes.number,
 		favorites: PropTypes.array
 	};
+
+	toggleAdminMode() {
+		this.props.toggleAdminMode();
+		this.setState({switched: !this.state.switched});
+	}
 
 	openModal() {
 		this.setState({modalIsOpen: true});
@@ -39,10 +50,6 @@ class Header extends React.Component {
 		event.preventDefault();
 	}
 
-	addNewContent(event) {
-		this.props.addNewContent();
-		event.preventDefault();
-	}
 
 	render() {
 		return (
@@ -72,26 +79,35 @@ class Header extends React.Component {
 					overlayClassName="Overlay"
 					closeTimeoutMS={150}
 				>
-					{ this.props.favorites.length > 0
+					{this.props.favorites.length > 0
 						? this.props.favorites.map(favorite => (
 							<FavoriteItem key={favorite.productKey}
-									  favoriteImg={favorite.productImageAddress}
-									  favoriteName={favorite.productName}
-									  favoriteDescription={favorite.productDescription}
-									  favoritePrice={favorite.productPrice}
-									  favoriteProductKey={favorite.productKey}
-									  removeFromFavorites={this.props.removeFromFavorites}
+										  favoriteImg={favorite.productImageAddress}
+										  favoriteName={favorite.productName}
+										  favoriteDescription={favorite.productDescription}
+										  favoritePrice={favorite.productPrice}
+										  favoriteProductKey={favorite.productKey}
+										  removeFromFavorites={this.props.removeFromFavorites}
 							/>))
 						: <p>You have no favorites!</p>
 					}
 					<button className='closeModalButton' onClick={this.closeModal}>close</button>
 				</Modal>
-				<button className='addNewContent' onClick={this.addNewContent}>add new product</button>
+
+				<div className='adminHeader'>
+					<Label htmlFor='toggleAdminMode'>
+						<Text>Admin Mode</Text>
+					</Label>
+					<Switch
+						id='toggleAdminMode'
+						onChange={this.toggleAdminMode}
+						switched={this.state.switched}
+					/>
+				</div>
 			</header>
 		)
 	}
 }
-
 
 
 export default Header;

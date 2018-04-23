@@ -10,11 +10,10 @@ class FavoriteItem extends React.Component {
 	}
 
 	static propTypes = {
-		key: PropTypes.number,
 		favoriteImg: PropTypes.string,
 		favoriteName: PropTypes.string,
 		favoriteDescription: PropTypes.string,
-		favoritePrice: PropTypes.string,
+		favoritePrice: PropTypes.number,
 		favoriteProductKey: PropTypes.number,
 		removeFromFavorites: PropTypes.func
 	};

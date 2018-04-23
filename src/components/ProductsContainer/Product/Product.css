@@ -1,15 +1,22 @@
 .productBox {
-	background: #e8e8e8;
 	border-radius: 10px;
 	text-align: left;
 	break-inside: avoid;
 	page-break-inside: avoid;
 	box-sizing: border-box;
-	margin: 0 20px 20px 0;
-	border: 1px solid transparent;
 	position: relative;
 	font-size: 14px;
+	transition: box-shadow 0.1s linear;
+	box-shadow: 0 0 0 0 white;
+    margin: 15px;
 }
+
+.productBox:hover {
+	box-shadow: 0 0 0 10px #e8e8e8;
+	background: #e8e8e8;
+	cursor: zoom-in;
+}
+
 
 /*Edit Mode Styles */
 
@@ -60,37 +67,29 @@
 	to { opacity: 0; }
 }
 
-.heartIcon {
+.saveIcon {
 	position: absolute;
 	height: 40px;
 	top: 20px;
-	left: 30px;
+	right: 30px;
 	opacity: 0;
-	transition: all 0.3s;
 }
 
-.productBox:hover .heartIcon {
-	opacity: .7;
-}
-
-.favorited__heartIcon {
+.productBox:hover .saveIcon {
 	opacity: 1;
-	height: 50px;
-	top: 15px;
-	left: 25px;
 }
 
-.heartIcon:hover {
-	height: 50px;
-	top: 15px;
-	left: 25px;
+.saveIcon:hover {
 	cursor: pointer;
 }
 
 .productPic img {
 	width: 100%;
-	border-top-right-radius: 10px;
-	border-top-left-radius: 10px;
+	border-radius: 10px;
+}
+
+.productBox:hover .productPic img {
+	filter: brightness(0.8);
 }
 
 .tagContainer {
@@ -145,12 +144,8 @@
 	box-shadow: 0 2px 2px lightgrey;
 	cursor: pointer;
 	letter-spacing: 1px;
-	opacity: 0;
+	display: none;
 	transition: all 0.25s;
-}
-
-.productBox:hover button {
-	opacity: 1;
 }
 
 .editPanel button:hover {
@@ -160,7 +155,7 @@
 }
 
 .editPanel button.alwaysShow {
-	opacity: 1;
+	display: inline;
 }
 
 @media (max-width: 400px) {
