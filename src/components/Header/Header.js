@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import Modal from 'react-modal';
-import FavoriteItem from './FavoriteItem/FavoriteItem';
-import {Switch, Label, Text, Box} from 'gestalt';
+import { Switch, Label, Text, Tabs } from 'gestalt';
 
 import 'gestalt/dist/gestalt.css';
 import './Header.css';
@@ -14,6 +11,7 @@ class Header extends React.Component {
 		super(props);
 
 		this.state = {
+			isOpen: false,
 			modalIsOpen: false,
 			switched: false
 		};
@@ -22,6 +20,8 @@ class Header extends React.Component {
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 		this.toggleAdminMode = this.toggleAdminMode.bind(this);
+		this.toggleAdminMode = this.toggleAdminMode.bind(this);
+		this.tabChange = this.tabChange.bind(this);
 	}
 
 	static propTypes = {
@@ -50,6 +50,15 @@ class Header extends React.Component {
 		event.preventDefault();
 	}
 
+	tabChange({ activeTabIndex, event }) {
+		event.preventDefault();
+		this.setState({
+			activeIndex: activeTabIndex
+		});
+	}
+
+
+
 
 	render() {
 		return (
@@ -63,6 +72,8 @@ class Header extends React.Component {
 						   onChange={this.searchInputChange}
 						   placeholder="Search"/>
 				</form>
+
+				{/*
 				<button className='favoritesSummary' onClick={this.openModal}>
 					{this.props.favoritesQuantity < 1
 						? 'save a favorite!'
@@ -93,6 +104,25 @@ class Header extends React.Component {
 					}
 					<button className='closeModalButton' onClick={this.closeModal}>close</button>
 				</Modal>
+				*/}
+				<Tabs
+					tabs={[
+						{
+							text: "Explore",
+							href: "explore"
+						},
+						{
+							text: "Boards",
+							href: "boards"
+						},
+						{
+							text: "Pins",
+							href: "pins"
+						}
+					]}
+					activeTabIndex={this.state.activeIndex}
+					onChange={this.handleChange}
+				/>
 
 				<div className='adminHeader'>
 					<Label htmlFor='toggleAdminMode'>

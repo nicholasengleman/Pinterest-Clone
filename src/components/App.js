@@ -22,6 +22,7 @@ class App extends Component {
 			'$500 & above': false
 		};
 		this.state = {
+			activeIndex: 0,
 			Favorites: [],
 			DisplayedProductList: [],
 			MeetsPriceFilters: {},
