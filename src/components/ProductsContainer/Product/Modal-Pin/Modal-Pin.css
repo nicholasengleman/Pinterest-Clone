@@ -1,16 +1,22 @@
-.Modal {
+.modalPin {
 	width: 40%;
-	height: 80%;
-	border-radius: 5%;
+	height: 50%;
+	outline: none;
+	border-radius: 10px;
 	overflow: hidden;
 	border: none;
 	display: flex;
 	justify-content: space-between;
 	padding: 0;
 	border: 0;
+	background: white;
+	position: absolute;
+	top: 20%;
+	left: 30%;
+
 }
 
-.ReactModal__Overlay {
+.ReactModalPin__Overlay {
 	position: fixed;
 	width: 100%;
 	height: 100%;
@@ -22,12 +28,11 @@
 	z-index: 4;
 }
 
-.ReactModal__Body--open {
+.ReactModalPin__Body--open {
 	overflow: hidden;
 }
 
-.modal_ProductSummary {
-	border: 1px solid black;
+.modalPin_ProductSummary {
 	width: 50%;
 	height: 100%;
 	text-align: center;
@@ -38,24 +43,23 @@
 	justify-content: center;
 }
 
-.modal_productDescription {
+.modalPin_productDescription {
 	width: 80%;
 	float: left;
+	cursor: pointer;
 }
 
-.modal_productDescription textarea {
+.modalPin_productDescription textarea {
 	max-height: 50px;
 	width: 100%;
 }
 
-.modal_productDescriptionEdit {
+.modalPin_productDescriptionEdit {
 	display: inline-block;
+	cursor: pointer;
 }
 
-
-
-.modal_Boards {
-	border: 1px solid black;
+.modalPin_Boards {
 	width: 50%;
 	text-align: center;
 	height: 100%;
