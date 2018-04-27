@@ -8,7 +8,7 @@ Becauase all product fields are optional, price and data fields can be left empt
 
 The features fall into 3 categories:
 
-1. Content Search
+1. Content SearchBar
     * Find products by selecting different combinations of tag and price filters
     * Add a search term to further refine your search
 2. Favorite System

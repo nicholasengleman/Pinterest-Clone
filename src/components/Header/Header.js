@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Label, Text, Tabs } from 'gestalt';
 
+import SearchBar from './SearchBar/SearchBar';
+
 import 'gestalt/dist/gestalt.css';
 import './Header.css';
 
@@ -16,7 +18,6 @@ class Header extends React.Component {
 			switched: false
 		};
 
-		this.searchInputChange = this.searchInputChange.bind(this);
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 		this.toggleAdminMode = this.toggleAdminMode.bind(this);
@@ -45,11 +46,6 @@ class Header extends React.Component {
 		this.setState({modalIsOpen: false});
 	}
 
-	searchInputChange(event) {
-		this.props.filterProducts(this.refs.searchInput.value);
-		event.preventDefault();
-	}
-
 	tabChange({ activeTabIndex, event }) {
 		event.preventDefault();
 		this.setState({
@@ -63,48 +59,7 @@ class Header extends React.Component {
 	render() {
 		return (
 			<header>
-				<form id="search" className="headerSearchAddInput">
-					<input type="search"
-						   id="search"
-						   name="search"
-						   className="searchInput"
-						   ref="searchInput"
-						   onChange={this.searchInputChange}
-						   placeholder="Search"/>
-				</form>
-
-				{/*
-				<button className='favoritesSummary' onClick={this.openModal}>
-					{this.props.favoritesQuantity < 1
-						? 'save a favorite!'
-						: this.props.favoritesQuantity < 2
-							? `see your favorite item!`
-							: `see your ${this.props.favoritesQuantity} favorites!`
-					}
-				</button>
-				<Modal
-					isOpen={this.state.modalIsOpen}
-					onRequestClose={this.closeModal}
-					contentLabel="Favorites"
-					className="Modal"
-					overlayClassName="Overlay"
-					closeTimeoutMS={150}
-				>
-					{this.props.favorites.length > 0
-						? this.props.favorites.map(favorite => (
-							<FavoriteItem key={favorite.productKey}
-										  favoriteImg={favorite.productImageAddress}
-										  favoriteName={favorite.productName}
-										  favoriteDescription={favorite.productDescription}
-										  favoritePrice={favorite.productPrice}
-										  favoriteProductKey={favorite.productKey}
-										  removeFromFavorites={this.props.removeFromFavorites}
-							/>))
-						: <p>You have no favorites!</p>
-					}
-					<button className='closeModalButton' onClick={this.closeModal}>close</button>
-				</Modal>
-				*/}
+				<SearchBar filterProducts={this.props.filterProducts}/>
 				<Tabs
 					tabs={[
 						{
