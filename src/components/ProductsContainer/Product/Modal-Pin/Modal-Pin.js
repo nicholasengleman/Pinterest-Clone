@@ -31,13 +31,13 @@ class ModalPin extends React.Component {
 		this.setState({ newBoardName : event.target.value });
 	};
 
-	addPinToExistingBoard = (productKey, boardID) => {
-		this.props.addPinToExistingBoard(productKey, boardID);
+	addPinToExistingBoard = (boardID) => {
+		this.props.addPinToExistingBoard(this.props.productKey, this.props.productImage, boardID);
 		this.closeModal();
 	};
 
 	addPinToNewBoard = () => {
-		this.props.addPinToNewBoard(this.props.productKey, this.state.newBoardName);
+		this.props.addPinToNewBoard(this.props.productKey, this.props.productImage, this.state.newBoardName);
 		this.closeModal();
 	};
 
@@ -150,7 +150,7 @@ class ModalPin extends React.Component {
 							</div>
 							{this.props.boards.map(board => (
 								<div className='board'
-									 onClick={() => this.addPinToExistingBoard(this.props.productKey, board.boardID)}>
+									 onClick={() => this.addPinToExistingBoard(board.boardID)}>
 									<div>
 										<img src={board.pic} alt=''/>
 										<span className='boardTitle'>

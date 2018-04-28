@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
+
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import ProductsContainer from './ProductsContainer/ProductsContainer';
+import ConfirmationToast from './ConfirmationToast/ConfirmationToast';
+
 import ProjectData from '../ProjectData.json';
 
 class App extends Component {
@@ -36,6 +39,12 @@ class App extends Component {
 					pins: [4, 5, 6]
 				}
 			],
+			ConfirmationToast: {
+				ShowConfirmationToast : false,
+				ToastImage: '',
+				ToastAction: '',
+				ToastActionDestination: ''
+			},
 			activeIndex: 0,
 			Favorites: [],
 			DisplayedProductList: [],
@@ -68,25 +77,52 @@ class App extends Component {
 		this.setState({adminMode: !this.state.adminMode});
 	}
 
-	addPinToExistingBoard = (productKey, boardID) => {
+	addPinToExistingBoard = (productKey, productImage, boardID) => {
 		let boards = this.state.Boards;
 		for (let board of boards) {
 			if (board.boardID === boardID) {
 				board.pins.push(productKey);
 				this.setState({ Boards : boards });
+				this.setState({ ConfirmationToast:
+						{
+							ShowConfirmationToast : true,
+							ToastImage: productImage,
+							ToastAction: 'Saved To',
+							ToastActionDestination: board.name
+						}
+				});
 			}
 		}
+
+		setTimeout(function(){
+			this.setState({ ConfirmationToast : { ShowConfirmationToast : false }});
+		}.bind(this),3000);
 	};
 
-	addPinToNewBoard = (productKey, boardName) => {
+	addPinToNewBoard = (productKey, productImage, boardName) => {
 		let boards = this.state.Boards;
 		boards.push({
 			name: boardName,
 			boardID: Math.random(),
-			pic: 'https://i.pinimg.com/564x/bd/a2/90/bda290318816d59a338c97bb6beaa203.jpg',
+			pic: productImage,
 			pins: [productKey]
 		});
 		this.setState({ Boards : boards });
+		this.setState({ ConfirmationToast:
+							{
+								ShowConfirmationToast : true,
+								ToastImage: productImage,
+								ToastAction: 'Saved To',
+								ToastActionDestination: boardName
+							}
+				});
+		setTimeout(function(){
+			this.setState({ ConfirmationToast : { ShowConfirmationToast : false }});
+		}.bind(this),3000);
+	};
+
+	handleConfirmationClick = ({ event }) => {
+		this.setState(prevState => ({ showConfirmationToast: !prevState.showConfirmationToast }));
 	};
 
 	removeFromFavorites(productKey) {
@@ -377,6 +413,10 @@ class App extends Component {
 						addPinToNewBoard={this.addPinToNewBoard}
 						removeFromFavorites={this.removeFromFavorites}
 					/>
+					{
+						this.state.ConfirmationToast.ShowConfirmationToast
+						&& <ConfirmationToast ConfirmationToast={this.state.ConfirmationToast}/>
+					}
 				</main>
 			</div>
 		);
