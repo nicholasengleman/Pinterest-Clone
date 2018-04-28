@@ -5,6 +5,7 @@ import "gestalt/dist/gestalt.css";
 import "./SearchBar.css";
 
 const SearchBar = props => {
+
   const searchInputChange = event => {
     props.filterProducts(event.target.value);
     event.preventDefault();

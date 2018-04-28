@@ -85,7 +85,6 @@ class Product extends React.Component {
 		this.setState(prevState => ({
 			displayModal: !prevState.displayModal
 		}));
-		console.log("test");
 	};
 
 	toggleFavorite(event) {
@@ -160,7 +159,7 @@ class Product extends React.Component {
 
 	render() {
 		return (
-			<div className="productBox" id={this.state.newProduct ? "newProduct" : null}>
+			<div className="productBox" id={this.state.newProduct && "newProduct"}>
 				{this.state.editMode
 					? <div>
 						<p className="optionalWarning">all fields optional</p>
@@ -201,28 +200,21 @@ class Product extends React.Component {
 						/>
 					</div>
 					: <div>
-						{this.state.Favorited.message === "added to favorites!"
-							? <div className="Message">{this.state.Favorited.message}</div>
-							: null
-						}
-						{this.state.Favorited.message === "removed from favorites!"
-							? <div className="Message">{this.state.Favorited.message}</div>
-							: null
-						}
+						{this.state.Favorited.message === "added to favorites!" && <div className="Message">{this.state.Favorited.message}</div>}
+						{this.state.Favorited.message === "removed from favorites!" && <div className="Message">{this.state.Favorited.message}</div>}
 						<div className="productPic">
-							<img src={this.props.productImage} alt=""/>
+							<img src={this.props.productImageAddress} alt=""/>
 						</div>
-						{this.state.tags
-							? <div className="tagContainer">
+						{this.state.tags &&
+							<div className="tagContainer">
 								{this.props.productTags.map(tag => (
 									<Tag text={tag} key={tag}/>
-								))
+									))
 								}
 							</div>
-							: null
 						}
-						{this.state.name
-							? <div>
+						{this.state.name &&
+							 <div>
 								<div className="saveIcon">
 									<Button
 										onClick={this.toggleModal}
@@ -234,7 +226,11 @@ class Product extends React.Component {
 									<ModalPin modalStatus={this.state.displayModal}
 											  toggleModal={this.toggleModal}
 											  productDescription={this.props.productDescription}
-											  productImage={this.props.productImage}
+											  productImage={this.props.productImageAddress}
+											  boards={this.props.boards}
+											  productKey={this.props.productKey}
+											  addPinToExistingBoard={this.props.addPinToExistingBoard}
+											  addPinToNewBoard={this.props.addPinToNewBoard}
 									/>
 								</div>
 								<h1>
@@ -244,22 +240,15 @@ class Product extends React.Component {
 										textToHighlight={this.props.productName}
 									/>
 								</h1>
-								{this.state.price
-									? <div className="productPrice">${this.props.productPrice}</div>
-									: null
-								}
-								{this.state.description
-									? <div className="productDescription">
-										<Highlight
+								{this.state.price && <div className="productPrice">${this.props.productPrice}</div>}
+								{this.state.description && <div className="productDescription">
+									<Highlight
 											caseSensitive={false}
 											searchWords={[this.props.searchString]}
 											textToHighlight={this.props.productDescription}
-										/>
-									</div>
-									: null
+										/></div>
 								}
 							</div>
-							: null
 						}
 						<div className="editPanel">
 							{this.state.editMode
@@ -277,13 +266,13 @@ class Product extends React.Component {
 								: <div>
 									<button
 										onClick={this.toggleEditMode}
-										className={this.props.adminMode ? "alwaysShow" : ""}
+										className={this.props.adminMode && "alwaysShow"}
 									>
 										edit
 									</button>
 									<button
 										onClick={this.removeProduct}
-										className={this.props.adminMode ? "alwaysShow" : ""}
+										className={this.props.adminMode && "alwaysShow"}
 									>
 										remove
 									</button>

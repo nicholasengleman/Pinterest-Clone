@@ -9,23 +9,10 @@ const ProductsContainer = (props) => {
 				{props.products.length> 0 ?
 					props.products.map(product => (
 						<Product
-							removeProduct = {props.removeProduct}
-							submitNewProductInfo={props.submitNewProductInfo}
-							addToFavorites={props.addToFavorites}
-							favorites={props.favorites}
-							removeFromFavorites={props.removeFromFavorites}
-							searchString={props.searchString}
-							adminMode={props.adminMode}
-
+							{...props}
+							{...product}
 
 							key = {product.productKey}
-							productImage = {product.productImageAddress}
-							productName = {product.productName}
-							productPrice = {product.productPrice}
-							productDescription = {product.productDescription}
-							productTags = {product.productTags}
-							productKey = {product.productKey}
-
 						/>
 					)) : <p>Sorry, we are out of products!</p>
 				}

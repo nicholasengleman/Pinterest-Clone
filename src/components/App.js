@@ -22,6 +22,20 @@ class App extends Component {
 			'$500 & above': false
 		};
 		this.state = {
+			Boards: [
+				{
+					name: 'Places to Go',
+					boardID: 34343,
+					pic: 'https://i.pinimg.com/564x/4d/9b/4f/4d9b4ff9801362c075528b45e5742b13.jpg',
+					pins: [1, 2, 3]
+				},
+				{
+					name: 'Recipies to make',
+					boardID: 2323,
+					pic: 'https://i.pinimg.com/564x/bd/a2/90/bda290318816d59a338c97bb6beaa203.jpg',
+					pins: [4, 5, 6]
+				}
+			],
 			activeIndex: 0,
 			Favorites: [],
 			DisplayedProductList: [],
@@ -39,7 +53,6 @@ class App extends Component {
 		this.updateSearchParameter = this.updateSearchParameter.bind(this);
 		this.addNewContent = this.addNewContent.bind(this);
 		this.submitNewProductInfo = this.submitNewProductInfo.bind(this);
-		this.addToFavorites = this.addToFavorites.bind(this);
 		this.removeFromFavorites = this.removeFromFavorites.bind(this);
 		this.toggleAdminMode = this.toggleAdminMode.bind(this);
 	}
@@ -52,19 +65,29 @@ class App extends Component {
 	}
 
 	toggleAdminMode() {
-		this.setState({ adminMode: !this.state.adminMode });
+		this.setState({adminMode: !this.state.adminMode});
 	}
 
-	addToFavorites(productKey) {
-		for (let product of this.baseproductList) {
-			if (product.productKey === productKey) {
-				this.setState(prevState => ({
-					Favorites: [...prevState.Favorites, product ]
-				}));
+	addPinToExistingBoard = (productKey, boardID) => {
+		let boards = this.state.Boards;
+		for (let board of boards) {
+			if (board.boardID === boardID) {
+				board.pins.push(productKey);
+				this.setState({ Boards : boards });
 			}
 		}
-	}
+	};
 
+	addPinToNewBoard = (productKey, boardName) => {
+		let boards = this.state.Boards;
+		boards.push({
+			name: boardName,
+			boardID: Math.random(),
+			pic: 'https://i.pinimg.com/564x/bd/a2/90/bda290318816d59a338c97bb6beaa203.jpg',
+			pins: [productKey]
+		});
+		this.setState({ Boards : boards });
+	};
 
 	removeFromFavorites(productKey) {
 		this.setState(prevState => ({
@@ -115,7 +138,7 @@ class App extends Component {
 		};
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
-		if(this.FilteredProductList.length === this.baseproductList.length) {
+		if (this.FilteredProductList.length === this.baseproductList.length) {
 			this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
 		}
 	}
@@ -139,7 +162,7 @@ class App extends Component {
 
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
-		if(this.FilteredProductList.length === this.baseproductList.length) {
+		if (this.FilteredProductList.length === this.baseproductList.length) {
 			this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 		}
 	}
@@ -166,7 +189,7 @@ class App extends Component {
 			alwaysReturnTrue = false;
 		}
 		return editedproductList.filter(product => {
-			if(alwaysReturnTrue) {
+			if (alwaysReturnTrue) {
 				return true;
 			}
 			if (params['Under $25']) {
@@ -308,7 +331,6 @@ class App extends Component {
 				product.productName = newName;
 				product.productPrice = newPrice;
 				product.productDescription = newDescription;
-
 			}
 		});
 		this.basetags = [];
@@ -345,12 +367,14 @@ class App extends Component {
 						products={this.state.DisplayedProductList}
 						favorites={this.state.Favorites}
 						adminMode={this.state.adminMode}
+						boards={this.state.Boards}
 
 						searchString={this.searchFilterParameter}
 						removeProduct={this.removeProduct}
 						editProduct={this.editProduct}
 						submitNewProductInfo={this.submitNewProductInfo}
-						addToFavorites={this.addToFavorites}
+						addPinToExistingBoard={this.addPinToExistingBoard}
+						addPinToNewBoard={this.addPinToNewBoard}
 						removeFromFavorites={this.removeFromFavorites}
 					/>
 				</main>
