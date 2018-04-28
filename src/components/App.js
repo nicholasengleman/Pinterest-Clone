@@ -87,7 +87,7 @@ class App extends Component {
 						{
 							ShowConfirmationToast : true,
 							ToastImage: productImage,
-							ToastAction: 'Saved To',
+							ToastAction: 'Saved to',
 							ToastActionDestination: board.name
 						}
 				});
@@ -96,7 +96,7 @@ class App extends Component {
 
 		setTimeout(function(){
 			this.setState({ ConfirmationToast : { ShowConfirmationToast : false }});
-		}.bind(this),3000);
+		}.bind(this),3500);
 	};
 
 	addPinToNewBoard = (productKey, productImage, boardName) => {
@@ -112,13 +112,13 @@ class App extends Component {
 							{
 								ShowConfirmationToast : true,
 								ToastImage: productImage,
-								ToastAction: 'Saved To',
+								ToastAction: 'Saved to',
 								ToastActionDestination: boardName
 							}
 				});
 		setTimeout(function(){
 			this.setState({ ConfirmationToast : { ShowConfirmationToast : false }});
-		}.bind(this),3000);
+		}.bind(this),3500);
 	};
 
 	handleConfirmationClick = ({ event }) => {
