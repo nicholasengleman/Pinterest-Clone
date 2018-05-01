@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import './App.css';
 
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import ProductsContainer from './ProductsContainer/ProductsContainer';
 import ConfirmationToast from './ConfirmationToast/ConfirmationToast';
+import ProductComments from "./ProductComments/ProductComments";
 
 import ProjectData from '../ProjectData.json';
 
@@ -40,7 +42,7 @@ class App extends Component {
 				}
 			],
 			ConfirmationToast: {
-				ShowConfirmationToast : false,
+				ShowConfirmationToast: false,
 				ToastImage: '',
 				ToastAction: '',
 				ToastActionDestination: ''
@@ -82,10 +84,11 @@ class App extends Component {
 		for (let board of boards) {
 			if (board.boardID === boardID) {
 				board.pins.push(productKey);
-				this.setState({ Boards : boards });
-				this.setState({ ConfirmationToast:
+				this.setState({Boards: boards});
+				this.setState({
+					ConfirmationToast:
 						{
-							ShowConfirmationToast : true,
+							ShowConfirmationToast: true,
 							ToastImage: productImage,
 							ToastAction: 'Saved to',
 							ToastActionDestination: board.name
@@ -93,11 +96,30 @@ class App extends Component {
 				});
 			}
 		}
-
-		setTimeout(function(){
-			this.setState({ ConfirmationToast : { ShowConfirmationToast : false }});
-		}.bind(this),3500);
+		setTimeout(function () {
+			this.setState({ConfirmationToast: {ShowConfirmationToast: false}});
+		}.bind(this), 3500);
 	};
+
+	addNewComment = (productID, newComment) => {
+		let ProductList = this.state.DisplayedProductList;
+		if (ProductList[productID].comments) {
+			ProductList[productID].comments.push(newComment);
+		} else {
+			ProductList[productID].comments = [newComment];
+		}
+		this.setState({DisplayedProductList: ProductList});
+		this.setState({
+			ConfirmationToast:
+				{
+					ShowConfirmationToast: true,
+					ToastImage: '',
+					ToastAction: 'thanks for',
+					ToastActionDestination: 'your comment!'
+				}
+		});
+	};
+
 
 	addPinToNewBoard = (productKey, productImage, boardName) => {
 		let boards = this.state.Boards;
@@ -107,22 +129,35 @@ class App extends Component {
 			pic: productImage,
 			pins: [productKey]
 		});
-		this.setState({ Boards : boards });
-		this.setState({ ConfirmationToast:
-							{
-								ShowConfirmationToast : true,
-								ToastImage: productImage,
-								ToastAction: 'Saved to',
-								ToastActionDestination: boardName
-							}
-				});
-		setTimeout(function(){
-			this.setState({ ConfirmationToast : { ShowConfirmationToast : false }});
-		}.bind(this),3500);
+		this.setState({Boards: boards});
+		// this.setState({
+		// 	ConfirmationToast:
+		// 		{
+		// 			ShowConfirmationToast: true,
+		// 			ToastImage: productImage,
+		// 			ToastAction: 'Saved to',
+		// 			ToastActionDestination: boardName
+		// 		}
+		// });
+		// setTimeout(function () {
+		// 	this.setState({ConfirmationToast: {ShowConfirmationToast: false}});
+		// }.bind(this), 3500);
+		this.displayConfirmationToast(productImage, 'Saved to', boardName);
 	};
 
-	handleConfirmationClick = ({ event }) => {
-		this.setState(prevState => ({ showConfirmationToast: !prevState.showConfirmationToast }));
+	displayConfirmationToast = (ToastImage, ToastAction, ToastActionDestination) => {
+		this.setState({
+			ConfirmationToast:
+				{
+					ShowConfirmationToast: true,
+					ToastImage,
+					ToastAction,
+					ToastActionDestination
+				}
+		});
+		setTimeout(function () {
+			this.setState({ConfirmationToast: {ShowConfirmationToast: false}});
+		}.bind(this), 3500);
 	};
 
 	removeFromFavorites(productKey) {
@@ -378,47 +413,62 @@ class App extends Component {
 
 	render() {
 		return (
-			<div>
-				<Header
-					favorites={this.state.Favorites}
-					adminMode={this.state.adminMode}
-
-					filterProducts={this.updateSearchParameter}
-					favoritesQuantity={this.state.Favorites.length}
-					removeFromFavorites={this.removeFromFavorites}
-					toggleAdminMode={this.toggleAdminMode}
-				/>
-
-				<main className="homepage">
-					<Sidebar
-						MeetsPriceFilters={this.state.MeetsPriceFilters}
-						adminMode={this.state.adminMode}
-
-						updatePriceFilter={this.updatePriceFilter}
-						updateTagFilter={this.updateTagFilter}
-						addNewContent={this.addNewContent}
-						MeetsTagFilters={this.basetags}
+			<Router>
+				<div>
+					<Route exact path="/:product" render={({match}) =>
+						<ProductComments
+							{...this.state.DisplayedProductList[match.params.product]}
+							addNewComment={this.addNewComment}/>}
 					/>
-					<ProductsContainer
-						products={this.state.DisplayedProductList}
-						favorites={this.state.Favorites}
-						adminMode={this.state.adminMode}
-						boards={this.state.Boards}
 
-						searchString={this.searchFilterParameter}
-						removeProduct={this.removeProduct}
-						editProduct={this.editProduct}
-						submitNewProductInfo={this.submitNewProductInfo}
-						addPinToExistingBoard={this.addPinToExistingBoard}
-						addPinToNewBoard={this.addPinToNewBoard}
-						removeFromFavorites={this.removeFromFavorites}
-					/>
+					<Route exact path="/" render={() =>
+						<Header
+							favorites={this.state.Favorites}
+							adminMode={this.state.adminMode}
+
+							filterProducts={this.updateSearchParameter}
+							favoritesQuantity={this.state.Favorites.length}
+							removeFromFavorites={this.removeFromFavorites}
+							toggleAdminMode={this.toggleAdminMode}
+						/>
+					}/>
+
+					<Route exact path="/" render={() =>
+						<main className="homepage">
+							<Sidebar
+								MeetsPriceFilters={this.state.MeetsPriceFilters}
+								adminMode={this.state.adminMode}
+
+								updatePriceFilter={this.updatePriceFilter}
+								updateTagFilter={this.updateTagFilter}
+								addNewContent={this.addNewContent}
+								MeetsTagFilters={this.basetags}
+							/>
+
+							<ProductsContainer
+								products={this.state.DisplayedProductList}
+								favorites={this.state.Favorites}
+								adminMode={this.state.adminMode}
+								boards={this.state.Boards}
+
+								searchString={this.searchFilterParameter}
+								removeProduct={this.removeProduct}
+								editProduct={this.editProduct}
+								submitNewProductInfo={this.submitNewProductInfo}
+								addPinToExistingBoard={this.addPinToExistingBoard}
+								addPinToNewBoard={this.addPinToNewBoard}
+								removeFromFavorites={this.removeFromFavorites}
+							/>
+						</main>
+					}/>
 					{
 						this.state.ConfirmationToast.ShowConfirmationToast
 						&& <ConfirmationToast ConfirmationToast={this.state.ConfirmationToast}/>
 					}
-				</main>
-			</div>
+
+
+				</div>
+			</Router>
 		);
 	}
 }

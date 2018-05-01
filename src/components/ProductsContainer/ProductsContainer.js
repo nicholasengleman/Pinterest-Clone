@@ -1,24 +1,28 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 import PropTypes from 'prop-types';
 import './ProductsContainer.css';
 import Product from './Product/Product';
 
 const ProductsContainer = (props) => {
-		return (
+	return (
 			<div className="productContainer">
-				{props.products.length> 0 ?
+				{props.products.length > 0 ?
 					props.products.map(product => (
-						<Product
-							{...props}
-							{...product}
+						<Link to={`/${product.productKey - 1}`}>
+							<Product
+								{...props}
+								{...product}
 
-							key = {product.productKey}
-						/>
+								key={product.productKey}
+							/>
+						</Link>
 					)) : <p>Sorry, we are out of products!</p>
 				}
 			</div>
-		)
-	};
+	)
+};
 
 ProductsContainer.propTypes = {
 	products: PropTypes.array,

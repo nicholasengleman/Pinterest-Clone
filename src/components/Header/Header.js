@@ -1,4 +1,5 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 import { Switch, Label, Text, Tabs } from 'gestalt';
 
@@ -64,7 +65,7 @@ class Header extends React.Component {
 					tabs={[
 						{
 							text: "Explore",
-							href: "explore"
+							href: "/"
 						},
 						{
 							text: "Boards",
