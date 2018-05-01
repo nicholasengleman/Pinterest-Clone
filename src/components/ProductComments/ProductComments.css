@@ -1,0 +1,46 @@
+.commentsContainerContainer {
+	background: #EEEEEE;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+}
+
+.commentsContainer {
+	width: 800px;
+	height: 800px;
+	background: #ffffff;
+	margin: 0 auto;
+	margin-top: 50px;
+	border-radius: 5px;
+	padding: 20px;
+}
+.commentsContainer .header {
+	height: 40px;
+	margin-bottom: 20px;
+}
+.commentsContainer .header Button {
+	float: right;
+}
+.commentsContainer .productImage {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+
+.commentsContainer .productImage img {
+	width: 100%;
+	border-radius: 5px;
+}
+
+.commentsContainer .comments {
+	width: 45%;
+	float: right;
+}
+
+.commentsContainer .addCommentInput {
+	width: 80%;
+	margin-top: 50px;
+	height: 30px;
+	margin: 0 auto;
+}
