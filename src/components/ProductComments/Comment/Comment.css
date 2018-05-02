@@ -1,14 +1,86 @@
 .individualCommentContainer {
-	border: 1px solid black;
-	margin: 2px 20px 0 20px	;
-	border-radius: 10px;
-	padding: 5px 10px;
-	max-width: 70%;
+	margin-bottom: 20px;
+	width: 100%;
 	word-break: keep-all;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto Oxygen-Sans", Ubuntu, Cantarell, "“Fira Sans”", "“Droid Sans”", "Helvetica";
+}
+
+.commentHeader {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.commentHeader .commentHeaderRight {
+	width: 50%;
+	display: flex;
+	align-items: center;
 }
 
 .commentUsername {
 	font-weight: bold;
-	color: blueviolet;
-	margin-right: 5px;
+	margin-left: 15px;
+}
+
+.commentBody {
+	margin: 10px 10px 5px 40px;
+	line-height: 24px;
+}
+
+.editCommentButtonContainer {
+	position: relative;
+}
+
+.tooltip {
+	width: 225px;
+	background: white;
+	color: brown;
+	position: absolute;
+	top: 45px;
+	left: -100px;
+	text-align: center;
+	border-radius: 10px;
+	box-shadow: 1px 1px 2px 2px darkgrey;
+}
+
+.tooltip::after {
+	content: " ";
+	position: absolute;
+	bottom: 100%;  /* At the top of the tooltip */
+	left: 50%;
+	margin-left: -5px;
+	border-width: 10px;
+	border-style: solid;
+	border-color: transparent transparent black transparent;
+	box-shadow: 1px 1px 2px 2px darkgrey;
+}
+
+.tooltipActions {
+	height: 40px;
+	line-height: 40px;
+}
+
+.tooltipActions .first {
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.tooltipActions .second {
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.tooltipActions:hover {
+	background: #efefef;
+}
+
+
+
+.commentFooter {
+	margin-left: 40px;
+	display: flex;
+	justify-content: space-between;
+	width: 40%;
 }

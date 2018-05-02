@@ -90,12 +90,13 @@ class App extends Component {
 		}
 	};
 
-	addNewComment = (productID, newComment, user) => {
+	addNewComment = (productID, newComment, user, date) => {
 		let ProductList = this.state.DisplayedProductList;
+		const commentId = Math.random();
 		if (ProductList[productID].comments) {
-			ProductList[productID].comments.push({ user, newComment });
+			ProductList[productID].comments.push({ user, newComment, date, commentId});
 		} else {
-			ProductList[productID].comments = [{ user, newComment }];
+			ProductList[productID].comments = [{ user, newComment, date, commentId }];
 		}
 		this.setState({DisplayedProductList: ProductList});
 		this.displayConfirmationToast('', 'thanks for','your comment!');

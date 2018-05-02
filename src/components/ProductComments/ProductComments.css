@@ -8,11 +8,11 @@
 
 .commentsContainer {
 	width: 800px;
-	height: 100%;
+	height: 800px;
 	background: #ffffff;
 	margin: 0 auto;
 	margin-top: 50px;
-	border-radius: 5px;
+	border-radius: 10px;
 	padding: 20px;
 }
 .commentsContainer .header {
@@ -41,16 +41,27 @@
 .commentsContainer .addCommentInput {
 	width: 80%;
 	margin-top: 50px;
-	height: 30px;
 	padding: 5px 10px;
 	outline: none;
 	border-radius: 10px;
 	border: 1px solid lightgrey;
+	resize: none;
+
 }
+
+.commentsContainer .addCommentInput:focus {
+	border: 1px solid rgb(181,181,181);
+	border-radius: 5px;
+	box-shadow: rgba(0, 132, 255, 0.5) 0 0 0 4px;
+	height: 100px;
+}
+
+
 
 .commentsContainer .commentBox {
 	display: flex;
-	width: 100%;
+	width: 90%;
 	align-items: start;
-	margin-bottom: 10px;
+	flex-direction: column;
+	padding-top: 20px;
 }
