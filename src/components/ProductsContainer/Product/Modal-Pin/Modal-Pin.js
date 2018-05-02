@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Heading, Icon, Button, IconButton} from "gestalt";
+import {Text, Heading, Icon, IconButton} from "gestalt";
 import ReactModal from "react-modal";
 
 import "gestalt/dist/gestalt.css";
@@ -22,23 +22,31 @@ class ModalPin extends React.Component {
 		event.preventDefault();
 	};
 
-	closeModal = () => {
-		this.setState({ createBoard: false });
-		this.props.toggleModal();
+	closeModal = (event) => {
+		this.setState({createBoard: false});
+		this.props.toggleModal(event);
 	};
 
 	createBoardInputChange = (event) => {
-		this.setState({ newBoardName : event.target.value });
+		event.stopPropagation();
+		this.setState({newBoardName: event.target.value});
 	};
 
-	addPinToExistingBoard = (boardID) => {
+	toggleCreateBoardDialog = (event) => {
+		event.preventDefault();
+		this.setState({createBoard: !this.state.createBoard});
+	};
+
+	addPinToExistingBoard = (event, boardID) => {
+		event.preventDefault();
 		this.props.addPinToExistingBoard(this.props.productKey, this.props.productImage, boardID);
-		this.closeModal();
+		this.closeModal(event);
 	};
 
-	addPinToNewBoard = () => {
+	addPinToNewBoard = (event) => {
+		event.preventDefault();
 		this.props.addPinToNewBoard(this.props.productKey, this.props.productImage, this.state.newBoardName);
-		this.closeModal();
+		this.closeModal(event);
 	};
 
 	render() {
@@ -100,7 +108,7 @@ class ModalPin extends React.Component {
 							</div>
 							<div className='createBoardInputContainer'>
 								<Text color='gray'>Name</Text>
-								<form id='createBoard'>
+								<form id='createBoard' onClick={(event) => event.preventDefault()}>
 									<input
 										name='createBoard'
 										placeholder="Like 'Places to Go' or 'Recipies to Make'"
@@ -111,28 +119,11 @@ class ModalPin extends React.Component {
 								</form>
 							</div>
 							<div className='submitNewBoard'>
-								<Button
-									text="Cancel"
-									color="gray"
-									inline
-									alt="cancel this board creation"
-									onClick={() => this.setState({ createBoard: false })}
-								/>
+								<button className='button_pin' onClick={this.toggleCreateBoardDialog}>Cancel</button>
 								{
 									this.state.newBoardName
-									? <Button
-										text="Create"
-										color="red"
-										inline
-										alt="create this board"
-										onClick={this.addPinToNewBoard}
-									/>
-									: <Button
-										text="Create"
-										color="gray"
-										inline
-										alt="create this board"
-									/>
+										? <button className='button_pin' onClick={this.addPinToNewBoard}>Save</button>
+										: <button>Save</button>
 								}
 							</div>
 						</div>
@@ -150,7 +141,7 @@ class ModalPin extends React.Component {
 							</div>
 							{this.props.boards.map(board => (
 								<div className='board'
-									 onClick={() => this.addPinToExistingBoard(board.boardID)}>
+									 onClick={(event) => this.addPinToExistingBoard(event, board.boardID)}>
 									<div>
 										<img src={board.pic} alt=''/>
 										<span className='boardTitle'>
@@ -158,18 +149,13 @@ class ModalPin extends React.Component {
 										</span>
 									</div>
 									<span className='boardSaveButton'>
-									<Button
-										text="Save"
-										color="red"
-										inline
-										alt="pin this product"
-									/>
+									<button className='button_pin'>Save</button>
 									</span>
 								</div>
 							))
 							}
 							<div className='createBoardContainer'
-								 onClick={() => this.setState({createBoard: true})}>
+								 onClick={this.toggleCreateBoardDialog}>
 								<Icon icon='add-circle' color='red' size='40' accessibilityLabel='add board'/>
 								<span>
 									<Text inline={true} size='md'>Create board</Text>

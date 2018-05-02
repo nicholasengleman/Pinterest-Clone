@@ -11,6 +11,7 @@ class Comment extends React.Component {
 		return (
 			<div className='individualCommentContainer'>
 				<div className='comment'>
+					<span className='commentUsername'>{this.props.name}</span>
 					{this.props.comment}
 				</div>
 			</div>

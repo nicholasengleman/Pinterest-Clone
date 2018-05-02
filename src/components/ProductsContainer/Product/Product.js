@@ -4,9 +4,7 @@ import PropTypes from "prop-types";
 import Highlight from "react-highlight-words";
 import Tag from "./Tag/Tag";
 import ModalPin from "./Modal-Pin/Modal-Pin"
-import {Button} from "gestalt";
 
-import "gestalt/dist/gestalt.css";
 import "./Product.css";
 
 class Product extends React.Component {
@@ -34,7 +32,6 @@ class Product extends React.Component {
 		this.toggleFavorite = this.toggleFavorite.bind(this);
 		this.edit = this.edit.bind(this);
 		this.cancelEdit = this.cancelEdit.bind(this);
-		this.toggleModal = this.toggleModal.bind(this);
 	}
 
 	static propTypes = {
@@ -81,7 +78,12 @@ class Product extends React.Component {
 		}
 	}
 
-	toggleModal(){
+	toggleModal = (event) => {
+		if(event.event) {
+			event.event.preventDefault();
+		} else {
+			event.preventDefault();
+		}
 		this.setState(prevState => ({
 			displayModal: !prevState.displayModal
 		}));
@@ -216,13 +218,12 @@ class Product extends React.Component {
 						{this.state.name &&
 							 <div>
 								<div className="saveIcon">
-									<Button
+									<button
 										onClick={this.toggleModal}
-										text="Save"
-										color="red"
-										inline
 										alt="save this product"
-									/>
+										className='button_pin'
+									>Save
+									</button>
 									<ModalPin modalStatus={this.state.displayModal}
 											  toggleModal={this.toggleModal}
 											  productDescription={this.props.productDescription}

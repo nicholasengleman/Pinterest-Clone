@@ -8,7 +8,7 @@
 
 .commentsContainer {
 	width: 800px;
-	height: 800px;
+	height: 100%;
 	background: #ffffff;
 	margin: 0 auto;
 	margin-top: 50px;
@@ -42,5 +42,15 @@
 	width: 80%;
 	margin-top: 50px;
 	height: 30px;
-	margin: 0 auto;
+	padding: 5px 10px;
+	outline: none;
+	border-radius: 10px;
+	border: 1px solid lightgrey;
+}
+
+.commentsContainer .commentBox {
+	display: flex;
+	width: 100%;
+	align-items: start;
+	margin-bottom: 10px;
 }

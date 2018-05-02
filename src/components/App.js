@@ -85,39 +85,20 @@ class App extends Component {
 			if (board.boardID === boardID) {
 				board.pins.push(productKey);
 				this.setState({Boards: boards});
-				this.setState({
-					ConfirmationToast:
-						{
-							ShowConfirmationToast: true,
-							ToastImage: productImage,
-							ToastAction: 'Saved to',
-							ToastActionDestination: board.name
-						}
-				});
+				this.displayConfirmationToast(productImage, 'Saved to', board.name);
 			}
 		}
-		setTimeout(function () {
-			this.setState({ConfirmationToast: {ShowConfirmationToast: false}});
-		}.bind(this), 3500);
 	};
 
-	addNewComment = (productID, newComment) => {
+	addNewComment = (productID, newComment, user) => {
 		let ProductList = this.state.DisplayedProductList;
 		if (ProductList[productID].comments) {
-			ProductList[productID].comments.push(newComment);
+			ProductList[productID].comments.push({ user, newComment });
 		} else {
-			ProductList[productID].comments = [newComment];
+			ProductList[productID].comments = [{ user, newComment }];
 		}
 		this.setState({DisplayedProductList: ProductList});
-		this.setState({
-			ConfirmationToast:
-				{
-					ShowConfirmationToast: true,
-					ToastImage: '',
-					ToastAction: 'thanks for',
-					ToastActionDestination: 'your comment!'
-				}
-		});
+		this.displayConfirmationToast('', 'thanks for','your comment!');
 	};
 
 
@@ -130,18 +111,6 @@ class App extends Component {
 			pins: [productKey]
 		});
 		this.setState({Boards: boards});
-		// this.setState({
-		// 	ConfirmationToast:
-		// 		{
-		// 			ShowConfirmationToast: true,
-		// 			ToastImage: productImage,
-		// 			ToastAction: 'Saved to',
-		// 			ToastActionDestination: boardName
-		// 		}
-		// });
-		// setTimeout(function () {
-		// 	this.setState({ConfirmationToast: {ShowConfirmationToast: false}});
-		// }.bind(this), 3500);
 		this.displayConfirmationToast(productImage, 'Saved to', boardName);
 	};
 
@@ -418,7 +387,11 @@ class App extends Component {
 					<Route exact path="/:product" render={({match}) =>
 						<ProductComments
 							{...this.state.DisplayedProductList[match.params.product]}
-							addNewComment={this.addNewComment}/>}
+							addNewComment={this.addNewComment}
+							addPinToExistingBoard={this.addPinToExistingBoard}
+							addPinToNewBoard={this.addPinToNewBoard}
+							boards={this.state.Boards}
+						/>}
 					/>
 
 					<Route exact path="/" render={() =>

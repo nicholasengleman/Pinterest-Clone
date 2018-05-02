@@ -1,5 +1,5 @@
 .confirmationToast {
-	animation: slideUp 0.25s cubic-bezier(0, 1.4, 0.99, 1.32) forwards, dissolve 0.75s forwards 2s;
+	animation: slideUp 0.5s cubic-bezier(0, 1.4, 0.99, 1.32) forwards, dissolve 0.75s forwards 2s;
 	position: fixed;
 	bottom: -100px;
 	left: 40%;
