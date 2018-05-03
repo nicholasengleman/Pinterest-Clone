@@ -33,54 +33,71 @@
 	position: relative;
 }
 
+
 .tooltip {
-	width: 225px;
-	background: white;
-	color: brown;
+	width: 150px;
+	outline: none;
 	position: absolute;
-	top: 45px;
-	left: -100px;
+	background: whitesmoke;
+	top: 43px;
+	left: -64px;
 	text-align: center;
 	border-radius: 10px;
-	box-shadow: 1px 1px 2px 2px darkgrey;
+	box-shadow: 2px 2px 4px 1px lightgrey;
+}
+.tooltip:after, .tooltip:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
 }
 
-.tooltip::after {
-	content: " ";
-	position: absolute;
-	bottom: 100%;  /* At the top of the tooltip */
-	left: 50%;
-	margin-left: -5px;
-	border-width: 10px;
-	border-style: solid;
-	border-color: transparent transparent black transparent;
-	box-shadow: 1px 1px 2px 2px darkgrey;
+.tooltip:after {
+	border-color: rgba(213, 207, 207, 0);
+	border-bottom-color: whitesmoke;
+	border-width: 15px;
+	margin-left: -15px;
 }
+.tooltip:before {
+	border-color: rgba(46, 45, 45, 0);
+	border-bottom-color: #f1f1f1;
+	border-width: 16px;
+	margin-left: -16px;
+}
+
 
 .tooltipActions {
 	height: 40px;
 	line-height: 40px;
+	cursor: pointer;
 }
 
-.tooltipActions .first {
+.tooltipActions.first {
 	border-top-right-radius: 10px;
 	border-top-left-radius: 10px;
 }
 
-.tooltipActions .second {
+.tooltipActions.second {
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
 }
 
 .tooltipActions:hover {
-	background: #efefef;
+	background: #d3d3d3;
 }
-
-
 
 .commentFooter {
 	margin-left: 40px;
 	display: flex;
 	justify-content: space-between;
-	width: 40%;
+	width: 50%;
 }
+
+.commentInteractions {
+	cursor: pointer;
+}
+

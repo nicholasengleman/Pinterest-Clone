@@ -32,7 +32,7 @@ class ProductComments extends React.Component {
 	};
 
 	addNewComment = (event) => {
-		if(event.key === 'Enter') {
+		if (event.key === 'Enter') {
 			let newDate = new Date();
 			const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 			let date = `${months[newDate.getMonth()]} ${newDate.getDate()}`;
@@ -42,6 +42,7 @@ class ProductComments extends React.Component {
 			event.target.blur();
 		}
 	};
+
 
 	render() {
 		return (
@@ -70,18 +71,21 @@ class ProductComments extends React.Component {
 						<br/>
 						<Text>Share feedback, ask a question or give a high five.</Text>
 						<div className='commentBox'>
-							{this.props.comments && this.props.comments.map(comment => (
-								<Comment key={comment.commentId} user={comment.user} comment={comment.newComment} date={comment.date}/>
-							))
+							{this.props.comments && this.props.comments.map(comment => {
+								return <Comment key={comment.commentId}
+												{...comment}
+												{...this.props}
+										/>
+									})
 							}
 						</div>
 
 						<form id="addComment" onKeyUp={this.addNewComment}>
 							<textarea className='addCommentInput'
-								   form='addComment'
-								   placeholder='add a comment'
-								   onChange={this.newCommentChange}
-								   value={this.state.newComment}
+									  form='addComment'
+									  placeholder='add a comment'
+									  onChange={this.newCommentChange}
+									  value={this.state.newComment}
 							/>
 						</form>
 

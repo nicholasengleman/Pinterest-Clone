@@ -27,20 +27,22 @@ class App extends Component {
 			'$500 & above': false
 		};
 		this.state = {
-			Boards: [
-				{
-					name: 'Places to Go',
-					boardID: 34343,
-					pic: 'https://i.pinimg.com/564x/4d/9b/4f/4d9b4ff9801362c075528b45e5742b13.jpg',
-					pins: [1, 2, 3]
-				},
-				{
-					name: 'Recipies to make',
-					boardID: 2323,
-					pic: 'https://i.pinimg.com/564x/bd/a2/90/bda290318816d59a338c97bb6beaa203.jpg',
-					pins: [4, 5, 6]
-				}
-			],
+			UserData: {
+				Boards: [
+					{
+						name: 'Places to Go',
+						boardID: 34343,
+						pic: 'https://i.pinimg.com/564x/4d/9b/4f/4d9b4ff9801362c075528b45e5742b13.jpg',
+						pins: [1, 2, 3]
+					},
+					{
+						name: 'Recipies to make',
+						boardID: 2323,
+						pic: 'https://i.pinimg.com/564x/bd/a2/90/bda290318816d59a338c97bb6beaa203.jpg',
+						pins: [4, 5, 6]
+					}
+				],
+			},
 			ConfirmationToast: {
 				ShowConfirmationToast: false,
 				ToastImage: '',
@@ -54,18 +56,6 @@ class App extends Component {
 			MeetsTagFilters: [],
 			adminMode: false
 		};
-
-		this.removeProduct = this.removeProduct.bind(this);
-		this.editProduct = this.editProduct.bind(this);
-		this.findNumPoductsMatchPriceFilter = this.findNumPoductsMatchPriceFilter.bind(this);
-		this.findNumPoductsMatchTagFilter = this.findNumPoductsMatchTagFilter.bind(this);
-		this.updatePriceFilter = this.updatePriceFilter.bind(this);
-		this.updateTagFilter = this.updateTagFilter.bind(this);
-		this.updateSearchParameter = this.updateSearchParameter.bind(this);
-		this.addNewContent = this.addNewContent.bind(this);
-		this.submitNewProductInfo = this.submitNewProductInfo.bind(this);
-		this.removeFromFavorites = this.removeFromFavorites.bind(this);
-		this.toggleAdminMode = this.toggleAdminMode.bind(this);
 	}
 
 	componentWillMount() {
@@ -75,33 +65,58 @@ class App extends Component {
 		this.setState({DisplayedProductList: ProjectData});
 	}
 
-	toggleAdminMode() {
-		this.setState({adminMode: !this.state.adminMode});
-	}
+
+	addNewComment = (productID, comment, user, date) => {
+		let ProductList = this.state.DisplayedProductList;
+		const commentId = Math.random();
+		if (ProductList[productID].comments) {
+			ProductList[productID].comments.push({user, comment, date, commentId});
+		} else {
+			ProductList[productID].comments = [{user, comment, date, commentId}];
+		}
+		this.setState({DisplayedProductList: ProductList});
+		this.displayConfirmationToast('', 'thanks for', 'your comment!');
+	};
+
+	deleteComment = (productKey, commentId) => {
+		let ProductList = this.state.DisplayedProductList;
+		ProductList[productKey - 1].comments = ProductList[productKey - 1].comments.filter((comment) => {
+			return comment.commentId !== commentId;
+		});
+		this.setState({DisplayedProductList: ProductList});
+	};
+
+	openEditCommentWindow = (productKey, commentId) => {
+		let ProductList = this.state.DisplayedProductList;
+		ProductList[productKey - 1].comments.forEach((comment) => {
+			if (comment.commentId === commentId) {
+				comment['edit'] = true;
+			}
+		});
+		this.setState({DisplayedProductList: ProductList});
+	};
+
+	editComment = (productKey, commentId, newCommentText) => {
+		let ProductList = this.state.DisplayedProductList;
+		ProductList[productKey - 1].comments.forEach((comment) => {
+			if (comment.commentId === commentId) {
+				comment.comment = newCommentText;
+				comment.edit = false;
+			}
+		});
+		this.setState({DisplayedProductList: ProductList});
+	};
 
 	addPinToExistingBoard = (productKey, productImage, boardID) => {
-		let boards = this.state.Boards;
-		for (let board of boards) {
+		let UserData = this.state.UserData;
+		for (let board of UserData.Boards) {
 			if (board.boardID === boardID) {
 				board.pins.push(productKey);
-				this.setState({Boards: boards});
+				this.setState({UserData});
 				this.displayConfirmationToast(productImage, 'Saved to', board.name);
 			}
 		}
 	};
-
-	addNewComment = (productID, newComment, user, date) => {
-		let ProductList = this.state.DisplayedProductList;
-		const commentId = Math.random();
-		if (ProductList[productID].comments) {
-			ProductList[productID].comments.push({ user, newComment, date, commentId});
-		} else {
-			ProductList[productID].comments = [{ user, newComment, date, commentId }];
-		}
-		this.setState({DisplayedProductList: ProductList});
-		this.displayConfirmationToast('', 'thanks for','your comment!');
-	};
-
 
 	addPinToNewBoard = (productKey, productImage, boardName) => {
 		let boards = this.state.Boards;
@@ -130,14 +145,8 @@ class App extends Component {
 		}.bind(this), 3500);
 	};
 
-	removeFromFavorites(productKey) {
-		this.setState(prevState => ({
-			Favorites: prevState.Favorites.filter(product => product.productKey !== productKey)
-		}));
-	}
 
-
-	removeProduct(productToRemove) {
+	removeProduct = (productToRemove) => {
 		this.baseproductList = this.baseproductList.filter(product => {
 			if (product.productKey !== productToRemove) {
 				return true;
@@ -152,9 +161,9 @@ class App extends Component {
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
-	}
+	};
 
-	editProduct(productToRemove) {
+	editProduct = (productToRemove) => {
 		this.baseproductList = this.baseproductList.filter(product => {
 			if (product.productKey !== productToRemove) {
 				return true;
@@ -162,17 +171,17 @@ class App extends Component {
 				return false;
 			}
 		});
-	}
+	};
 
 
-	updateSearchParameter(searchParameter) {
+	updateSearchParameter = (searchParameter) => {
 		this.searchFilterParameter = searchParameter;
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
-	}
+	};
 
-	updatePriceFilter(filter) {
+	updatePriceFilter = (filter) => {
 		this.PriceFilterParameters = {
 			...this.PriceFilterParameters,
 			[filter]: !this.PriceFilterParameters[filter]
@@ -182,9 +191,9 @@ class App extends Component {
 		if (this.FilteredProductList.length === this.baseproductList.length) {
 			this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
 		}
-	}
+	};
 
-	updateTagFilter(filter) {
+	updateTagFilter = (filter) => {
 		let filterAdded = false;
 		if (this.TagFilterParameters.length < 1) {
 			this.TagFilterParameters.push([filter, true]);
@@ -206,9 +215,9 @@ class App extends Component {
 		if (this.FilteredProductList.length === this.baseproductList.length) {
 			this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 		}
-	}
+	};
 
-	filterProductsBySearch() {
+	filterProductsBySearch = () => {
 		return this.baseproductList.filter(product => {
 			if (product.productName.search(this.searchFilterParameter) > -1) {
 				return true;
@@ -218,10 +227,10 @@ class App extends Component {
 				return false;
 			}
 		});
-	}
+	};
 
 
-	filterProductsByPrice(editedproductList) {
+	filterProductsByPrice = (editedproductList) => {
 		let alwaysReturnTrue = false;
 		let params = this.PriceFilterParameters;
 		if (!params['Under $25'] && !params['$25 to $50'] && !params['$50 to $100'] && !params['$100 to $200'] && !params['$200 to $500'] && !params['$500 & above']) {
@@ -265,9 +274,9 @@ class App extends Component {
 			}
 			return false;
 		});
-	}
+	};
 
-	filterProductsByTag(editedproductList) {
+	filterProductsByTag = (editedproductList) => {
 		let alwaysReturnTrue = false;
 		let params = this.TagFilterParameters;
 		if (params.length === 0) {
@@ -291,10 +300,10 @@ class App extends Component {
 		});
 		this.FilteredProductList = FilteredProductList;
 		return FilteredProductList;
-	}
+	};
 
 
-	findNumPoductsMatchPriceFilter(FilteredProductList) {
+	findNumPoductsMatchPriceFilter = (FilteredProductList) => {
 		let priceUnder25 = 0, price25to50 = 0, price50to100 = 0, price100to200 = 0, price200to500 = 0, priceOver500 = 0;
 		for (let product of FilteredProductList) {
 			if (product.productPrice < 25) {
@@ -326,9 +335,9 @@ class App extends Component {
 				priceOver500
 			}
 		})
-	}
+	};
 
-	findNumPoductsMatchTagFilter(FilteredProductList) {
+	findNumPoductsMatchTagFilter = (FilteredProductList) => {
 		let tagsCount;
 		if (this.basetags.length > 0) {
 			tagsCount = this.basetags;
@@ -348,9 +357,9 @@ class App extends Component {
 		}
 		this.basetags = tagsCount;
 		this.setState({MeetsTagFilters: tagsCount});
-	}
+	};
 
-	addNewContent() {
+	addNewContent = () => {
 		this.baseproductList.unshift({
 			productImageAddress: '',
 			productName: '',
@@ -360,9 +369,9 @@ class App extends Component {
 			productKey: Math.random()
 		});
 		this.setState({DisplayedProductList: this.baseproductList});
-	}
+	};
 
-	submitNewProductInfo(productKey, newTags, newImgSrc, newName, newPrice, newDescription) {
+	submitNewProductInfo = (productKey, newTags, newImgSrc, newName, newPrice, newDescription) => {
 		this.baseproductList.forEach(product => {
 			if (product.productKey === productKey) {
 				product.productImageAddress = newImgSrc;
@@ -378,7 +387,11 @@ class App extends Component {
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
 		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
-	}
+	};
+
+	toggleAdminMode = () => {
+		this.setState({adminMode: !this.state.adminMode});
+	};
 
 
 	render() {
@@ -391,7 +404,10 @@ class App extends Component {
 							addNewComment={this.addNewComment}
 							addPinToExistingBoard={this.addPinToExistingBoard}
 							addPinToNewBoard={this.addPinToNewBoard}
-							boards={this.state.Boards}
+							boards={this.state.UserData.Boards}
+							deleteComment={this.deleteComment}
+							editComment={this.editComment}
+							openEditCommentWindow={this.openEditCommentWindow}
 						/>}
 					/>
 
@@ -423,7 +439,7 @@ class App extends Component {
 								products={this.state.DisplayedProductList}
 								favorites={this.state.Favorites}
 								adminMode={this.state.adminMode}
-								boards={this.state.Boards}
+								boards={this.state.UserData.Boards}
 
 								searchString={this.searchFilterParameter}
 								removeProduct={this.removeProduct}
