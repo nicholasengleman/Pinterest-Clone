@@ -2,7 +2,9 @@ import React from 'react';
 import Comment from './Comment/Comment';
 import ModalPin from '../ProductsContainer/Product/Modal-Pin/Modal-Pin';
 
-import {Button, Heading, Text} from "gestalt";
+import { Link } from "react-router-dom";
+
+import { Button, Heading, Text, Icon } from "gestalt";
 
 import "gestalt/dist/gestalt.css";
 import './ProductComments.css';
@@ -12,7 +14,7 @@ class ProductComments extends React.Component {
 		super(props);
 		this.state = {
 			displayModal: false,
-			newComment: ''
+			newComment: '',
 		}
 	}
 
@@ -25,6 +27,10 @@ class ProductComments extends React.Component {
 		this.setState(prevState => ({
 			displayModal: !prevState.displayModal
 		}));
+	};
+
+	handleChange = ({ activeTabIndex, event }) => {
+		event.preventDefault();
 	};
 
 	newCommentChange = (event) => {
@@ -47,6 +53,12 @@ class ProductComments extends React.Component {
 	render() {
 		return (
 			<div className='commentsContainerContainer'>
+				<Link to='/'>
+					<div className='homepageLink'>
+						<Icon accessibilityLabel='return to homepage' icon='arrow-back' color="darkGray" size='20'/>
+						<Text bold size='md'>Home</Text>
+					</div>
+				</Link>
 				<main className='commentsContainer'>
 					<div className='header'>
 						<Button text='Save' color='red' onClick={this.toggleModal} inline/>

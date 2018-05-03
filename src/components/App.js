@@ -119,14 +119,14 @@ class App extends Component {
 	};
 
 	addPinToNewBoard = (productKey, productImage, boardName) => {
-		let boards = this.state.Boards;
-		boards.push({
+		let UserData = this.state.UserData;
+		UserData.Boards.push({
 			name: boardName,
 			boardID: Math.random(),
 			pic: productImage,
 			pins: [productKey]
 		});
-		this.setState({Boards: boards});
+		this.setState({UserData});
 		this.displayConfirmationToast(productImage, 'Saved to', boardName);
 	};
 
