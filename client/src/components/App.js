@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+
 import './App.css';
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Header from './Header/Header';
+import Boards from './Boards/Boards';
 import Sidebar from './Sidebar/Sidebar';
 import ProductsContainer from './ProductsContainer/ProductsContainer';
 import ConfirmationToast from './ConfirmationToast/ConfirmationToast';
 import ProductComments from "./ProductComments/ProductComments";
-
-import ProjectData from '../ProjectData.json';
 
 class App extends Component {
 	constructor(props) {
@@ -50,7 +51,6 @@ class App extends Component {
 				ToastActionDestination: ''
 			},
 			activeIndex: 0,
-			Favorites: [],
 			DisplayedProductList: [],
 			MeetsPriceFilters: {},
 			MeetsTagFilters: [],
@@ -59,11 +59,34 @@ class App extends Component {
 	}
 
 	componentWillMount() {
-		this.findNumPoductsMatchPriceFilter(ProjectData);
-		this.findNumPoductsMatchTagFilter(ProjectData);
-		this.baseproductList = ProjectData;
-		this.setState({DisplayedProductList: ProjectData});
+	let t = this;
+		axios.get('/api/GetAllProducts')
+		.then(function(response) {
+			const databaseData = response.data;
+
+			function collectData(callback) {
+				let ProjectData = [];
+				for(let property1 in databaseData) {
+					ProjectData.push({ 
+					productName: databaseData[property1].name,
+					productPrice: databaseData[property1].price,
+					productImageAddress: databaseData[property1].productImageAddress,
+					productTags: [databaseData[property1].tags],
+					productDescription: databaseData[property1].description
+					});
+				}
+				callback(ProjectData);
+			};
+			collectData((ProjectData) => {
+				t.findNumPoductsMatchPriceFilter(ProjectData);
+				t.findNumPoductsMatchTagFilter(ProjectData);
+				t.baseproductList = ProjectData;
+				t.setState({DisplayedProductList: ProjectData});
+			});
+		});
 	}
+
+	
 
 
 	addNewComment = (productID, comment, user, date) => {
@@ -217,17 +240,7 @@ class App extends Component {
 		}
 	};
 
-	filterProductsBySearch = () => {
-		return this.baseproductList.filter(product => {
-			if (product.productName.search(this.searchFilterParameter) > -1) {
-				return true;
-			} else if (product.productDescription.search(this.searchFilterParameter) > -1) {
-				return true;
-			} else {
-				return false;
-			}
-		});
-	};
+
 
 
 	filterProductsByPrice = (editedproductList) => {
@@ -273,6 +286,19 @@ class App extends Component {
 				}
 			}
 			return false;
+		});
+	};
+
+
+	filterProductsBySearch = () => {
+		return this.baseproductList.filter(product => {
+			if (product.productName.search(this.searchFilterParameter) > -1) {
+				return true;
+			} else if (product.productDescription.search(this.searchFilterParameter) > -1) {
+				return true;
+			} else {
+				return false;
+			}
 		});
 	};
 
@@ -398,7 +424,11 @@ class App extends Component {
 		return (
 			<Router>
 				<div>
-					<Route exact path="/:product" render={({match}) =>
+					<Route exact path="/boards" render={() =>
+						<Boards Boards={this.state.UserData.Boards} />
+					} />
+
+					<Route exact path="/products/:product" render={({match}) =>
 						<ProductComments
 							{...this.state.DisplayedProductList[match.params.product]}
 							addNewComment={this.addNewComment}
@@ -413,11 +443,9 @@ class App extends Component {
 
 					<Route exact path="/" render={() =>
 						<Header
-							favorites={this.state.Favorites}
 							adminMode={this.state.adminMode}
 
 							filterProducts={this.updateSearchParameter}
-							favoritesQuantity={this.state.Favorites.length}
 							removeFromFavorites={this.removeFromFavorites}
 							toggleAdminMode={this.toggleAdminMode}
 						/>
@@ -437,7 +465,6 @@ class App extends Component {
 
 							<ProductsContainer
 								products={this.state.DisplayedProductList}
-								favorites={this.state.Favorites}
 								adminMode={this.state.adminMode}
 								boards={this.state.UserData.Boards}
 

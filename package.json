@@ -31,6 +31,7 @@
     "moment-js": "^1.1.15",
     "mongodb": "^2.2.31",
     "mongoose": "^4.10.8",
+    "node-fetch": "^2.1.2",
     "nodemon": "^1.17.4"
   }
 }
