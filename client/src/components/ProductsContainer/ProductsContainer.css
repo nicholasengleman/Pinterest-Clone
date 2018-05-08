@@ -4,4 +4,9 @@
 	column-gap: 0;
 	padding: 20px 0 0 20px;
 	margin-top: 80px;
+
+}
+
+.productContainer a {
+	text-decoration: none;
 }

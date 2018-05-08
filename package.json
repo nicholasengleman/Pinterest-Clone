@@ -1,23 +1,36 @@
 {
   "name": "react-cms",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "gestalt": "^0.65.0",
-    "prop-types": "^15.6.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-highlight-words": "^0.11.0",
-    "react-modal": "^3.4.4",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1",
-    "redux": "^3.7.2"
-  },
+  "version": "1.0.0",
+  "description": "This is a store/cms front-end built all in React. There is no backend so there is no authentication and data resets on page load.",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server/server.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicholasengleman/React-CMS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicholasengleman/React-CMS/issues"
+  },
+  "homepage": "https://github.com/nicholasengleman/React-CMS#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.0.1",
+    "moment-js": "^1.1.15",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.10.8",
+    "nodemon": "^1.17.4"
   }
 }

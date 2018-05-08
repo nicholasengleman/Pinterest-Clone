@@ -43,14 +43,8 @@ class Comment extends React.Component {
 		this.props.openEditCommentWindow(this.props.productKey, this.props.commentId);
 	};
 
-
 	toggleLike = () => {
-		this.setState((prevState) => {
-			if (prevState.OpenCommentEditMenu === false) {
-
-			}
-			return {OpenCommentEditMenu: !prevState.OpenCommentEditMenu};
-		});
+		this.setState({userLikesComment: !this.state.userLikesComment});
 	};
 
 	newCommentChange = (event) => {
@@ -101,14 +95,15 @@ class Comment extends React.Component {
 					</div>
 					<div className='commentFooter'>
 						<Text size='sm' color='gray'>{this.props.date}</Text>
-						<span className='commentInteractions'><Text size='sm'
-																									   bold>Reply</Text></span>
+						{/*<span className='commentInteractions'><Text size='sm' bold>Reply</Text></span>*/}
 						{
 							this.state.userLikesComment
-								? <span className='commentInteractions' onClick={this.toggleLike}><Text size='sm'
-																										bold>Liked</Text></span>
-								: <span className='commentInteractions' onClick={this.toggleLike}><Text size='sm'
-																										bold>Like</Text></span>
+								? <span className='commentInteractions' onClick={this.toggleLike}>
+									<Text size='sm' bold>You like this.</Text>
+								</span>
+								: <span className='commentInteractions' onClick={this.toggleLike}>
+									<Text size='sm' bold>Like?</Text>
+								</span>
 						}
 					</div>
 				</div>

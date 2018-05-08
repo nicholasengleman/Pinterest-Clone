@@ -64,10 +64,6 @@ class Header extends React.Component {
 				<Tabs
 					tabs={[
 						{
-							text: "Explore",
-							href: "/"
-						},
-						{
 							text: "Boards",
 							href: "boards"
 						},
