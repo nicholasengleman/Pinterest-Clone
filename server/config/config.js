@@ -5,7 +5,7 @@ const config = {
 	},
 	default: {
 		SECRET:'secretpassword123',
-		DATABASE: 'mongodb/localhost:27017/pinterest'
+		DATABASE: 'mongodb://localhost:27017/pinterest'
 	}
 };
 
