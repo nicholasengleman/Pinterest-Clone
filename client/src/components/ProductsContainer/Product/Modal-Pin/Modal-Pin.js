@@ -55,7 +55,7 @@ class ModalPin extends React.Component {
 				isOpen={this.props.modalStatus}
 				onRequestClose={this.closeModal}
 				className="modalPin"
-				overlayClassName="ReactModalPin__Overlay"
+				overlayClassName="Overlay"
 				contentLabel="Pin Modal"
 			>
 				<div className="modalPin_ProductSummary" onClick={this.submitNewPersonalizedDescription}>

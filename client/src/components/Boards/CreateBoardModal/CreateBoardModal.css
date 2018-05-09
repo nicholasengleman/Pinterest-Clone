@@ -1,0 +1,70 @@
+
+.createNewBoardModal {
+	width: 600px;
+	height: 250px;
+	background: white;
+	margin: 300px auto;
+	border: 1px solid transparent;
+	border-radius: 7px;
+	outline: none;
+}
+
+
+.Overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 4;
+	overflow: hidden;
+}
+
+.Modal_CreateBoard_Header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid lightgrey;
+	padding: 0 25px;
+	height: 30%;
+}
+
+.Modal_CreateBoard_Input {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 40%;
+	border-bottom: 1px solid lightgrey;
+	padding: 0 25px;
+}
+
+.Modal_CreateBoard_Input input {
+	width: 70%;
+	padding: 12px;
+	border-radius: 5px;
+	border: 1px solid lightgrey;
+	outline: none;
+
+}
+
+.Modal_CreateBoard_Input input:focus {
+	border: 1px solid rgb(181, 181, 181);
+	border-radius: 5px;
+	box-shadow: rgba(0, 132, 255, 0.5) 0 0 0 4px;
+}
+
+.Modal_CreateBoard_Footer {
+	height: 30%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0 25px;
+}
+
+.Modal_CreateBoard_Footer Button:first-child {
+	margin-right: 15px;
+}
+

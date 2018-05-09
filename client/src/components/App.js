@@ -59,34 +59,33 @@ class App extends Component {
 	}
 
 	componentWillMount() {
-	let t = this;
+		let t = this;
 		axios.get('/api/GetAllProducts')
-		.then(function(response) {
-			const databaseData = response.data;
+			.then(function (response) {
+				const databaseData = response.data;
 
-			function collectData(callback) {
-				let ProjectData = [];
-				for(let property1 in databaseData) {
-					ProjectData.push({ 
-					productName: databaseData[property1].name,
-					productPrice: databaseData[property1].price,
-					productImageAddress: databaseData[property1].productImageAddress,
-					productTags: [databaseData[property1].tags],
-					productDescription: databaseData[property1].description
-					});
-				}
-				callback(ProjectData);
-			};
-			collectData((ProjectData) => {
-				t.findNumPoductsMatchPriceFilter(ProjectData);
-				t.findNumPoductsMatchTagFilter(ProjectData);
-				t.baseproductList = ProjectData;
-				t.setState({DisplayedProductList: ProjectData});
+				function collectData(callback) {
+					let ProjectData = [];
+					for (let property1 in databaseData) {
+						ProjectData.push({
+							productName: databaseData[property1].name,
+							productPrice: databaseData[property1].price,
+							productImageAddress: databaseData[property1].productImageAddress,
+							productTags: databaseData[property1].tags.split(","),
+							productDescription: databaseData[property1].description,
+							productKey: databaseData[property1].productKey
+						});
+					}
+					callback(ProjectData);
+				};
+				collectData((ProjectData) => {
+					t.findNumPoductsMatchPriceFilter(ProjectData);
+					t.findNumPoductsMatchTagFilter(ProjectData);
+					t.baseproductList = ProjectData;
+					t.setState({DisplayedProductList: ProjectData});
+				});
 			});
-		});
 	}
-
-	
 
 
 	addNewComment = (productID, comment, user, date) => {
@@ -151,6 +150,47 @@ class App extends Component {
 		});
 		this.setState({UserData});
 		this.displayConfirmationToast(productImage, 'Saved to', boardName);
+	};
+
+	createNewBoard = (boardName) => {
+		let UserData = this.state.UserData;
+		UserData.Boards.push({
+			name: boardName,
+			boardID: Math.random()
+		});
+		this.setState({UserData});
+		this.displayConfirmationToast('', 'New Board Created', boardName);
+	};
+
+	editBoard = (boardID, newBoardName, newBoardDescription) => {
+		let UserData = this.state.UserData;
+		UserData.Boards.forEach(board => {
+			if(board.boardID === boardID) {
+				if(newBoardName) {
+					board.name = newBoardName;
+				}
+				if(newBoardDescription) {
+					board.description = newBoardDescription;
+				}
+			}
+		});
+		this.setState({UserData});
+		this.displayConfirmationToast('', 'Your board', 'has been updated');
+	};
+
+	deleteBoard = (boardID) => {
+		let UserData = this.state.UserData;
+		let boardname;
+		UserData.Boards = UserData.Boards.filter(board => {
+			if(board.boardID !== boardID) {
+				return true;
+			} else {
+				boardname = board.name;
+				return false;
+			}
+		});
+		this.setState({UserData});
+		this.displayConfirmationToast('', `"${boardname}" board`, 'has been deleted');
 	};
 
 	displayConfirmationToast = (ToastImage, ToastAction, ToastActionDestination) => {
@@ -239,8 +279,6 @@ class App extends Component {
 			this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 		}
 	};
-
-
 
 
 	filterProductsByPrice = (editedproductList) => {
@@ -425,8 +463,13 @@ class App extends Component {
 			<Router>
 				<div>
 					<Route exact path="/boards" render={() =>
-						<Boards Boards={this.state.UserData.Boards} />
-					} />
+						<Boards
+							Boards={this.state.UserData.Boards}
+							createNewBoard={this.createNewBoard}
+							deleteBoard={this.deleteBoard}
+							editBoard={this.editBoard}
+						/>
+					}/>
 
 					<Route exact path="/products/:product" render={({match}) =>
 						<ProductComments

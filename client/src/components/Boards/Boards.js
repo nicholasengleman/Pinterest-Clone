@@ -1,8 +1,10 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import Modal from "react-modal";
 
-import {Text, Icon, IconButton, Heading, Button} from "gestalt";
+import EditBoardModal from './EditBoardModal/EditBoardModal';
+import CreateBoardModal from './CreateBoardModal/CreateBoardModal'
+
+import {Text, Icon, IconButton} from "gestalt";
 
 import "gestalt/dist/gestalt.css";
 import './Boards.css';
@@ -11,34 +13,24 @@ class Boards extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			displayModal: false,
-			createNewBoardInputValue: ''
+			displayModal_CreateBoard: false,
+			displayModal_EditBoard: false,
 		};
-		this.textInput = React.createRef();
+
 	}
 
 	toggleCreateNewBoardModal = () => {
-		this.setState(
-			{
-				displayModal: !this.state.displayModal,
-				createNewBoardInputValue: ''
-			});
+		this.setState({displayModal_CreateBoard: !this.state.displayModal_CreateBoard});
 	};
 
-	onChangeOfcreateNewBoardInputValue = () => {
-		this.setState(
-			{
-				createNewBoardInputValue: this.input.value
-			});
+	toggleEditBoardModal = () => {
+		this.setState({displayModal_EditBoard: !this.state.displayModal_EditBoard});
 	};
 
-	createNewBoard = () => {
-		this.props.createNewBoard(this.state.createNewBoardInputValue);
-		this.setState(
-			{
-				displayModal: false,
-				createNewBoardInputValue: ''
-			});
+
+	createNewBoard = (createNewBoardInputValue) => {
+		this.props.createNewBoard(createNewBoardInputValue);
+		this.setState({displayModal_CreateBoard: false});
 	};
 
 
@@ -52,59 +44,45 @@ class Boards extends React.Component {
 					</div>
 				</Link>
 				<div className='myBoardsContainer'>
-					<div className='createMyBoardContainer'>
-						<div className='createMyBoard'>
+
+					<div className='myBoard'>
+						<div className='myBoardView'>
 							<IconButton accessibilityLabel='createBoard'
 										icon='add-circle'
 										iconColor='red'
 										size='xl'
 										onClick={this.toggleCreateNewBoardModal}
 							/>
-							<Modal
-								isOpen={this.state.displayModal}
-								className="createNewBoardModal"
-								onRequestClose={this.toggleCreateNewBoardModal}
-								contentLabel="create New Board Modal"
-								overlayClassName="ReactModalPin__Overlay"
-							>
-								<div className="Modal_CreateBoard_Header">
-									<Heading size="xs">Create Board</Heading>
-									<IconButton accessibilityLabel="close this Modal"
-												icon="cancel"
-												onClick={this.toggleCreateNewBoardModal}/>
-								</div>
-								<div className="Modal_CreateBoard_Input">
-									<Text>Name</Text>
-									<input type="text"
-										   placeholder='Like "Places to Go" or "Recipies to Make"'
-										   ref={input => (this.input = input)}
-										   onChange={this.onChangeOfcreateNewBoardInputValue}/>
-								</div>
-								<div className="Modal_CreateBoard_Footer">
-									<Button inline text="Cancel" color="gray"/>
-									{
-										this.state.createNewBoardInputValue
-											? <Button inline
-													  text="Create"
-													  color="red"
-													  onClick={this.createNewBoard}
-											/>
-											: <Button inline
-													  text="Create"
-													  color="gray"/>
-									}
-
-								</div>
-							</Modal>
+							<CreateBoardModal
+								displayModal={this.state.displayModal_CreateBoard}
+								toggleCreateNewBoardModal={this.toggleCreateNewBoardModal}
+								createNewBoard={this.createNewBoard}
+							/>
 						</div>
-						<div className='createMyBoardFooter'>
+						<div className='myBoardFooter'>
 							<Text bold color="gray" size="lg">Create Board</Text>
 						</div>
 					</div>
 					{this.props.Boards.map(board => (
 						<div className='myBoard'>
+							<div className='myBoardView'></div>
 							<div className='myBoardFooter'>
-								<h1>{board.name}</h1>
+								<div>
+									<Text bold color="maroon" size="lg">{board.name}</Text>
+									<Text bold color="gray" size="md">{board.description}</Text>
+								</div>
+
+								<IconButton accessibilityLabel="edit Board"
+											icon="edit"
+											onClick={this.toggleEditBoardModal}
+								/>
+								<EditBoardModal
+									displayModal={this.state.displayModal_EditBoard}
+									toggleEditBoardModal={this.toggleEditBoardModal}
+									deleteBoard={this.props.deleteBoard}
+									editBoard={this.props.editBoard}
+									board={board}
+								/>
 							</div>
 						</div>
 					))

@@ -29,7 +29,6 @@ class Product extends React.Component {
 		this.removeProduct = this.removeProduct.bind(this);
 		this.toggleEditMode = this.toggleEditMode.bind(this);
 		this.submitNewProductInfo = this.submitNewProductInfo.bind(this);
-		this.toggleFavorite = this.toggleFavorite.bind(this);
 		this.edit = this.edit.bind(this);
 		this.cancelEdit = this.cancelEdit.bind(this);
 	}
@@ -89,20 +88,6 @@ class Product extends React.Component {
 		}));
 	};
 
-	toggleFavorite(event) {
-		if (!this.state.Favorited.status) {
-			this.props.addToFavorites(this.props.productKey);
-			this.setState({
-				Favorited: {status: true, message: "added to favorites!"}
-			});
-		} else {
-			this.props.removeFromFavorites(this.props.productKey);
-			this.setState({
-				Favorited: {status: false, message: "removed from favorites!"}
-			});
-		}
-		event.preventDefault();
-	}
 
 	removeProduct(event) {
 		this.props.removeProduct(this.props.productKey);
