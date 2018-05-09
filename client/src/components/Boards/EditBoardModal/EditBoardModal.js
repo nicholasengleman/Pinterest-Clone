@@ -95,8 +95,6 @@ class EditBoardModal extends React.Component {
 								onClick={this.editBoard}
 						/>
 					</div>
-
-
 				</div>
 			</Modal>
 		)

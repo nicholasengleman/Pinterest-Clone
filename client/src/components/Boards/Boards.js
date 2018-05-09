@@ -23,7 +23,8 @@ class Boards extends React.Component {
 		this.setState({displayModal_CreateBoard: !this.state.displayModal_CreateBoard});
 	};
 
-	toggleEditBoardModal = () => {
+	toggleEditBoardModal = (event) => {
+		event.event.preventDefault();
 		this.setState({displayModal_EditBoard: !this.state.displayModal_EditBoard});
 	};
 
@@ -64,27 +65,35 @@ class Boards extends React.Component {
 						</div>
 					</div>
 					{this.props.Boards.map(board => (
-						<div className='myBoard'>
-							<div className='myBoardView'></div>
-							<div className='myBoardFooter'>
-								<div>
-									<Text bold color="maroon" size="lg">{board.name}</Text>
-									<Text bold color="gray" size="md">{board.description}</Text>
+						<Link to={`/boards/${board.boardID}`}>
+							<div className='myBoard'>
+								<div className='myBoardView'>
+									{/*{*/}
+										{/*board.pins.map(pin => (*/}
+											{/*<img src={this.props.products[2].productImageAddress} alt="test"/>*/}
+										{/*))*/}
+									{/*}*/}
 								</div>
+								<div className='myBoardFooter'>
+									<div>
+										<Text bold color="maroon" size="lg">{board.name}</Text>
+										<Text bold color="gray" size="md">{board.description}</Text>
+									</div>
 
-								<IconButton accessibilityLabel="edit Board"
-											icon="edit"
-											onClick={this.toggleEditBoardModal}
-								/>
-								<EditBoardModal
-									displayModal={this.state.displayModal_EditBoard}
-									toggleEditBoardModal={this.toggleEditBoardModal}
-									deleteBoard={this.props.deleteBoard}
-									editBoard={this.props.editBoard}
-									board={board}
-								/>
+									<IconButton accessibilityLabel="edit Board"
+												icon="edit"
+												onClick={this.toggleEditBoardModal}
+									/>
+									<EditBoardModal
+										displayModal={this.state.displayModal_EditBoard}
+										toggleEditBoardModal={this.toggleEditBoardModal}
+										deleteBoard={this.props.deleteBoard}
+										editBoard={this.props.editBoard}
+										board={board}
+									/>
+								</div>
 							</div>
-						</div>
+						</Link>
 					))
 					}
 				</div>

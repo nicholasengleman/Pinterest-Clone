@@ -10,6 +10,7 @@ import Sidebar from './Sidebar/Sidebar';
 import ProductsContainer from './ProductsContainer/ProductsContainer';
 import ConfirmationToast from './ConfirmationToast/ConfirmationToast';
 import ProductComments from "./ProductComments/ProductComments";
+import IndividualBoard from "./Boards/IndividualBoard/IndividualBoard";
 
 class App extends Component {
 	constructor(props) {
@@ -140,6 +141,23 @@ class App extends Component {
 		}
 	};
 
+	deletePinFromBoard = (boardID, productKey, productImage) => {
+		let UserData = this.state.UserData;
+		for (let board of UserData.Boards) {
+			if (board.boardID == boardID) {
+				console.log(board);
+				board.pins = board.pins.filter(pin => {
+					if (pin !== productKey) {
+						return true;
+					}
+				});
+
+			}
+		}
+		this.setState({UserData});
+		this.displayConfirmationToast(productImage, 'Deleted from', "board");
+	};
+
 	addPinToNewBoard = (productKey, productImage, boardName) => {
 		let UserData = this.state.UserData;
 		UserData.Boards.push({
@@ -165,11 +183,11 @@ class App extends Component {
 	editBoard = (boardID, newBoardName, newBoardDescription) => {
 		let UserData = this.state.UserData;
 		UserData.Boards.forEach(board => {
-			if(board.boardID === boardID) {
-				if(newBoardName) {
+			if (board.boardID === boardID) {
+				if (newBoardName) {
 					board.name = newBoardName;
 				}
-				if(newBoardDescription) {
+				if (newBoardDescription) {
 					board.description = newBoardDescription;
 				}
 			}
@@ -182,7 +200,7 @@ class App extends Component {
 		let UserData = this.state.UserData;
 		let boardname;
 		UserData.Boards = UserData.Boards.filter(board => {
-			if(board.boardID !== boardID) {
+			if (board.boardID !== boardID) {
 				return true;
 			} else {
 				boardname = board.name;
@@ -462,9 +480,18 @@ class App extends Component {
 		return (
 			<Router>
 				<div>
+					<Route exact path="/boards/:board" render={({match}) =>
+						<IndividualBoard
+							boardID={match.params.board}
+							products={this.state.DisplayedProductList}
+							boards={this.state.UserData.Boards}
+							deletePinFromBoard={this.deletePinFromBoard}
+						/>
+					}/>
 					<Route exact path="/boards" render={() =>
 						<Boards
 							Boards={this.state.UserData.Boards}
+							products={this.state.DisplayedProductList}
 							createNewBoard={this.createNewBoard}
 							deleteBoard={this.deleteBoard}
 							editBoard={this.editBoard}

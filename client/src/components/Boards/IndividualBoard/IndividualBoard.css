@@ -1,0 +1,57 @@
+.wider {
+	width: 200px;
+}
+
+.deletePinButton {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 5;
+}
+
+.pinHeader {
+	margin: 70px 100px;
+}
+
+.pinContainer {
+	width: 90%;
+	display: flex;
+	justify-content: flex-start;
+	margin: 150px auto 0;
+}
+
+.pinContainer a {
+	text-decoration: none;
+	width: 15%;
+	margin: 0 30px 60px 0;
+}
+
+.pinContainer .pin {
+	width: 100%;
+	height: 470px;
+	position: relative;
+	transition: box-shadow 0.1s linear;
+	box-shadow: 0 0 0 0 white;
+	border-radius: 5px;
+}
+
+.pinContainer .pin:hover {
+	box-shadow: 0 0 0 15px  #f3f3f3;
+	background: #f3f3f3;
+	cursor: zoom-in;
+}
+
+
+.pinImage {
+	overflow: hidden;
+	max-height: 80%;
+	border-radius: 10px;
+}
+
+.pinImage img {
+	width: 100%;
+}
+
+.pinContainer .pin:hover img {
+	filter: brightness(0.8);
+}
