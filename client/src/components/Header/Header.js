@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 import PropTypes from 'prop-types';
-import { Switch, Label, Text, Tabs } from 'gestalt';
+import { Switch, Label, Text } from 'gestalt';
 
 import SearchBar from './SearchBar/SearchBar';
 
@@ -15,66 +16,28 @@ class Header extends React.Component {
 
 		this.state = {
 			isOpen: false,
-			modalIsOpen: false,
 			switched: false
 		};
-
-		this.openModal = this.openModal.bind(this);
-		this.closeModal = this.closeModal.bind(this);
-		this.toggleAdminMode = this.toggleAdminMode.bind(this);
-		this.toggleAdminMode = this.toggleAdminMode.bind(this);
-		this.tabChange = this.tabChange.bind(this);
 	}
 
 	static propTypes = {
 		filterProducts: PropTypes.func,
 		addNewContent: PropTypes.func,
-		favoritesQuantity: PropTypes.number,
-		favorites: PropTypes.array
 	};
 
-	toggleAdminMode() {
+	toggleAdminMode = () => {
 		this.props.toggleAdminMode();
 		this.setState({switched: !this.state.switched});
-	}
-
-	openModal() {
-		this.setState({modalIsOpen: true});
-	}
-
-
-	closeModal() {
-		this.setState({modalIsOpen: false});
-	}
-
-	tabChange({ activeTabIndex, event }) {
-		event.preventDefault();
-		this.setState({
-			activeIndex: activeTabIndex
-		});
-	}
-
-
-
+	};
 
 	render() {
 		return (
 			<header>
 				<SearchBar filterProducts={this.props.filterProducts}/>
-				<Tabs
-					tabs={[
-						{
-							text: "Boards",
-							href: "boards"
-						},
-						{
-							text: "Pins",
-							href: "pins"
-						}
-					]}
-					activeTabIndex={this.state.activeIndex}
-					onChange={this.handleChange}
-				/>
+
+				<ul>
+					<Link to="/boards"><li>My Boards</li></Link>
+				</ul>
 
 				<div className='adminHeader'>
 					<Label htmlFor='toggleAdminMode'>

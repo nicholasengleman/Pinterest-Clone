@@ -1,8 +1,6 @@
 let data = require('./data/ProjectData');
 const axios = require('axios');
 
-
-
 for(var e = 0; e<data.length; e++) {
 
 axios.post('http://localhost:3001/api/product', {
@@ -10,7 +8,8 @@ axios.post('http://localhost:3001/api/product', {
 		"productImageAddress": data[e].productImageAddress,
 		"price": data[e].productPrice,
 		"description": data[e].productDescription,
-		"tags": data[e].productTags
+		"tags": data[e].productTags,
+		"productKey": data[e].productKey
 	}).then(function(response) {
 		console.log(reponse);
 	}).catch(function (error) {

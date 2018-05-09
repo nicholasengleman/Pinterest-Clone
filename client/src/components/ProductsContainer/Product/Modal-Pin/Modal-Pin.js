@@ -111,7 +111,7 @@ class ModalPin extends React.Component {
 								<form id='createBoard' onClick={(event) => event.preventDefault()}>
 									<input
 										name='createBoard'
-										placeholder="Like 'Places to Go' or 'Recipies to Make'"
+										placeholder='Like "Places to Go" or "Recipies to Make"'
 										type='text'
 										onChange={this.createBoardInputChange}
 										value={this.state.newBoardName}
