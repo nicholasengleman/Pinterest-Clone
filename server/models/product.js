@@ -1,21 +1,30 @@
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 const productSchema = mongoose.Schema({
 	name: {
 		type: String,
-		required: true
+		required: true,
+		trim: true
 	},
 	productImageAddress: {
-		type: String
+		type: String,
+		trim: true
 	},
 	price: {
-		type: Number
+		type: Number,
+		trim: true
 	},
 	description: {
-		type: String
+		type: String,
+		trim: true
 	},
 	tags: {
 		type: String
+	},
+	productKey: {
+		type: Number,
+		trim: true
 	}
 }, { timestamps: true });
 

@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "server": "nodemon server/server.js",
+    "server": "nodemon server/start.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
@@ -25,13 +24,21 @@
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
+    "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.2.0",
+    "flash": "^1.1.0",
     "jsonwebtoken": "^8.0.1",
     "moment-js": "^1.1.15",
     "mongodb": "^2.2.31",
     "mongoose": "^4.10.8",
     "node-fetch": "^2.1.2",
-    "nodemon": "^1.17.4"
+    "nodemon": "^1.17.4",
+    "passport": "^0.4.0",
+    "path": "^0.12.7",
+    "promisify": "0.0.3"
   }
 }
