@@ -34,14 +34,12 @@ class App extends Component {
 					{
 						name: 'Places to Go',
 						boardID: 34343,
-						pic: 'https://i.pinimg.com/564x/4d/9b/4f/4d9b4ff9801362c075528b45e5742b13.jpg',
-						pins: [1, 2, 3]
+						pic: 'https://i.pinimg.com/564x/4d/9b/4f/4d9b4ff9801362c075528b45e5742b13.jpg'
 					},
 					{
 						name: 'Recipies to make',
 						boardID: 2323,
-						pic: 'https://i.pinimg.com/564x/bd/a2/90/bda290318816d59a338c97bb6beaa203.jpg',
-						pins: [4, 5, 6]
+						pic: 'https://i.pinimg.com/564x/bd/a2/90/bda290318816d59a338c97bb6beaa203.jpg'
 					}
 				],
 			},
@@ -130,11 +128,15 @@ class App extends Component {
 		this.setState({DisplayedProductList: ProductList});
 	};
 
-	addPinToExistingBoard = (productKey, productImage, boardID) => {
+	addPinToExistingBoard = (productName, productDescription, productImage, productKey, boardID) => {
 		let UserData = this.state.UserData;
 		for (let board of UserData.Boards) {
 			if (board.boardID === boardID) {
-				board.pins.push(productKey);
+				if(board.pins) {
+					board.pins.push({productName, productDescription, productImage, productKey});
+				} else {
+					board.pins = [{productName, productDescription, productImage, productKey}];
+				}
 				this.setState({UserData});
 				this.displayConfirmationToast(productImage, 'Saved to', board.name);
 			}
@@ -145,9 +147,8 @@ class App extends Component {
 		let UserData = this.state.UserData;
 		for (let board of UserData.Boards) {
 			if (board.boardID == boardID) {
-				console.log(board);
 				board.pins = board.pins.filter(pin => {
-					if (pin !== productKey) {
+					if (pin.productKey !== productKey) {
 						return true;
 					}
 				});
@@ -158,13 +159,13 @@ class App extends Component {
 		this.displayConfirmationToast(productImage, 'Deleted from', "board");
 	};
 
-	addPinToNewBoard = (productKey, productImage, boardName) => {
+	addPinToNewBoard = (productName, productDescription, productImage, productKey, boardName) => {
 		let UserData = this.state.UserData;
 		UserData.Boards.push({
 			name: boardName,
 			boardID: Math.random(),
 			pic: productImage,
-			pins: [productKey]
+			pins: [{productName, productDescription, productImage, productKey}]
 		});
 		this.setState({UserData});
 		this.displayConfirmationToast(productImage, 'Saved to', boardName);
@@ -483,7 +484,6 @@ class App extends Component {
 					<Route exact path="/boards/:board" render={({match}) =>
 						<IndividualBoard
 							boardID={match.params.board}
-							products={this.state.DisplayedProductList}
 							boards={this.state.UserData.Boards}
 							deletePinFromBoard={this.deletePinFromBoard}
 						/>

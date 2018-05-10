@@ -68,11 +68,15 @@ class Boards extends React.Component {
 						<Link to={`/boards/${board.boardID}`}>
 							<div className='myBoard'>
 								<div className='myBoardView'>
-									{/*{*/}
-										{/*board.pins.map(pin => (*/}
-											{/*<img src={this.props.products[2].productImageAddress} alt="test"/>*/}
-										{/*))*/}
-									{/*}*/}
+									<div className="boardCoverImageContainer">
+										{
+											board.pins && board.pins.map(pin => (
+												<div className='boardCoverImage'>
+													<img src={pin.productImage} alt="test"/>
+												</div>
+											))
+										}
+									</div>
 								</div>
 								<div className='myBoardFooter'>
 									<div>

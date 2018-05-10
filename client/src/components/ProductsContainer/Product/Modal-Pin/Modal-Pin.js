@@ -39,13 +39,13 @@ class ModalPin extends React.Component {
 
 	addPinToExistingBoard = (event, boardID) => {
 		event.preventDefault();
-		this.props.addPinToExistingBoard(this.props.productKey, this.props.productImage, boardID);
+		this.props.addPinToExistingBoard(this.props.productName, this.props.productDescription, this.props.productImage, this.props.productKey, boardID);
 		this.closeModal(event);
 	};
 
 	addPinToNewBoard = (event) => {
 		event.preventDefault();
-		this.props.addPinToNewBoard(this.props.productKey, this.props.productImage, this.state.newBoardName);
+		this.props.addPinToNewBoard(this.props.productName, this.props.productDescription, this.props.productImage, this.props.productKey, this.state.newBoardName);
 		this.closeModal(event);
 	};
 

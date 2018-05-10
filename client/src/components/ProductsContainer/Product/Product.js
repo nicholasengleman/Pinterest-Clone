@@ -211,10 +211,11 @@ class Product extends React.Component {
 									</button>
 									<ModalPin modalStatus={this.state.displayModal}
 											  toggleModal={this.toggleModal}
+											  productName={this.props.productName}
 											  productDescription={this.props.productDescription}
 											  productImage={this.props.productImageAddress}
-											  boards={this.props.boards}
 											  productKey={this.props.productKey}
+											  boards={this.props.boards}
 											  addPinToExistingBoard={this.props.addPinToExistingBoard}
 											  addPinToNewBoard={this.props.addPinToNewBoard}
 									/>
