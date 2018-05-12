@@ -44,7 +44,8 @@ class IndividualBoard extends React.Component {
 				</div>
 				<div className="pinContainer">
 					{
-						this.state.thisboard[0].pins && this.state.thisboard[0].pins.map(product => (
+						this.state.thisboard[0].pins
+						 ? this.state.thisboard[0].pins.map(product => (
 							<Link to={`/products/${product.productKey - 1}`}>
 								<div className="pin">
 									<span className="deletePinButton">
@@ -66,6 +67,7 @@ class IndividualBoard extends React.Component {
 								</div>
 							</Link>
 						))
+							: <p>This board has no pins!</p>
 					}
 				</div>
 			</div>

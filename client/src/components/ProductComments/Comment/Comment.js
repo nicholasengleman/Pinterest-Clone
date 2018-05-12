@@ -1,4 +1,5 @@
 import React from 'react';
+import detectclickoutside from 'react-onclickoutside';
 
 import {Avatar, IconButton, Text} from "gestalt";
 
