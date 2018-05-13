@@ -1,9 +1,7 @@
 import React from 'react';
-
 import {Avatar, IconButton, Text} from "gestalt";
 
 import "gestalt/dist/gestalt.css";
-
 import './Comment.css';
 
 class Comment extends React.Component {
@@ -12,9 +10,14 @@ class Comment extends React.Component {
 		this.state = {
 			userLikesComment: false,
 			OpenCommentEditMenu: false,
-			newComment: this.props.comment
+			newComment: this.props.comment,
+			commentIsEditable: (this.props.userId === this.props.userData.userID)
 		};
+
+
 	}
+
+
 
 	toggleCommentEditMenu = (event) => {
 		if (event.event) {
@@ -57,17 +60,18 @@ class Comment extends React.Component {
 				<div className='individualCommentContainer'>
 					<div className='commentHeader'>
 						<div className='commentHeaderRight'>
-							<Avatar name={this.props.user} size='sm'/>
+							<Avatar name={this.props.name} size='sm'/>
 							<span className='commentUsername'>
-							<Text bold>{this.props.user}</Text>
+							<Text bold>{this.props.name}</Text>
 						</span>
 						</div>
 						<div className='editCommentButtonContainer' tabIndex="0">
-							<IconButton accessibilityLabel="edit comment"
-										icon='ellipsis'
-										size='xs'
-										onClick={this.toggleCommentEditMenu}
-							/>
+							{this.state.commentIsEditable && <IconButton accessibilityLabel="edit comment"
+										 icon='ellipsis'
+										 size='xs'
+										 onClick={this.toggleCommentEditMenu}/>
+							}
+
 							{this.state.OpenCommentEditMenu && (
 								<div className='tooltip' >
 									<div className='tooltipActions first' onClick={this.openEditCommentWindow}>

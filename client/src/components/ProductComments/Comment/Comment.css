@@ -55,6 +55,7 @@
 	width: 0;
 	position: absolute;
 	pointer-events: none;
+	outline: none;
 }
 
 .tooltip:after {
@@ -62,12 +63,14 @@
 	border-bottom-color: whitesmoke;
 	border-width: 15px;
 	margin-left: -15px;
+	outline: none;
 }
 .tooltip:before {
 	border-color: rgba(46, 45, 45, 0);
 	border-bottom-color: #f1f1f1;
 	border-width: 16px;
 	margin-left: -16px;
+	outline: none;
 }
 
 
@@ -75,6 +78,7 @@
 	height: 40px;
 	line-height: 40px;
 	cursor: pointer;
+	outline: none;
 }
 
 .tooltipActions.first {

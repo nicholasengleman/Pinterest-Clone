@@ -33,11 +33,11 @@
 	border-radius: 10px;
 	padding: 20px;
 }
-.commentsContainer .header {
+.commentsContainer__header {
 	height: 40px;
 	margin-bottom: 20px;
 }
-.commentsContainer .header Button {
+.commentsContainer__header Button {
 	float: right;
 }
 .commentsContainer .productSummary {
