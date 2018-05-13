@@ -187,6 +187,8 @@ class App extends Component {
 				board.pins = board.pins.filter(pin => {
 					if (pin.productID !== productID) {
 						return true;
+					} else {
+						return false;
 					}
 				});
 
@@ -594,10 +596,6 @@ class App extends Component {
 		return (
 			<Router>
 				<div>
-					<Route exact path="/login" render={() =>
-						<Login setUserData={this.setUserData}/>
-					}/>
-					<Route exact path="/register" component={Register}/>
 					<Route exact path="/boards/:board" render={({match}) =>
 						<IndividualBoard
 							boardID={match.params.board}
@@ -636,6 +634,7 @@ class App extends Component {
 							removeFromFavorites={this.removeFromFavorites}
 							toggleAdminMode={this.toggleAdminMode}
 							removeUserData={this.removeUserData}
+							setUserData={this.setUserData}
 						/>
 					}/>
 

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Highlight from "react-highlight-words";
 import Tag from "./Tag/Tag";
 import ModalPin from "./Modal-Pin/Modal-Pin"
-import { Button, Icon} from "gestalt";
+import { Button } from "gestalt";
 
 import "gestalt/dist/gestalt.css";
 import "./Product.css";

@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import EditBoardModal from './EditBoardModal/EditBoardModal';
 import CreateBoardModal from './CreateBoardModal/CreateBoardModal'
 
-import {Text, Icon, Mask, IconButton} from "gestalt";
+import {Text, Icon, IconButton} from "gestalt";
 
 import "gestalt/dist/gestalt.css";
 import './Boards.css';

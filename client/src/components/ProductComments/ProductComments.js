@@ -2,8 +2,6 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {Button, Heading, Text, Icon} from "gestalt";
 
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-
 import Comment from './Comment/Comment';
 import ModalPin from '../ProductsContainer/Product/Modal-Pin/Modal-Pin';
 

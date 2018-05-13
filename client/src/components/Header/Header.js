@@ -3,9 +3,10 @@ import {Link} from "react-router-dom";
 import axios from 'axios';
 
 import PropTypes from 'prop-types';
-import {Switch, Label, Text, Heading} from 'gestalt';
+import {Text} from 'gestalt';
 
 import SearchBar from './SearchBar/SearchBar';
+import LoginRegisterModal from './LoginRegisterModal/LoginRegisterModal';
 
 import 'gestalt/dist/gestalt.css';
 import './Header.css';
@@ -16,8 +17,7 @@ class Header extends React.Component {
 		super(props);
 
 		this.state = {
-			isOpen: false,
-			switched: false
+			LoginRegisterModalisOpen: false,
 		};
 	}
 
@@ -26,26 +26,28 @@ class Header extends React.Component {
 		addNewContent: PropTypes.func,
 	};
 
-	toggleAdminMode = () => {
-		this.props.toggleAdminMode();
-		this.setState({switched: !this.state.switched});
+
+	toggleLoginRegisterModal = () => {
+		this.setState({LoginRegisterModalisOpen: !this.state.LoginRegisterModalisOpen});
 	};
+
 
 	logout = (event) => {
 		let a = this;
 		event.preventDefault();
+		console.log("got here");
 		axios.get('/api/logout')
-			.then(function(response) {
+			.then(function (response) {
 				a.props.removeUserData();
 			})
-			.catch(function(error) {
+			.catch(function (error) {
 				console.log(error);
 			})
 	};
 
 	render() {
 		return (
-			<header>
+			<header className='header'>
 				<SearchBar filterProducts={this.props.filterProducts}/>
 
 				<Link to="/boards">
@@ -57,25 +59,17 @@ class Header extends React.Component {
 					this.props.name
 						? <button onClick={this.logout}>Log out</button>
 						: <div>
-							<div className='headerLink'>
-								<Link to="/login">Login</Link>
+							<div className='header__headerLink' onClick={this.toggleLoginRegisterModal}>
+								<Text inline bold size="md" color="gray">Login/Register</Text>
 							</div>
-							{/*<div className='headerLink'>*/}
-								{/*<Link to="/register">Register</Link>*/}
-							{/*</div>*/}
+							<LoginRegisterModal
+								isOpen={this.state.LoginRegisterModalisOpen}
+								toggleLoginRegisterModal={this.toggleLoginRegisterModal}
+								setUserData={this.props.setUserData}
+							/>
 						</div>
 				}
 
-				<div className='adminHeader'>
-					<Label htmlFor='toggleAdminMode'>
-						<Text>Admin Mode</Text>
-					</Label>
-					<Switch
-						id='toggleAdminMode'
-						onChange={this.toggleAdminMode}
-						switched={this.state.switched}
-					/>
-				</div>
 			</header>
 		)
 	}

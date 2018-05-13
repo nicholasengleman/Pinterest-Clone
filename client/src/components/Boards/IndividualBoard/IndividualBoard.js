@@ -18,6 +18,8 @@ class IndividualBoard extends React.Component {
 		let board = nextProps.boards.filter(board => {
 			if (nextProps.boardID == board.boardID) {
 				return true;
+			} else {
+				return false;
 			}
 		});
 		return {
@@ -58,7 +60,7 @@ class IndividualBoard extends React.Component {
 										/>
 									</span>
 									<div className="pinImage">
-										<img src={product.productImage}/>
+										<img src={product.productImage} alt="product"/>
 									</div>
 									<br/>
 									<div><Text>{product.productDescription}</Text></div>

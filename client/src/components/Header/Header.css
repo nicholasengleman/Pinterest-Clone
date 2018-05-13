@@ -1,110 +1,44 @@
-header {
+.header {
+	align-items: center;
+	background: #ffffff;
+	box-shadow: 0 2px 4px grey;
+	box-sizing: border-box;
+	display: flex;
+	font-size: 14px;
 	height: 70px;
+	justify-content: space-between;
+	padding: 0 60px;
 	position: fixed;
 	top: 0;
 	width: 100%;
 	z-index: 2;
-	background: #ffffff;
-	box-shadow: 0 2px 4px grey;
-	font-size: 14px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0 60px;
-	box-sizing: border-box;
 }
 
-.headerLink {
-	height: 40px;
-	background: #EFEFEF;
-	border-radius: 20px;
-	font-weight: bold;
-}
-
-a .headerLink {
+.header a {
 	text-decoration: none;
 }
-.adminHeader {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 140px;
-	height: 35px;
-	vertical-align: middle;
-	padding: 0 10px;
-	background: lightgrey;
-	border-radius: 20px;
-	font-weight: bold;
-}
 
-/*ModalPin-Pin Styles */
+.header__headerLink {
 
-.Modal {
-	position: absolute;
-	top: 150px;
-	margin: 0 auto;
-	left: 0;
-	right: 0;
-	background-color: white;
-	width: 50%;
-	max-height: 500px;
-	padding: 50px;
-	border: 5px solid #969696;
-	outline: none;
-	overflow-y: scroll;
-}
-
-.Overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-}
-
-.closeModalButton {
-	background: #ff7763;
-	border: none;
-	outline: none;
-	font-size: 1.5em;
-	padding: 5px 20px;
-	margin-left: 45%;
-	cursor: pointer;
-	font-weight: bold;
-	letter-spacing: 1px;
-	margin-top: 50px;
-	border-radius: 5px;
-	box-shadow: 0 2px 2px lightgrey;
-	transition: box-shadow 0.3s;
-}
-
- p {
+	height: 40px;
+	width:130px;
 	text-align: center;
+	line-height: 40px;
+	border-radius: 30px;
 }
 
-.closeModalButton:hover {
-	box-shadow: 0 2px 2px grey;
+.header__headerLink:hover {
+	background: #EFEFEF;
 }
 
 
-.ReactModal__Content {
-	opacity: 0;
-}
 
-.ReactModal__Content--after-open {
-	opacity: 1;
-	transition: opacity 150ms;
-}
-
-.ReactModal__Content--before-close {
-	opacity: 0;
-}
 
 @media (max-width: 1050px) {
 	header {
+		align-items: center;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
 	}
 	.Modal {
 		width: 70%;
@@ -114,8 +48,8 @@ a .headerLink {
 		padding: 5px 10px;
 	}
 	.headerSearchAddInput {
-		width: 30%;
 		margin: 0 0 0 30px;
+		width: 30%;
 	}
 	.addNewContent {
 		margin: 0 45px 0 0;
@@ -127,14 +61,14 @@ a .headerLink {
 		padding: 25px;
 	}
 	.closeModalButton {
-		margin-top: 25px;
 		font-size: 1em;
+		margin-top: 25px;
 		padding: 5px 5px;
 	}
 	.headerSearchAddInput {
+		margin: 0 20px;
 		min-width: 200px;
 		width: 20%;
-		margin: 0 20px;
 	}
 	.favoritesSummary {
 		margin-right: 20px;
@@ -155,8 +89,8 @@ a .headerLink {
 		font-size: 12px;
 	}
 	.headerSearchAddInput {
-		min-width: 150px;
 		margin: 0 10px;
+		min-width: 150px;
 	}
 	.favoritesSummary {
 		font-size: 1.2em;
@@ -165,9 +99,9 @@ a .headerLink {
 
 @media (max-width: 430px) {
 	.closeModalButton {
+		font-size: 0.8em;
 		margin-left: 43%;
 		margin-top: 10px;
-		font-size: 0.8em;
 		padding: 2px 5px;
 	}
 	.favoritesSummary {
