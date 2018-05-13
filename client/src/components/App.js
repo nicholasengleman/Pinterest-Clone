@@ -7,8 +7,6 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import Header from './Header/Header';
 import Boards from './Boards/Boards';
 import Sidebar from './Sidebar/Sidebar';
-import Login from './UserAdmin/Login/Login';
-import Register from './UserAdmin/Register/Register';
 import ProductsContainer from './ProductsContainer/ProductsContainer';
 import ConfirmationToast from './ConfirmationToast/ConfirmationToast';
 import ProductComments from "./ProductComments/ProductComments";
@@ -32,6 +30,7 @@ class App extends Component {
 		};
 		this.state = {
 			UserData: {},
+			LoginRegisterModalisOpen: false,
 			ConfirmationToast: {
 				ShowConfirmationToast: false,
 				ToastImage: '',
@@ -78,20 +77,20 @@ class App extends Component {
 	}
 
 
-	addNewComment = (productID, comment, user, date) => {
+	addNewComment = (productID, comment, name, userId, date) => {
 		let ProductList = this.state.DisplayedProductList;
 		const commentId = Math.random();
-		if (ProductList[productID - 1].comments) {
-			ProductList[productID - 1].comments.push({user, comment, date, commentId});
+		if (ProductList[productID - 1].productComments) {
+			ProductList[productID - 1].productComments.push({name, userId, comment, date, commentId});
 		} else {
-			ProductList[productID - 1].comments = [{user, comment, date, commentId}];
+			ProductList[productID - 1].productComments = [{name, userId, comment, date, commentId}];
 		}
 		this.setState({DisplayedProductList: ProductList});
 		this.displayConfirmationToast('', 'thanks for', 'your comment!');
 
 		axios.post('/api/product_update', {
 			id: productID,
-			comments: ProductList[productID - 1].comments
+			comments: ProductList[productID - 1].productComments
 		})
 			.then(function (response) {
 				console.log(response);
@@ -99,6 +98,10 @@ class App extends Component {
 			.catch(function (error) {
 				console.log(error);
 			})
+	};
+
+	toggleLoginRegisterModal = () => {
+		this.setState({LoginRegisterModalisOpen: !this.state.LoginRegisterModalisOpen});
 	};
 
 	deleteComment = (productID, commentId) => {
@@ -623,18 +626,21 @@ class App extends Component {
 							deleteComment={this.deleteComment}
 							editComment={this.editComment}
 							openEditCommentWindow={this.openEditCommentWindow}
+							userData={this.state.UserData}
+							toggleLoginRegisterModal={this.toggleLoginRegisterModal}
+							LoginRegisterModalisOpen={this.state.LoginRegisterModalisOpen}
+							setUserData={this.setUserData}
 						/>}
 					/>
 
 					<Route exact path="/" render={() =>
 						<Header
-							adminMode={this.state.adminMode}
-							name={this.state.UserData.name}
 							filterProducts={this.updateSearchParameter}
-							removeFromFavorites={this.removeFromFavorites}
-							toggleAdminMode={this.toggleAdminMode}
 							removeUserData={this.removeUserData}
 							setUserData={this.setUserData}
+							name={this.state.UserData.name}
+							toggleLoginRegisterModal={this.toggleLoginRegisterModal}
+							LoginRegisterModalisOpen={this.state.LoginRegisterModalisOpen}
 						/>
 					}/>
 
@@ -661,7 +667,11 @@ class App extends Component {
 								submitNewProductInfo={this.submitNewProductInfo}
 								addPinToExistingBoard={this.addPinToExistingBoard}
 								addPinToNewBoard={this.addPinToNewBoard}
-								removeFromFavorites={this.removeFromFavorites}
+
+								toggleLoginRegisterModal={this.toggleLoginRegisterModal}
+								loginRegisterModalisOpen={this.state.LoginRegisterModalisOpen}
+								setUserData={this.setUserData}
+								name={this.state.UserData.name}
 							/>
 						</main>
 					}/>

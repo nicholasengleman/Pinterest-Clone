@@ -22,7 +22,8 @@ class LoginRegisterModal extends React.Component {
 	}
 
 	closeModal = () => {
-		this.setState({logInEmail: '',
+		this.setState({
+			logInEmail: '',
 			logInPassword: '',
 			signUpEmail: '',
 			signUpPassword: '',
@@ -42,6 +43,7 @@ class LoginRegisterModal extends React.Component {
 			.then(function (response) {
 				if (response.data.isAuth) {
 					a.props.setUserData(response.data);
+					a.props.toggleLoginRegisterModal();
 					a.props.history.push('/');
 				} else {
 					a.setState({statusSignIn: response.data.message});
@@ -61,6 +63,7 @@ class LoginRegisterModal extends React.Component {
 		})
 			.then(function (response) {
 				if (response.data.isAuth) {
+					a.props.toggleLoginRegisterModal();
 					a.props.history.push('/');
 				} else {
 					a.setState({statusCreateAccount: response.data.message});
@@ -78,7 +81,13 @@ class LoginRegisterModal extends React.Component {
 			logInPassword: this.logInPassword.value,
 			signUpEmail: this.signUpEmail.value,
 			signUpPassword: this.signUpPassword.value
-		})
+		});
+		if(!this.logInEmail.value || !this.logInPassword.value) {
+			this.setState({statusSignIn: ''});
+		}
+		if(!this.signUpEmail.value || !this.signUpPassword.value) {
+			this.setState({statusCreateAccount: ''});
+		}
 	};
 
 	render() {
@@ -118,7 +127,6 @@ class LoginRegisterModal extends React.Component {
 							color="red"
 					/>
 					<h3>or</h3>
-					<div className="loginRegisterModal__loginForm_error">{this.state.statusCreateAccount}</div>
 					<input name="email"
 						   type="email"
 						   ref={input => (this.signUpEmail = input)}
@@ -138,6 +146,7 @@ class LoginRegisterModal extends React.Component {
 							onClick={this.onSignUp}
 							color="blue"
 					/>
+					<div className="loginRegisterModal__loginForm_error">{this.state.statusCreateAccount}</div>
 
 
 				</div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Heading, Icon, IconButton} from "gestalt";
+import {Text, Heading, Icon, IconButton, Button} from "gestalt";
 import ReactModal from "react-modal";
 
 import "gestalt/dist/gestalt.css";
@@ -119,11 +119,11 @@ class ModalPin extends React.Component {
 								</form>
 							</div>
 							<div className='submitNewBoard'>
-								<button className='button_pin' onClick={this.toggleCreateBoardDialog}>Cancel</button>
+								<Button text="cancel" color="gray" onClick={this.toggleCreateBoardDialog} />
 								{
 									this.state.newBoardName
-										? <button className='button_pin' onClick={this.addPinToNewBoard}>Save</button>
-										: <button>Save</button>
+										? <Button text="Save" color="red" onClick={this.addPinToNewBoard}/>
+										: <Button text="Save" color="gray"/>
 								}
 							</div>
 						</div>
@@ -149,7 +149,7 @@ class ModalPin extends React.Component {
 										</span>
 									</div>
 									<span className='boardSaveButton'>
-									<button className='button_pin'>Save</button>
+									<Button text="Save" color="red" size="sm" />
 									</span>
 								</div>
 							))
