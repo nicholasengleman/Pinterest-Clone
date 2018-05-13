@@ -139,7 +139,7 @@ class ModalPin extends React.Component {
 											onClick={this.props.toggleModal}
 											size='sm'/>
 							</div>
-							{this.props.boards.map(board => (
+							{this.props.boards && this.props.boards.map(board => (
 								<div className='board'
 									 onClick={(event) => this.addPinToExistingBoard(event, board.boardID)}>
 									<div>

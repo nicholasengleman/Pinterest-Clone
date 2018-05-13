@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import Highlight from "react-highlight-words";
 import Tag from "./Tag/Tag";
 import ModalPin from "./Modal-Pin/Modal-Pin"
+import { Button, Icon} from "gestalt";
 
+import "gestalt/dist/gestalt.css";
 import "./Product.css";
 
 class Product extends React.Component {
@@ -203,12 +205,13 @@ class Product extends React.Component {
 						{this.state.name &&
 							 <div>
 								<div className="saveIcon">
-									<button
+									<Button
 										onClick={this.toggleModal}
-										alt="save this product"
-										className='button_pin'
-									>Save
-									</button>
+										text="Save"
+										color="red"
+										inline
+										>
+									</Button>
 									<ModalPin modalStatus={this.state.displayModal}
 											  toggleModal={this.toggleModal}
 											  productName={this.props.productName}
