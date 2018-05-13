@@ -25,9 +25,9 @@ class IndividualBoard extends React.Component {
 		}
 	};
 
-	deletePinFromBoard = (event, productKey, imageAddress) => {
+	deletePinFromBoard = (event, productID, imageAddress) => {
 		event.event.preventDefault();
-		this.props.deletePinFromBoard(this.props.boardID, productKey, imageAddress);
+		this.props.deletePinFromBoard(this.props.boardID, productID, imageAddress);
 	};
 
 	render() {
@@ -46,7 +46,7 @@ class IndividualBoard extends React.Component {
 					{
 						this.state.thisboard[0].pins
 						 ? this.state.thisboard[0].pins.map(product => (
-							<Link to={`/products/${product.productKey - 1}`}>
+							<Link to={`/products/${product.productID - 1}`}>
 								<div className="pin">
 									<span className="deletePinButton">
 										<IconButton accessibilityLabel="delete this pin"
@@ -54,7 +54,7 @@ class IndividualBoard extends React.Component {
 													bgColor="white"
 													iconColor="red"
 													size="md"
-													onClick={(event) => this.deletePinFromBoard(event, product.productKey, product.productImage)}
+													onClick={(event) => this.deletePinFromBoard(event, product.productID, product.productImage)}
 										/>
 									</span>
 									<div className="pinImage">
@@ -63,7 +63,7 @@ class IndividualBoard extends React.Component {
 									<br/>
 									<div><Text>{product.productDescription}</Text></div>
 									<br/>
-									<div><Text>${product.productKey}</Text></div>
+									<div><Text>${product.productID}</Text></div>
 								</div>
 							</Link>
 						))

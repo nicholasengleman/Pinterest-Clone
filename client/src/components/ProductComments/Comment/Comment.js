@@ -30,18 +30,18 @@ class Comment extends React.Component {
 		event.preventDefault();
 		event.stopPropagation();
 		this.toggleCommentEditMenu(event);
-		this.props.deleteComment(this.props.productKey, this.props.commentId);
+		this.props.deleteComment(this.props.productID, this.props.commentId);
 	};
 
 	editComment = (event) => {
 		if (event.key === 'Enter') {
-			this.props.editComment(this.props.productKey, this.props.commentId, this.state.newComment);
+			this.props.editComment(this.props.productID, this.props.commentId, this.state.newComment);
 		}
 	};
 
 	openEditCommentWindow = (event) => {
 		this.toggleCommentEditMenu(event);
-		this.props.openEditCommentWindow(this.props.productKey, this.props.commentId);
+		this.props.openEditCommentWindow(this.props.productID, this.props.commentId);
 	};
 
 	toggleLike = () => {

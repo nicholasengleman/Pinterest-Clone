@@ -48,7 +48,7 @@ class Product extends React.Component {
 		productPrice: PropTypes.number,
 		productDescription: PropTypes.string,
 		productTags: PropTypes.array,
-		productKey: PropTypes.number
+		productID: PropTypes.number
 	};
 
 	componentDidMount() {
@@ -60,7 +60,7 @@ class Product extends React.Component {
 	UNSAFE_componentWillReceiveProps(nextProps) {
 		if (this.state.Favorited.status === true) {
 			for (let favorite of nextProps.favorites) {
-				if (nextProps.productKey === favorite.productKey) {
+				if (nextProps.productID === favorite.productID) {
 					return null;
 				}
 			}
@@ -92,7 +92,7 @@ class Product extends React.Component {
 
 
 	removeProduct(event) {
-		this.props.removeProduct(this.props.productKey);
+		this.props.removeProduct(this.props.productID);
 		event.preventDefault();
 	}
 
@@ -128,7 +128,7 @@ class Product extends React.Component {
 
 	submitNewProductInfo(event) {
 		this.props.submitNewProductInfo(
-			this.props.productKey,
+			this.props.productID,
 			this.state.tags,
 			this.state.imageSrc,
 			this.state.name,
@@ -217,7 +217,7 @@ class Product extends React.Component {
 											  productName={this.props.productName}
 											  productDescription={this.props.productDescription}
 											  productImage={this.props.productImageAddress}
-											  productKey={this.props.productKey}
+											  productID={this.props.productID}
 											  boards={this.props.boards}
 											  addPinToExistingBoard={this.props.addPinToExistingBoard}
 											  addPinToNewBoard={this.props.addPinToNewBoard}

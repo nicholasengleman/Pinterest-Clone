@@ -141,7 +141,7 @@ app.post('/api/board_update', (req, res) => {
 
 //update product comments
 app.post('/api/product_update', (req, res) => {
-	Product.findOneAndUpdate(req.body._id, req.body, {new: true, upsert: true}, (err, doc) => {
+	Product.findOneAndUpdate(req.body.id, req.body, {new: true, upsert: true}, (err, doc) => {
 		if (err) {
 			return res.status(400).send(err);
 		} else {

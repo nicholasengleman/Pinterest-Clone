@@ -61,11 +61,13 @@ class App extends Component {
 							productImageAddress: databaseData[property1].productImageAddress,
 							productTags: databaseData[property1].tags.split(","),
 							productDescription: databaseData[property1].description,
-							productKey: databaseData[property1].productKey
+							productID: databaseData[property1].productKey,
+							productComments: databaseData[property1].comments
 						});
 					}
 					callback(ProjectData);
-				};
+				}
+
 				collectData((ProjectData) => {
 					t.findNumPoductsMatchPriceFilter(ProjectData);
 					t.findNumPoductsMatchTagFilter(ProjectData);
@@ -79,26 +81,49 @@ class App extends Component {
 	addNewComment = (productID, comment, user, date) => {
 		let ProductList = this.state.DisplayedProductList;
 		const commentId = Math.random();
-		if (ProductList[productID].comments) {
-			ProductList[productID].comments.push({user, comment, date, commentId});
+		if (ProductList[productID - 1].comments) {
+			ProductList[productID - 1].comments.push({user, comment, date, commentId});
 		} else {
-			ProductList[productID].comments = [{user, comment, date, commentId}];
+			ProductList[productID - 1].comments = [{user, comment, date, commentId}];
 		}
 		this.setState({DisplayedProductList: ProductList});
 		this.displayConfirmationToast('', 'thanks for', 'your comment!');
+
+		axios.post('/api/product_update', {
+			id: productID,
+			comments: ProductList[productID - 1].comments
+		})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
 	};
 
-	deleteComment = (productKey, commentId) => {
+	deleteComment = (productID, commentId) => {
 		let ProductList = this.state.DisplayedProductList;
-		ProductList[productKey - 1].comments = ProductList[productKey - 1].comments.filter((comment) => {
+		ProductList[productID - 1].productComments = ProductList[productID - 1].productComments.filter((comment) => {
 			return comment.commentId !== commentId;
 		});
 		this.setState({DisplayedProductList: ProductList});
+
+		axios.post('/api/product_update', {
+			id: productID,
+			comments: ProductList[productID - 1].productComments
+		})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+
 	};
 
-	openEditCommentWindow = (productKey, commentId) => {
+	openEditCommentWindow = (productID, commentId) => {
 		let ProductList = this.state.DisplayedProductList;
-		ProductList[productKey - 1].comments.forEach((comment) => {
+		ProductList[productID - 1].productComments.forEach((comment) => {
 			if (comment.commentId === commentId) {
 				comment['edit'] = true;
 			}
@@ -106,38 +131,61 @@ class App extends Component {
 		this.setState({DisplayedProductList: ProductList});
 	};
 
-	editComment = (productKey, commentId, newCommentText) => {
+	editComment = (productID, commentId, newCommentText) => {
 		let ProductList = this.state.DisplayedProductList;
-		ProductList[productKey - 1].comments.forEach((comment) => {
+		ProductList[productID - 1].productComments.forEach((comment) => {
 			if (comment.commentId === commentId) {
 				comment.comment = newCommentText;
 				comment.edit = false;
 			}
 		});
 		this.setState({DisplayedProductList: ProductList});
+		axios.post('/api/product_update', {
+			id: productID,
+			comments: ProductList[productID - 1].productComments
+		})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+
 	};
 
-	addPinToExistingBoard = (productName, productDescription, productImage, productKey, boardID) => {
+	addPinToExistingBoard = (productName, productDescription, productImage, productID, boardID) => {
 		let UserData = this.state.UserData;
 		for (let board of UserData.Boards) {
 			if (board.boardID === boardID) {
 				if (board.pins) {
-					board.pins.push({productName, productDescription, productImage, productKey});
+					board.pins.push({productName, productDescription, productImage, productID});
 				} else {
-					board.pins = [{productName, productDescription, productImage, productKey}];
+					board.pins = [{productName, productDescription, productImage, productID}];
 				}
 				this.setState({UserData});
+
 				this.displayConfirmationToast(productImage, 'Saved to', board.name);
+
+				axios.post('/api/board_update', {
+					_id: this.state.UserData.userID,
+					boards: JSON.stringify(UserData.Boards)
+				})
+					.then(function (response) {
+						console.log(response);
+					})
+					.catch(function (error) {
+						console.log(error);
+					})
 			}
 		}
 	};
 
-	deletePinFromBoard = (boardID, productKey, productImage) => {
+	deletePinFromBoard = (boardID, productID, productImage) => {
 		let UserData = this.state.UserData;
 		for (let board of UserData.Boards) {
 			if (board.boardID == boardID) {
 				board.pins = board.pins.filter(pin => {
-					if (pin.productKey !== productKey) {
+					if (pin.productID !== productID) {
 						return true;
 					}
 				});
@@ -145,19 +193,42 @@ class App extends Component {
 			}
 		}
 		this.setState({UserData});
+
 		this.displayConfirmationToast(productImage, 'Deleted from', "board");
+
+		axios.post('/api/board_update', {
+			_id: this.state.UserData.userID,
+			boards: JSON.stringify(UserData.Boards)
+		})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
 	};
 
-	addPinToNewBoard = (productName, productDescription, productImage, productKey, boardName) => {
+	addPinToNewBoard = (productName, productDescription, productImage, productID, boardName) => {
 		let UserData = this.state.UserData;
 		UserData.Boards.push({
 			name: boardName,
 			boardID: Math.random(),
 			pic: productImage,
-			pins: [{productName, productDescription, productImage, productKey}]
+			pins: [{productName, productDescription, productImage, productID}]
 		});
 		this.setState({UserData});
 		this.displayConfirmationToast(productImage, 'Saved to', boardName);
+
+		axios.post('/api/board_update', {
+			_id: this.state.UserData.userID,
+			boards: JSON.stringify(UserData.Boards)
+		})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
 	};
 
 	createNewBoard = (boardName) => {
@@ -169,15 +240,14 @@ class App extends Component {
 		this.setState({UserData});
 		this.displayConfirmationToast('', 'New Board Created', boardName);
 
-
 		axios.post('/api/board_update', {
 			_id: this.state.UserData.userID,
 			boards: JSON.stringify(UserData.Boards)
 		})
-			.then(function(response) {
+			.then(function (response) {
 				console.log(response);
 			})
-			.catch(function(error) {
+			.catch(function (error) {
 				console.log(error);
 			})
 	};
@@ -195,7 +265,19 @@ class App extends Component {
 			}
 		});
 		this.setState({UserData});
+
 		this.displayConfirmationToast('', 'Your board', 'has been updated');
+
+		axios.post('/api/board_update', {
+			_id: this.state.UserData.userID,
+			boards: JSON.stringify(UserData.Boards)
+		})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
 	};
 
 	deleteBoard = (boardID) => {
@@ -210,13 +292,25 @@ class App extends Component {
 			}
 		});
 		this.setState({UserData});
+
 		this.displayConfirmationToast('', `"${boardname}" board`, 'has been deleted');
+
+		axios.post('/api/board_update', {
+			_id: this.state.UserData.userID,
+			boards: JSON.stringify(UserData.Boards)
+		})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
 	};
 
 	setUserData = (userInfo) => {
 		let UserData = this.state.UserData;
 		console.log(userInfo);
-		if(userInfo.boards) {
+		if (userInfo.boards) {
 			userInfo.boards = JSON.parse(userInfo.boards);
 			console.log(userInfo.boards);
 			UserData.Boards = userInfo.boards || [];
@@ -249,7 +343,7 @@ class App extends Component {
 
 	removeProduct = (productToRemove) => {
 		this.baseproductList = this.baseproductList.filter(product => {
-			if (product.productKey !== productToRemove) {
+			if (product.productID !== productToRemove) {
 				return true;
 			} else {
 				return false;
@@ -266,7 +360,7 @@ class App extends Component {
 
 	editProduct = (productToRemove) => {
 		this.baseproductList = this.baseproductList.filter(product => {
-			if (product.productKey !== productToRemove) {
+			if (product.productID !== productToRemove) {
 				return true;
 			} else {
 				return false;
@@ -468,14 +562,14 @@ class App extends Component {
 			productPrice: '',
 			productDescription: '',
 			productTags: [],
-			productKey: Math.random()
+			productID: Math.random()
 		});
 		this.setState({DisplayedProductList: this.baseproductList});
 	};
 
-	submitNewProductInfo = (productKey, newTags, newImgSrc, newName, newPrice, newDescription) => {
+	submitNewProductInfo = (productID, newTags, newImgSrc, newName, newPrice, newDescription) => {
 		this.baseproductList.forEach(product => {
-			if (product.productKey === productKey) {
+			if (product.productID === productID) {
 				product.productImageAddress = newImgSrc;
 				newTags.length > 0 && newTags[0] !== ""
 					? product.productTags = newTags.split(',')
@@ -501,8 +595,8 @@ class App extends Component {
 			<Router>
 				<div>
 					<Route exact path="/login" render={() =>
-						<Login setUserData={this.setUserData} />
-					} />
+						<Login setUserData={this.setUserData}/>
+					}/>
 					<Route exact path="/register" component={Register}/>
 					<Route exact path="/boards/:board" render={({match}) =>
 						<IndividualBoard
@@ -512,13 +606,13 @@ class App extends Component {
 						/>
 					}/>
 					<Route exact path="/boards" render={() =>
-							<Boards
-								Boards={this.state.UserData.Boards}
-								products={this.state.DisplayedProductList}
-								createNewBoard={this.createNewBoard}
-								deleteBoard={this.deleteBoard}
-								editBoard={this.editBoard}
-							/>
+						<Boards
+							Boards={this.state.UserData.Boards}
+							products={this.state.DisplayedProductList}
+							createNewBoard={this.createNewBoard}
+							deleteBoard={this.deleteBoard}
+							editBoard={this.editBoard}
+						/>
 					}/>
 
 					<Route exact path="/products/:product" render={({match}) =>

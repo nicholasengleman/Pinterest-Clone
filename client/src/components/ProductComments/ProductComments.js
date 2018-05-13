@@ -44,7 +44,7 @@ class ProductComments extends React.Component {
 			const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 			let date = `${months[newDate.getMonth()]} ${newDate.getDate()}`;
 
-			this.props.addNewComment(this.props.productKey - 1, this.state.newComment, 'john', date);
+			this.props.addNewComment(this.props.productID, this.state.newComment, 'john', date);
 			this.setState({newComment: ''});
 			event.target.blur();
 		}
@@ -68,7 +68,7 @@ class ProductComments extends React.Component {
 								  productDescription={this.props.productDescription}
 								  productImage={this.props.productImageAddress}
 								  boards={this.props.boards}
-								  productKey={this.props.productKey}
+								  productID={this.props.productID}
 								  addPinToExistingBoard={this.props.addPinToExistingBoard}
 								  addPinToNewBoard={this.props.addPinToNewBoard}
 						/>
@@ -88,7 +88,7 @@ class ProductComments extends React.Component {
 						<br/>
 						<Text>Share feedback, ask a question or give a high five.</Text>
 						<div className='commentBox'>
-							{this.props.comments && this.props.comments.map(comment => {
+							{this.props.productComments && this.props.productComments.map(comment => {
 								return <Comment key={comment.commentId}
 												{...comment}
 												{...this.props}
