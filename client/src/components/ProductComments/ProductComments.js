@@ -1,10 +1,11 @@
 import React from 'react';
+import {Link} from "react-router-dom";
+import {Button, Heading, Text, Icon} from "gestalt";
+
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 import Comment from './Comment/Comment';
 import ModalPin from '../ProductsContainer/Product/Modal-Pin/Modal-Pin';
-
-import { Link } from "react-router-dom";
-
-import { Button, Heading, Text, Icon } from "gestalt";
 
 import "gestalt/dist/gestalt.css";
 import './ProductComments.css';
@@ -29,7 +30,7 @@ class ProductComments extends React.Component {
 		}));
 	};
 
-	handleChange = ({ activeTabIndex, event }) => {
+	handleChange = ({activeTabIndex, event}) => {
 		event.preventDefault();
 	};
 
@@ -72,11 +73,15 @@ class ProductComments extends React.Component {
 								  addPinToNewBoard={this.props.addPinToNewBoard}
 						/>
 					</div>
-					<div className='productImage'>
-						<img src={this.props.productImageAddress} alt=''/>
-						<p>{this.props.productName}</p>
-						<p>{this.props.productDescription}</p>
-						<p>{this.props.productPrice}</p>
+					<div className='productSummary'>
+						<div className='productImage'>
+							<img src={this.props.productImageAddress} alt=''/>
+						</div>
+						<Heading size="sm">{this.props.productName}</Heading>
+						<br />
+						<Text>{this.props.productDescription}</Text>
+						<br />
+						<Text>${this.props.productPrice}</Text>
 					</div>
 					<div className='comments'>
 						<Heading size='xs'>Comments</Heading>
@@ -87,8 +92,8 @@ class ProductComments extends React.Component {
 								return <Comment key={comment.commentId}
 												{...comment}
 												{...this.props}
-										/>
-									})
+								/>
+							})
 							}
 						</div>
 

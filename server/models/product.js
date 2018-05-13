@@ -22,6 +22,9 @@ const productSchema = mongoose.Schema({
 	tags: {
 		type: String
 	},
+	comments: {
+		type: Array
+	},
 	productKey: {
 		type: Number,
 		trim: true

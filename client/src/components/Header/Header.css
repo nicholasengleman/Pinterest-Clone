@@ -14,25 +14,16 @@ header {
 	box-sizing: border-box;
 }
 
-.favoritesSummary {
+.headerLink {
 	height: 40px;
-	background:left 15px top 6px/30px url('../../img/64px-Love_Heart_SVG.svg.png') no-repeat;
-	font-size: 1.5em;
-	padding: 2px 5px 2px 60px;
-	border-radius: 7px;
-	letter-spacing: 1px;
+	background: #EFEFEF;
+	border-radius: 20px;
 	font-weight: bold;
-	outline: none;
-	transition: all .1s;
-	cursor: pointer;
-	color: darkslategrey;
-	border: 1px solid transparent;
 }
 
-.favoritesSummary:hover {
-	border: 1px solid lightgrey;
+a .headerLink {
+	text-decoration: none;
 }
-
 .adminHeader {
 	display: flex;
 	justify-content: space-between;

@@ -7,6 +7,8 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import Header from './Header/Header';
 import Boards from './Boards/Boards';
 import Sidebar from './Sidebar/Sidebar';
+import Login from './UserAdmin/Login/Login';
+import Register from './UserAdmin/Register/Register';
 import ProductsContainer from './ProductsContainer/ProductsContainer';
 import ConfirmationToast from './ConfirmationToast/ConfirmationToast';
 import ProductComments from "./ProductComments/ProductComments";
@@ -29,20 +31,7 @@ class App extends Component {
 			'$500 & above': false
 		};
 		this.state = {
-			UserData: {
-				Boards: [
-					{
-						name: 'Places to Go',
-						boardID: 34343,
-						pic: 'https://i.pinimg.com/564x/4d/9b/4f/4d9b4ff9801362c075528b45e5742b13.jpg'
-					},
-					{
-						name: 'Recipies to make',
-						boardID: 2323,
-						pic: 'https://i.pinimg.com/564x/bd/a2/90/bda290318816d59a338c97bb6beaa203.jpg'
-					}
-				],
-			},
+			UserData: {},
 			ConfirmationToast: {
 				ShowConfirmationToast: false,
 				ToastImage: '',
@@ -132,7 +121,7 @@ class App extends Component {
 		let UserData = this.state.UserData;
 		for (let board of UserData.Boards) {
 			if (board.boardID === boardID) {
-				if(board.pins) {
+				if (board.pins) {
 					board.pins.push({productName, productDescription, productImage, productKey});
 				} else {
 					board.pins = [{productName, productDescription, productImage, productKey}];
@@ -179,6 +168,18 @@ class App extends Component {
 		});
 		this.setState({UserData});
 		this.displayConfirmationToast('', 'New Board Created', boardName);
+
+
+		axios.post('/api/board_update', {
+			_id: this.state.UserData.userID,
+			boards: JSON.stringify(UserData.Boards)
+		})
+			.then(function(response) {
+				console.log(response);
+			})
+			.catch(function(error) {
+				console.log(error);
+			})
 	};
 
 	editBoard = (boardID, newBoardName, newBoardDescription) => {
@@ -210,6 +211,24 @@ class App extends Component {
 		});
 		this.setState({UserData});
 		this.displayConfirmationToast('', `"${boardname}" board`, 'has been deleted');
+	};
+
+	setUserData = (userInfo) => {
+		let UserData = this.state.UserData;
+		console.log(userInfo);
+		if(userInfo.boards) {
+			userInfo.boards = JSON.parse(userInfo.boards);
+			console.log(userInfo.boards);
+			UserData.Boards = userInfo.boards || [];
+		}
+		UserData.userID = userInfo.id;
+		UserData.name = userInfo.name;
+		this.setState({UserData});
+	};
+
+	removeUserData = () => {
+		console.log("es");
+		this.setState({UserData: {}});
 	};
 
 	displayConfirmationToast = (ToastImage, ToastAction, ToastActionDestination) => {
@@ -481,6 +500,10 @@ class App extends Component {
 		return (
 			<Router>
 				<div>
+					<Route exact path="/login" render={() =>
+						<Login setUserData={this.setUserData} />
+					} />
+					<Route exact path="/register" component={Register}/>
 					<Route exact path="/boards/:board" render={({match}) =>
 						<IndividualBoard
 							boardID={match.params.board}
@@ -489,13 +512,13 @@ class App extends Component {
 						/>
 					}/>
 					<Route exact path="/boards" render={() =>
-						<Boards
-							Boards={this.state.UserData.Boards}
-							products={this.state.DisplayedProductList}
-							createNewBoard={this.createNewBoard}
-							deleteBoard={this.deleteBoard}
-							editBoard={this.editBoard}
-						/>
+							<Boards
+								Boards={this.state.UserData.Boards}
+								products={this.state.DisplayedProductList}
+								createNewBoard={this.createNewBoard}
+								deleteBoard={this.deleteBoard}
+								editBoard={this.editBoard}
+							/>
 					}/>
 
 					<Route exact path="/products/:product" render={({match}) =>
@@ -514,10 +537,11 @@ class App extends Component {
 					<Route exact path="/" render={() =>
 						<Header
 							adminMode={this.state.adminMode}
-
+							name={this.state.UserData.name}
 							filterProducts={this.updateSearchParameter}
 							removeFromFavorites={this.removeFromFavorites}
 							toggleAdminMode={this.toggleAdminMode}
+							removeUserData={this.removeUserData}
 						/>
 					}/>
 

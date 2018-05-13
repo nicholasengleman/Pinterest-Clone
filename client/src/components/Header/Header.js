@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+import axios from 'axios';
 
 import PropTypes from 'prop-types';
-import { Switch, Label, Text } from 'gestalt';
+import {Switch, Label, Text, Heading} from 'gestalt';
 
 import SearchBar from './SearchBar/SearchBar';
 
@@ -30,14 +31,40 @@ class Header extends React.Component {
 		this.setState({switched: !this.state.switched});
 	};
 
+	logout = (event) => {
+		let a = this;
+		event.preventDefault();
+		axios.get('/api/logout')
+			.then(function(response) {
+				a.props.removeUserData();
+			})
+			.catch(function(error) {
+				console.log(error);
+			})
+	};
+
 	render() {
 		return (
 			<header>
 				<SearchBar filterProducts={this.props.filterProducts}/>
 
-				<ul>
-					<Link to="/boards"><li>My Boards</li></Link>
-				</ul>
+				<Link to="/boards">
+					<div className='headerLink'>
+						<p>My Boards</p>
+					</div>
+				</Link>
+				{
+					this.props.name
+						? <button onClick={this.logout}>Log out</button>
+						: <div>
+							<div className='headerLink'>
+								<Link to="/login">Login</Link>
+							</div>
+							{/*<div className='headerLink'>*/}
+								{/*<Link to="/register">Register</Link>*/}
+							{/*</div>*/}
+						</div>
+				}
 
 				<div className='adminHeader'>
 					<Label htmlFor='toggleAdminMode'>
