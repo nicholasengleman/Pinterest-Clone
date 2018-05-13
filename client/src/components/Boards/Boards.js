@@ -64,7 +64,7 @@ class Boards extends React.Component {
 							<Text bold color="gray" size="lg">Create Board</Text>
 						</div>
 					</div>
-					{this.props.Boards.map(board => (
+					{this.props.Boards && this.props.Boards.map(board => (
 						<Link to={`/boards/${board.boardID}`}>
 							<div className='myBoard'>
 								<div className='myBoardView'>
