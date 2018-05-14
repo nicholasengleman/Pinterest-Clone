@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import EditBoardModal from './EditBoardModal/EditBoardModal';
 import CreateBoardModal from './CreateBoardModal/CreateBoardModal'
 
-import {Text, Icon, IconButton} from "gestalt";
+import {Text, Icon, IconButton, Heading} from "gestalt";
 
 import "gestalt/dist/gestalt.css";
 import './Boards.css';
@@ -44,8 +44,10 @@ class Boards extends React.Component {
 						<Text bold size='md'>Home</Text>
 					</div>
 				</Link>
+				<div className='pinHeader'>
+					<Heading>Your Boards</Heading>
+				</div>
 				<div className='myBoardsContainer'>
-
 					<div className='myBoard'>
 						<div className='myBoardView'>
 							<IconButton accessibilityLabel='createBoard'

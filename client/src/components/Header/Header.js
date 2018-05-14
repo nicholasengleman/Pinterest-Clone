@@ -45,6 +45,15 @@ class Header extends React.Component {
 		}
 	};
 
+	gotoPins = () => {
+		if (this.props.name) {
+			this.props.history.push('/pins');
+		} else {
+			this.props.toggleLoginRegisterModal();
+		}
+	};
+
+
 	render() {
 		return (
 			<header className='header'>
@@ -52,7 +61,14 @@ class Header extends React.Component {
 
 				<div className='header__headerLink' onClick={this.gotoBoards}>
 					<Text inline bold size="md" color="gray">My Boards</Text>
+					<div className='header__headerLink_notification'>{this.props.boards && this.props.boards.length || 0}</div>
 				</div>
+
+				<div className='header__headerLink' onClick={this.gotoPins}>
+					<Text inline bold size="md" color="gray">My Pins</Text>
+					<div className='header__headerLink_notification'>{this.props.pinsCount && this.props.pinsCount.length || 0}</div>
+				</div>
+
 
 				{
 					this.props.name

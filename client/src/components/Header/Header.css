@@ -6,7 +6,7 @@
 	display: flex;
 	font-size: 14px;
 	height: 70px;
-	justify-content: flex-start;
+	justify-content: space-between;
 	padding: 0 60px;
 	position: fixed;
 	top: 0;
@@ -24,15 +24,30 @@
 	text-align: center;
 	line-height: 40px;
 	border-radius: 30px;
-}
-
-.header__headerLink:first-child {
-	margin-right: 200px;
+	position: relative;
 }
 
 .header__headerLink:hover {
 	background: #EFEFEF;
 	cursor: pointer;
+}
+
+.header__headerLink_notification {
+	width: 17px;
+	height: 17px;
+	position: absolute;
+	top: 0;
+	right: 5px;
+	border-radius: 50%;
+	background-color: #0084FF;
+	color: white;
+	font-weight: bold;
+	border: 1px solid grey;
+	font-size: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 }
 
 

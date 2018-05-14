@@ -11,6 +11,7 @@ import ProductsContainer from './ProductsContainer/ProductsContainer';
 import ConfirmationToast from './ConfirmationToast/ConfirmationToast';
 import ProductComments from "./ProductComments/ProductComments";
 import IndividualBoard from "./Boards/IndividualBoard/IndividualBoard";
+import AllPins from "./AllPins/AllPins";
 
 class App extends Component {
 	constructor(props) {
@@ -74,30 +75,35 @@ class App extends Component {
 					t.setState({DisplayedProductList: ProjectData});
 				});
 			});
+
 	}
 
 
 	addNewComment = (productID, comment, name, userId, date) => {
 		let ProductList = this.state.DisplayedProductList;
 		const commentId = Math.random();
-		if (ProductList[productID - 1].productComments) {
-			ProductList[productID - 1].productComments.push({name, userId, comment, date, commentId});
-		} else {
-			ProductList[productID - 1].productComments = [{name, userId, comment, date, commentId}];
-		}
+		ProductList.forEach(product => {
+			if (product.productID === productID) {
+				if (product.productComments) {
+					product.productComments.push({name, userId, comment, date, commentId});
+				} else {
+					product.productComments = [{name, userId, comment, date, commentId}];
+				}
+				axios.post('/api/product_update', {
+					productKey: productID,
+					comments: product.productComments
+				})
+					.then(function (response) {
+						console.log(response);
+					})
+					.catch(function (error) {
+						console.log(error);
+					})
+			}
+		});
+
 		this.setState({DisplayedProductList: ProductList});
 		this.displayConfirmationToast('', 'thanks for', 'your comment!');
-
-		axios.post('/api/product_update', {
-			id: productID,
-			comments: ProductList[productID - 1].productComments
-		})
-			.then(function (response) {
-				console.log(response);
-			})
-			.catch(function (error) {
-				console.log(error);
-			})
 	};
 
 	toggleLoginRegisterModal = () => {
@@ -106,29 +112,38 @@ class App extends Component {
 
 	deleteComment = (productID, commentId) => {
 		let ProductList = this.state.DisplayedProductList;
-		ProductList[productID - 1].productComments = ProductList[productID - 1].productComments.filter((comment) => {
-			return comment.commentId !== commentId;
+		ProductList.forEach(product => {
+			if (product.productID === productID) {
+				console.log("yes");
+				product.productComments = product.productComments.filter((comment) => {
+					return comment.commentId !== commentId;
+				});
+				console.log(product.productComments);
+				axios.post('/api/product_update', {
+					productKey: productID,
+					comments: product.productComments
+				})
+					.then(function (response) {
+						console.log(response);
+					})
+					.catch(function (error) {
+						console.log(error);
+					})
+			}
 		});
 		this.setState({DisplayedProductList: ProductList});
-
-		axios.post('/api/product_update', {
-			id: productID,
-			comments: ProductList[productID - 1].productComments
-		})
-			.then(function (response) {
-				console.log(response);
-			})
-			.catch(function (error) {
-				console.log(error);
-			})
 
 	};
 
 	openEditCommentWindow = (productID, commentId) => {
 		let ProductList = this.state.DisplayedProductList;
-		ProductList[productID - 1].productComments.forEach((comment) => {
-			if (comment.commentId === commentId) {
-				comment['edit'] = true;
+		ProductList.forEach(product => {
+			if (product.productID === productID) {
+				product.productComments.forEach((comment) => {
+					if (comment.commentId === commentId) {
+						comment['edit'] = true;
+					}
+				});
 			}
 		});
 		this.setState({DisplayedProductList: ProductList});
@@ -136,24 +151,27 @@ class App extends Component {
 
 	editComment = (productID, commentId, newCommentText) => {
 		let ProductList = this.state.DisplayedProductList;
-		ProductList[productID - 1].productComments.forEach((comment) => {
-			if (comment.commentId === commentId) {
-				comment.comment = newCommentText;
-				comment.edit = false;
+		ProductList.forEach(product => {
+			if (product.productID === productID) {
+				product.productComments.forEach((comment) => {
+					if (comment.commentId === commentId) {
+						comment.comment = newCommentText;
+						comment.edit = false;
+					}
+				});
+				axios.post('/api/product_update', {
+					productKey: productID,
+					comments: product.productComments
+				})
+					.then(function (response) {
+						console.log(response);
+					})
+					.catch(function (error) {
+						console.log(error);
+					})
 			}
 		});
 		this.setState({DisplayedProductList: ProductList});
-		axios.post('/api/product_update', {
-			id: productID,
-			comments: ProductList[productID - 1].productComments
-		})
-			.then(function (response) {
-				console.log(response);
-			})
-			.catch(function (error) {
-				console.log(error);
-			})
-
 	};
 
 	addPinToExistingBoard = (productName, productDescription, productImage, productID, boardID) => {
@@ -165,6 +183,7 @@ class App extends Component {
 				} else {
 					board.pins = [{productName, productDescription, productImage, productID}];
 				}
+				this.justThePins(UserData.Boards);
 				this.setState({UserData});
 
 				this.displayConfirmationToast(productImage, 'Saved to', board.name);
@@ -181,6 +200,7 @@ class App extends Component {
 					})
 			}
 		}
+
 	};
 
 	deletePinFromBoard = (boardID, productID, productImage) => {
@@ -194,9 +214,9 @@ class App extends Component {
 						return false;
 					}
 				});
-
 			}
 		}
+		this.justThePins(UserData.Boards);
 		this.setState({UserData});
 
 		this.displayConfirmationToast(productImage, 'Deleted from', "board");
@@ -210,7 +230,8 @@ class App extends Component {
 			})
 			.catch(function (error) {
 				console.log(error);
-			})
+			});
+
 	};
 
 	addPinToNewBoard = (productName, productDescription, productImage, productID, boardName) => {
@@ -221,6 +242,7 @@ class App extends Component {
 			pic: productImage,
 			pins: [{productName, productDescription, productImage, productID}]
 		});
+		this.justThePins(UserData.Boards);
 		this.setState({UserData});
 		this.displayConfirmationToast(productImage, 'Saved to', boardName);
 
@@ -233,7 +255,8 @@ class App extends Component {
 			})
 			.catch(function (error) {
 				console.log(error);
-			})
+			});
+
 	};
 
 	createNewBoard = (boardName) => {
@@ -296,6 +319,7 @@ class App extends Component {
 				return false;
 			}
 		});
+		this.justThePins(UserData.Boards);
 		this.setState({UserData});
 
 		this.displayConfirmationToast('', `"${boardname}" board`, 'has been deleted');
@@ -309,16 +333,16 @@ class App extends Component {
 			})
 			.catch(function (error) {
 				console.log(error);
-			})
+			});
+
 	};
 
 	setUserData = (userInfo) => {
 		let UserData = this.state.UserData;
-		console.log(userInfo);
 		if (userInfo.boards) {
 			userInfo.boards = JSON.parse(userInfo.boards);
-			console.log(userInfo.boards);
 			UserData.Boards = userInfo.boards || [];
+			this.justThePins(UserData.Boards);
 		}
 		UserData.userID = userInfo.id;
 		UserData.name = userInfo.name;
@@ -590,8 +614,18 @@ class App extends Component {
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 	};
 
-	toggleAdminMode = () => {
-		this.setState({adminMode: !this.state.adminMode});
+	justThePins = (boards) => {
+		if (boards) {
+			let pins = [];
+			boards.forEach(board => {
+				if (board.pins) {
+					board.pins.forEach(pin => {
+						pins.push({...pin, boardID: board.boardID});
+					});
+				}
+			});
+			this.setState({ pins });
+		}
 	};
 
 
@@ -606,6 +640,12 @@ class App extends Component {
 							deletePinFromBoard={this.deletePinFromBoard}
 						/>
 					}/>
+					<Route exact path="/pins" render={() =>
+						<AllPins
+							deletePinFromBoard={this.deletePinFromBoard}
+							pins={this.state.pins}
+						/>
+					}/>
 					<Route exact path="/boards" render={() =>
 						<Boards
 							Boards={this.state.UserData.Boards}
@@ -618,7 +658,8 @@ class App extends Component {
 
 					<Route exact path="/products/:product" render={({match}) =>
 						<ProductComments
-							{...this.state.DisplayedProductList[match.params.product]}
+							productID={match.params.product}
+							productList={this.state.DisplayedProductList}
 							addNewComment={this.addNewComment}
 							addPinToExistingBoard={this.addPinToExistingBoard}
 							addPinToNewBoard={this.addPinToNewBoard}
@@ -639,6 +680,8 @@ class App extends Component {
 							removeUserData={this.removeUserData}
 							setUserData={this.setUserData}
 							name={this.state.UserData.name}
+							boards={this.state.UserData.Boards}
+							pinsCount={this.state.pins}
 							toggleLoginRegisterModal={this.toggleLoginRegisterModal}
 							LoginRegisterModalisOpen={this.state.LoginRegisterModalisOpen}
 						/>

@@ -11,7 +11,8 @@ class ModalPin extends React.Component {
 		this.state = {
 			newBoardName: '',
 			createBoard: false,
-			editModalProductDescription: false
+			editModalProductDescription: false,
+			newProductDescription: ''
 		};
 	}
 
@@ -19,33 +20,61 @@ class ModalPin extends React.Component {
 		if (this.state.editModalProductDescription && event.target.id !== "description") {
 			this.setState({editModalProductDescription: false});
 		}
-		event.preventDefault();
+		if(event.event) {
+			event.event.preventDefault();
+		} else {
+			event.preventDefault();
+		}
 	};
 
 	closeModal = (event) => {
-		this.setState({createBoard: false});
+		this.setState({
+			createBoard: false,
+			editModalProductDescription: false,
+			newProductDescription: ''
+		});
 		this.props.toggleModal(event);
 	};
 
 	createBoardInputChange = (event) => {
-		event.stopPropagation();
+		if(event.event) {
+			event.event.preventDefault();
+		} else {
+			event.preventDefault();
+		}
 		this.setState({newBoardName: event.target.value});
 	};
 
+	editProductDescription = (event) => {
+		this.setState({newProductDescription: event.target.value});
+	};
+
 	toggleCreateBoardDialog = (event) => {
-		event.preventDefault();
+		if(event.event) {
+			event.event.preventDefault();
+		} else {
+			event.preventDefault();
+		}
+
 		this.setState({createBoard: !this.state.createBoard});
 	};
 
 	addPinToExistingBoard = (event, boardID) => {
-		event.preventDefault();
-		this.props.addPinToExistingBoard(this.props.productName, this.props.productDescription, this.props.productImage, this.props.producID, boardID);
+		if(this.state.newProductDescription) {
+			this.props.addPinToExistingBoard(this.props.productName, this.state.newProductDescription, this.props.productImage, this.props.productID, boardID);
+		} else {
+			this.props.addPinToExistingBoard(this.props.productName, this.props.productDescription, this.props.productImage, this.props.productID, boardID);
+		}
 		this.closeModal(event);
 	};
 
 	addPinToNewBoard = (event) => {
-		event.preventDefault();
-		this.props.addPinToNewBoard(this.props.productName, this.props.productDescription, this.props.productImage, this.props.productID, this.state.newBoardName);
+		if(this.state.newProductDescription) {
+			this.props.addPinToNewBoard(this.props.productName, this.state.newProductDescription, this.props.productImage, this.props.productID, this.state.newBoardName);
+		} else {
+			this.props.addPinToNewBoard(this.props.productName, this.props.productDescription, this.props.productImage, this.props.productID, this.state.newBoardName);
+		}
+
 		this.closeModal(event);
 	};
 
@@ -69,8 +98,9 @@ class ModalPin extends React.Component {
 									id="description"
 									rows="6"
 									placeholder="Description"
-									value={this.props.productDescription}
-									onChange={this.edit}
+									ref={input => (this.newdescription = input)}
+									value={this.state.newProductDescription}
+									onChange={this.editProductDescription}
 								/>
 							</form>
 							: <div onClick={() =>
@@ -96,7 +126,7 @@ class ModalPin extends React.Component {
 						}
 					</div>
 				</div>
-				<div className="modalPin_Boards">
+				<div className="modalPin_Boards" onClick={(event) => event.preventDefault()}>
 					{this.state.createBoard
 						? <div>
 							<div className='boardheading'>
@@ -119,11 +149,11 @@ class ModalPin extends React.Component {
 								</form>
 							</div>
 							<div className='submitNewBoard'>
-								<Button text="cancel" color="gray" onClick={this.toggleCreateBoardDialog} />
+								<Button text="cancel" inline color="gray" onClick={this.toggleCreateBoardDialog} />
 								{
 									this.state.newBoardName
-										? <Button text="Save" color="red" onClick={this.addPinToNewBoard}/>
-										: <Button text="Save" color="gray"/>
+										? <Button text="Save" inline color="red" onClick={this.addPinToNewBoard}/>
+										: <Button text="Save" inline color="gray"/>
 								}
 							</div>
 						</div>
@@ -136,7 +166,7 @@ class ModalPin extends React.Component {
 								</Text>
 								<IconButton accessibilityLabel='cancel'
 											icon='cancel'
-											onClick={this.props.toggleModal}
+											onClick={this.closeModal}
 											size='sm'/>
 							</div>
 							{this.props.boards && this.props.boards.map(board => (

@@ -15,15 +15,17 @@ class IndividualBoard extends React.Component {
 	}
 
 	static getDerivedStateFromProps = (nextProps) => {
-		let board = nextProps.boards.filter(board => {
-			if (nextProps.boardID == board.boardID) {
-				return true;
-			} else {
-				return false;
+		if(nextProps.boards) {
+			let board = nextProps.boards.filter(board => {
+				if (nextProps.boardID == board.boardID) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+			return {
+				thisboard: board
 			}
-		});
-		return {
-			thisboard: board
 		}
 	};
 
@@ -42,13 +44,13 @@ class IndividualBoard extends React.Component {
 					</div>
 				</Link>
 				<div className='pinHeader'>
-					<Heading>{this.state.boardName}</Heading>
+					<Heading>{this.state.thisboard[0].name}</Heading>
 				</div>
 				<div className="pinContainer">
 					{
 						this.state.thisboard[0].pins
 						 ? this.state.thisboard[0].pins.map(product => (
-							<Link to={`/products/${product.productID - 1}`}>
+							<Link to={`/products/${product.productID}`}>
 								<div className="pin">
 									<span className="deletePinButton">
 										<IconButton accessibilityLabel="delete this pin"

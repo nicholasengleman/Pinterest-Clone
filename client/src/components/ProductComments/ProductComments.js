@@ -12,11 +12,26 @@ import './ProductComments.css';
 class ProductComments extends React.Component {
 	constructor(props) {
 		super(props);
+
+
 		this.state = {
 			displayModal: false,
 			newComment: '',
+		};
+	}
+
+	static getDerivedStateFromProps(nextProps) {
+		let product = nextProps.productList.filter(product => {
+			if (product.productID == nextProps.productID) {
+				return true;
+			} else {
+				return false;
+			}});
+		return {
+			...product[0]
 		}
 	}
+
 
 	toggleModal = (event) => {
 		if (event.event) {
@@ -47,7 +62,7 @@ class ProductComments extends React.Component {
 			const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 			let date = `${months[newDate.getMonth()]} ${newDate.getDate()}`;
 
-			this.props.addNewComment(this.props.productID, this.state.newComment, this.props.userData.name, this.props.userData.userID, date);
+			this.props.addNewComment(this.state.productID, this.state.newComment, this.props.userData.name, this.props.userData.userID, date);
 			this.setState({newComment: ''});
 			event.target.blur();
 		}
@@ -73,8 +88,8 @@ class ProductComments extends React.Component {
 						<Button text='Save' color='red' onClick={this.toggleModal} inline/>
 						<ModalPin modalStatus={this.state.displayModal}
 								  toggleModal={this.toggleModal}
-								  productDescription={this.props.productDescription}
-								  productImage={this.props.productImageAddress}
+								  productDescription={this.state.productDescription}
+								  productImage={this.state.productImageAddress}
 								  boards={this.props.boards}
 								  productID={this.props.productID}
 								  addPinToExistingBoard={this.props.addPinToExistingBoard}
@@ -83,23 +98,24 @@ class ProductComments extends React.Component {
 					</div>
 					<div className='productSummary'>
 						<div className='productImage'>
-							<img src={this.props.productImageAddress} alt=''/>
+							<img src={this.state.productImageAddress} alt=''/>
 						</div>
-						<Heading size="sm">{this.props.productName}</Heading>
+						<Heading size="sm">{this.state.productName}</Heading>
 						<br />
-						<Text>{this.props.productDescription}</Text>
+						<Text>{this.state.productDescription}</Text>
 						<br />
-						<Text>${this.props.productPrice}</Text>
+						<Text>${this.state.productPrice}</Text>
 					</div>
 					<div className='comments'>
 						<Heading size='xs'>Comments</Heading>
 						<br/>
 						<Text>Share feedback, ask a question or give a high five.</Text>
 						<div className='commentBox'>
-							{this.props.productComments && this.props.productComments.map(comment => {
+							{this.state.productComments && this.state.productComments.map(comment => {
 								return <Comment key={comment.commentId}
 												{...comment}
 												{...this.props}
+												{...this.state}
 								/>
 							})
 							}

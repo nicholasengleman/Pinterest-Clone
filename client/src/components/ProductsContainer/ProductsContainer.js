@@ -18,7 +18,7 @@ const ProductsContainer = (props) => {
 				/>
 				{props.products.length > 0 ?
 					props.products.map(product => (
-						<Link to={`/products/${product.productID - 1}`}>
+						<Link to={`/products/${product.productID}`}>
 							<Product
 								{...props}
 								{...product}

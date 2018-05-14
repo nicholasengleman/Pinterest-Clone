@@ -91,14 +91,14 @@ class Product extends React.Component {
 						textToHighlight={this.props.productName}
 					/>
 					</h1>
-					{this.state.price && <div className="productPrice">${this.props.productPrice}</div>}
-					{this.state.description && <div className="productDescription">
+					<div className="productPrice">${this.props.productPrice}</div>
+					<div className="productDescription">
 						<Highlight
 							caseSensitive={false}
 							searchWords={[this.props.searchString]}
 							textToHighlight={this.props.productDescription}
 						/></div>
-					}
+
 				</div>
 			</div>
 		)

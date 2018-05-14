@@ -30,7 +30,6 @@ class Comment extends React.Component {
 
 	deleteComment = (event) => {
 		event.preventDefault();
-		event.stopPropagation();
 		this.toggleCommentEditMenu(event);
 		this.props.deleteComment(this.props.productID, this.props.commentId);
 	};
