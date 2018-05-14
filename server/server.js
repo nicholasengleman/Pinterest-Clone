@@ -7,9 +7,7 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 
-let url = process.env.MONGOLAB_URI;
-
-mongoose.connect(url);
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://engleman:11july2017@ds119650.mlab.com:19650/pinterest-7512');
 
 const {User} = require('./models/user');
 const {Product} = require('./models/product');
@@ -18,7 +16,6 @@ const { auth } = require('./middleware/auth');
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-require('dotenv').config();
 // GET //
 // app.get('/api/getProduct', (req, res) => {
 // 	let id = req.query.id;
