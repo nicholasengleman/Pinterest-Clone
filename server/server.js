@@ -4,24 +4,22 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const config = require('./config/config').get(process.env.NODE_ENV);
 const app = express();
-let path = require('path');
+const path = require('path');
 
 mongoose.Promise = global.Promise;
-
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://engleman:11july2017@ds119650.mlab.com:19650/pinterest-7512');
-
 const {User} = require('./models/user');
 const {Product} = require('./models/product');
 const { auth } = require('./middleware/auth');
-
 app.use(bodyParser.json());
 app.use(cookieParser());
-
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-// app.get('*', (req, res) => {
-// 	res.sendFile(path.join(__dirname+'../client/build/index.html'));
-// });
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 // GET //
 // app.get('/api/getProduct', (req, res) => {
@@ -68,13 +66,13 @@ app.get('/api/product_comments', (req, res) => {
 
 app.get('/api/logout', auth, (req, res) => {
 	res.send(req.user);
-	// req.user.deleteToken(req.token, (err, user) => {
-	// 	if(err) {
-	// 		return res.status(400).send(err);
-	// 	} else {
-	// 		res.status(200);
-	// 	}
-	// })
+	req.user.deleteToken(req.token, (err, user) => {
+		if(err) {
+			return res.status(400).send(err);
+		} else {
+			res.status(200);
+		}
+	})
 });
 
 
@@ -84,11 +82,13 @@ app.post('/api/register', (req, res) => {
 
 	user.save((err, doc) => {
 		if (err) {
-			return res.json({success: false});
+			return res.json({error: err});
 		} else {
 			res.status(200).json({
 				success: true,
-				user: doc
+				id: doc._id,
+				name: doc.firstName,
+				email: doc.email
 			})
 		}
 	})
@@ -170,6 +170,10 @@ app.post('/api/product_update', (req, res) => {
 // });
 //
 //
+
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname+'../client/build/index.html'));
+});
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

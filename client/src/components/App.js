@@ -183,7 +183,7 @@ class App extends Component {
 				} else {
 					board.pins = [{productName, productDescription, productImage, productID}];
 				}
-				this.justThePins(UserData.Boards);
+				this.justThePins(UserData);
 				this.setState({UserData});
 
 				this.displayConfirmationToast(productImage, 'Saved to', board.name);
@@ -216,7 +216,7 @@ class App extends Component {
 				});
 			}
 		}
-		this.justThePins(UserData.Boards);
+		this.justThePins(UserData);
 		this.setState({UserData});
 
 		this.displayConfirmationToast(productImage, 'Deleted from', "board");
@@ -242,7 +242,7 @@ class App extends Component {
 			pic: productImage,
 			pins: [{productName, productDescription, productImage, productID}]
 		});
-		this.justThePins(UserData.Boards);
+		this.justThePins(UserData);
 		this.setState({UserData});
 		this.displayConfirmationToast(productImage, 'Saved to', boardName);
 
@@ -319,7 +319,7 @@ class App extends Component {
 				return false;
 			}
 		});
-		this.justThePins(UserData.Boards);
+		this.justThePins(UserData);
 		this.setState({UserData});
 
 		this.displayConfirmationToast('', `"${boardname}" board`, 'has been deleted');
@@ -342,7 +342,7 @@ class App extends Component {
 		if (userInfo.boards) {
 			userInfo.boards = JSON.parse(userInfo.boards);
 			UserData.Boards = userInfo.boards || [];
-			this.justThePins(UserData.Boards);
+			this.justThePins(UserData);
 		}
 		UserData.userID = userInfo.id;
 		UserData.name = userInfo.name;
@@ -350,7 +350,6 @@ class App extends Component {
 	};
 
 	removeUserData = () => {
-		console.log("es");
 		this.setState({UserData: {}});
 	};
 
@@ -614,17 +613,19 @@ class App extends Component {
 		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
 	};
 
-	justThePins = (boards) => {
-		if (boards) {
+	justThePins = (UserData) => {
+		let userdata = UserData;
+		if (userdata.Boards) {
 			let pins = [];
-			boards.forEach(board => {
+			userdata.Boards.forEach(board => {
 				if (board.pins) {
 					board.pins.forEach(pin => {
 						pins.push({...pin, boardID: board.boardID});
 					});
 				}
 			});
-			this.setState({ pins });
+			userdata.pins = pins;
+			this.setState({ UserData : userdata });
 		}
 	};
 
@@ -643,7 +644,7 @@ class App extends Component {
 					<Route exact path="/pins" render={() =>
 						<AllPins
 							deletePinFromBoard={this.deletePinFromBoard}
-							pins={this.state.pins}
+							pins={this.state.UserData.pins}
 						/>
 					}/>
 					<Route exact path="/boards" render={() =>
@@ -681,7 +682,7 @@ class App extends Component {
 							setUserData={this.setUserData}
 							name={this.state.UserData.name}
 							boards={this.state.UserData.Boards}
-							pinsCount={this.state.pins}
+							pinsCount={this.state.UserData.pins}
 							toggleLoginRegisterModal={this.toggleLoginRegisterModal}
 							LoginRegisterModalisOpen={this.state.LoginRegisterModalisOpen}
 						/>

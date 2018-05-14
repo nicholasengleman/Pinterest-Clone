@@ -27,7 +27,6 @@ class Header extends React.Component {
 	logout = (event) => {
 		let a = this;
 		event.preventDefault();
-		console.log("got here");
 		axios.get('/api/logout')
 			.then(function (response) {
 				a.props.removeUserData();
@@ -57,7 +56,7 @@ class Header extends React.Component {
 	render() {
 		return (
 			<header className='header'>
-				<SearchBar filterProducts={this.props.filterProducts}/>
+				<SearchBar filterProducts={this.props.filterProducts} name={this.props.name}/>
 
 				<div className='header__headerLink' onClick={this.gotoBoards}>
 					<Text inline bold size="md" color="gray">My Boards</Text>
@@ -73,11 +72,11 @@ class Header extends React.Component {
 				{
 					this.props.name
 						? <div className='header__headerLink' onClick={this.logout}>
-							<Text inline bold size="md" color="gray">Log Out</Text>
+							<Text inline bold size="md" color="red">Log Out</Text>
 						</div>
 						: <div>
 							<div className='header__headerLink' onClick={this.props.toggleLoginRegisterModal}>
-								<Text inline bold size="md" color="gray">Login/Register</Text>
+								<Text inline bold size="md" color="red">Login/Register</Text>
 							</div>
 							<LoginRegisterModal
 								isOpen={this.props.LoginRegisterModalisOpen}

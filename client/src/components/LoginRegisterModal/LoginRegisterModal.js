@@ -66,9 +66,9 @@ class LoginRegisterModal extends React.Component {
 		fetch('/api/register', {
 			method: 'POST',
 			body: JSON.stringify({
-				email: this.state.logInEmail,
+				email: this.state.signUpEmail,
 				firstName: this.state.signUpName,
-				password: this.state.logInPassword
+				password: this.state.signUpPassword
 			}),
 			credentials: 'include',
 			headers: new Headers({
@@ -77,11 +77,12 @@ class LoginRegisterModal extends React.Component {
 		}).then(res => res.json())
 			.catch(error => console.log('Error: ', error))
 			.then(response => {
-				if (response.isAuth) {
+				console.log(response);
+				if (response.success) {
+					a.props.setUserData(response);
 					a.props.toggleLoginRegisterModal();
 					a.props.history.push('/');
 				} else {
-					console.log(response);
 					// a.setState({statusSignIn: response.data.message});
 				}
 			})
@@ -117,7 +118,7 @@ class LoginRegisterModal extends React.Component {
 					<Heading size="xs" color="red">Welcome to <br/>Pinterest Clone</Heading>
 					<br/>
 					<Text size="md" align="center" color="gray">Find and comment on products you like.</Text>
-					<Text size="md" align="center" color="gray">Save to boards products you like the most</Text>
+					<Text size="md" align="center" color="gray">Save to boards the products you like the most.</Text>
 				</header>
 				<div className="loginRegisterModal__loginForm">
 					<div className="loginRegisterModal__loginForm_error">{this.state.statusSignIn}</div>

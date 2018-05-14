@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon } from "gestalt";
+import { Icon, Text } from "gestalt";
 
 import "gestalt/dist/gestalt.css";
 import "./SearchBar.css";
@@ -27,7 +27,10 @@ const SearchBar = props => {
           name="search"
           className="searchInput"
           onChange={searchInputChange}
-          placeholder="Search"
+          placeholder={props.name
+                            ? `Hello ${props.name}, looking for something?`
+                            : "Search"
+                      }
         />
       </form>
     </div>
