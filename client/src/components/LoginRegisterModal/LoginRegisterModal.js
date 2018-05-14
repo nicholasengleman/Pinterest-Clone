@@ -4,7 +4,6 @@ import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 import {Heading, Text, Button} from 'gestalt';
 
-
 import 'gestalt/dist/gestalt.css';
 import './LoginRegisterModal.css';
 
@@ -15,6 +14,7 @@ class LoginRegisterModal extends React.Component {
 			logInEmail: '',
 			logInPassword: '',
 			signUpEmail: '',
+			signUpName: '',
 			signUpPassword: '',
 			statusSignIn: '',
 			statusCreateAccount: ''
@@ -26,6 +26,7 @@ class LoginRegisterModal extends React.Component {
 			logInEmail: '',
 			logInPassword: '',
 			signUpEmail: '',
+			signUpName: '',
 			signUpPassword: '',
 			statusSignIn: '',
 			statusCreateAccount: ''
@@ -36,41 +37,53 @@ class LoginRegisterModal extends React.Component {
 	onSignIn = (event) => {
 		let a = this;
 		event.event.preventDefault();
-		axios.post('/api/login', {
-			email: this.state.logInEmail,
-			password: this.state.logInPassword
-		})
-			.then(function (response) {
-				if (response.data.isAuth) {
-					a.props.setUserData(response.data);
+		fetch('/api/login', {
+			method: 'POST',
+			body: JSON.stringify({
+				email: this.state.logInEmail,
+				password: this.state.logInPassword
+			}),
+			headers: new Headers({
+				'Content-Type': 'application/json'
+			})
+		}).then(res => res.json())
+			.catch(error => console.log('Error: ', error))
+			.then(response => {
+				if (response.isAuth) {
+					a.props.setUserData(response);
 					a.props.toggleLoginRegisterModal();
 					a.props.history.push('/');
 				} else {
 					a.setState({statusSignIn: response.data.message});
 				}
 			})
-			.catch(function (error) {
-				console.log(error);
-			})
 	};
+
 
 	onSignUp = (event) => {
 		let a = this;
 		event.event.preventDefault();
-		axios.post('/api/register', {
-			email: this.state.signUpEmail,
-			password: this.state.signUpPassword
-		})
-			.then(function (response) {
-				if (response.data.isAuth) {
+		fetch('/api/register', {
+			method: 'POST',
+			body: JSON.stringify({
+				email: this.state.logInEmail,
+				firstName: this.state.signUpName,
+				password: this.state.logInPassword
+			}),
+			credentials: 'include',
+			headers: new Headers({
+				'Content-Type': 'application/json'
+			})
+		}).then(res => res.json())
+			.catch(error => console.log('Error: ', error))
+			.then(response => {
+				if (response.isAuth) {
 					a.props.toggleLoginRegisterModal();
 					a.props.history.push('/');
 				} else {
-					a.setState({statusCreateAccount: response.data.message});
+					console.log(response);
+					// a.setState({statusSignIn: response.data.message});
 				}
-			})
-			.catch(function (error) {
-				console.log(error);
 			})
 	};
 
@@ -80,12 +93,13 @@ class LoginRegisterModal extends React.Component {
 			logInEmail: this.logInEmail.value,
 			logInPassword: this.logInPassword.value,
 			signUpEmail: this.signUpEmail.value,
+			signUpName: this.signUpName.value,
 			signUpPassword: this.signUpPassword.value
 		});
-		if(!this.logInEmail.value || !this.logInPassword.value) {
+		if (!this.logInEmail.value || !this.logInPassword.value) {
 			this.setState({statusSignIn: ''});
 		}
-		if(!this.signUpEmail.value || !this.signUpPassword.value) {
+		if (!this.signUpEmail.value || !this.signUpPassword.value) {
 			this.setState({statusCreateAccount: ''});
 		}
 	};
@@ -133,6 +147,13 @@ class LoginRegisterModal extends React.Component {
 						   onChange={this.onInputChange}
 						   value={this.state.signUpEmail}
 						   placeholder="enter your email"
+					/>
+					<input name="name"
+						   type="text"
+						   ref={input => (this.signUpName = input)}
+						   onChange={this.onInputChange}
+						   value={this.state.signUpName}
+						   placeholder="enter a first name"
 					/>
 					<input name="password"
 						   type="password"

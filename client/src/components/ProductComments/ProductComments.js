@@ -26,7 +26,8 @@ class ProductComments extends React.Component {
 				return true;
 			} else {
 				return false;
-			}});
+			}
+		});
 		return {
 			...product[0]
 		}
@@ -39,7 +40,7 @@ class ProductComments extends React.Component {
 		} else {
 			event.preventDefault();
 		}
-		if(this.props.userData.name) {
+		if (this.props.userData.name) {
 			this.setState(prevState => ({
 				displayModal: !prevState.displayModal
 			}));
@@ -49,12 +50,12 @@ class ProductComments extends React.Component {
 	};
 
 	newCommentChange = (event) => {
-		if(this.props.userData.name) {
+		if (this.props.userData.name) {
 			this.setState({newComment: event.target.value});
 		} else {
 			this.props.toggleLoginRegisterModal();
 		}
- 	};
+	};
 
 	addNewComment = (event) => {
 		if (event.key === 'Enter') {
@@ -84,8 +85,20 @@ class ProductComments extends React.Component {
 						toggleLoginRegisterModal={this.props.toggleLoginRegisterModal}
 						setUserData={this.props.setUserData}
 					/>
-					<div className='commentsContainer__header'>
-						<Button text='Save' color='red' onClick={this.toggleModal} inline/>
+					<div className='productSummary'>
+						<div className='productImage'>
+							<img src={this.state.productImageAddress} alt=''/>
+						</div>
+						<Heading size="sm">{this.state.productName}</Heading>
+						<br/>
+						<Text>{this.state.productDescription}</Text>
+						<br/>
+						<Text>${this.state.productPrice}</Text>
+					</div>
+					<div className='comments'>
+						<div className="productComments__toggleSaveProductModalButton">
+							<Button text='Save' color='red' align="right" onClick={this.toggleModal} inline/>
+						</div>
 						<ModalPin modalStatus={this.state.displayModal}
 								  toggleModal={this.toggleModal}
 								  productDescription={this.state.productDescription}
@@ -95,18 +108,6 @@ class ProductComments extends React.Component {
 								  addPinToExistingBoard={this.props.addPinToExistingBoard}
 								  addPinToNewBoard={this.props.addPinToNewBoard}
 						/>
-					</div>
-					<div className='productSummary'>
-						<div className='productImage'>
-							<img src={this.state.productImageAddress} alt=''/>
-						</div>
-						<Heading size="sm">{this.state.productName}</Heading>
-						<br />
-						<Text>{this.state.productDescription}</Text>
-						<br />
-						<Text>${this.state.productPrice}</Text>
-					</div>
-					<div className='comments'>
 						<Heading size='xs'>Comments</Heading>
 						<br/>
 						<Text>Share feedback, ask a question or give a high five.</Text>

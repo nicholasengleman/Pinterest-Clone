@@ -11,8 +11,7 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: true,
 		trim: true,
-		unique: true,
-		lowercase: true
+		unique: true
 	},
 	firstName: {
 		type: String,
@@ -27,7 +26,6 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: true,
 		minlength: 6,
-		trim: true,
 	},
 	token: {
 		type: String
@@ -69,7 +67,8 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 
 userSchema.methods.generateToken = function(cb) {
 	let user = this;
-	let token = jwt.sign(user._id.toHexString(),config.SECRET);
+
+	let token = jwt.sign(user._id.toHexString(),"secret");
 
 	user.token = token;
 	user.save(function(err, user) {
@@ -83,14 +82,17 @@ userSchema.methods.generateToken = function(cb) {
 
 
 userSchema.statics.findByToken = function(token, cb) {
-	const user = this;
+	let user = this;
 
-	jwt.verify(token, config.SECRET, function(err, decode) {
+	console.log("TOKEN:" + token);
+	jwt.verify(token, "secert", function(err, decode) {
+		console.log("ERRR" + err);
 		user.findOne({ "_id": decode, "token": token}, function (err, user) {
 			if(err) {
 				return cb(err);
 			} else {
-				cb(null, user);
+
+				cb(user);
 			}
 		})
 	})
@@ -98,7 +100,7 @@ userSchema.statics.findByToken = function(token, cb) {
 
 userSchema.methods.deleteToken = function(token, cb) {
 	let user = this;
-	user.update({$unset: { token: 1}}, (err, user) => {
+	user.update({sunset: { token: 1}}, (err, user) => {
 		if(err) {
 			return cb(err);
 		} else {

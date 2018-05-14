@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const config = require('./config/config').get(process.env.NODE_ENV);
-
 const app = express();
 
 mongoose.Promise = global.Promise;
@@ -16,23 +15,17 @@ const { auth } = require('./middleware/auth');
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-
-const port = process.env.PORT || 3001;
-app.listen(port, () => {
-	console.log('SERVER RUNNUNG');
-});
-
 // GET //
-app.get('/api/getProduct', (req, res) => {
-	let id = req.query.id;
-	Product.findById(id, (err, doc) => {
-		if (err) {
-			return res.status(400).send(err);
-		} else {
-			res.send(doc);
-		}
-	})
-});
+// app.get('/api/getProduct', (req, res) => {
+// 	let id = req.query.id;
+// 	Product.findById(id, (err, doc) => {
+// 		if (err) {
+// 			return res.status(400).send(err);
+// 		} else {
+// 			res.send(doc);
+// 		}
+// 	})
+// });
 
 app.get('/api/GetAllProducts', (req, res) => {
 	Product.find().exec((err, doc) => {
@@ -64,15 +57,15 @@ app.get('/api/product_comments', (req, res) => {
 	})
 });
 
-app.get('/api/logout', auth,(req, res) => {
-	req.user.deleteToken(req.token, (err, user) => {
-		console.log("reached here");
-		if(err) {
-			return res.status(400).send(err);
-		} else {
-			res.status(200);
-		}
-	})
+app.get('/api/logout', auth, (req, res) => {
+	res.send(req.user);
+	// req.user.deleteToken(req.token, (err, user) => {
+	// 	if(err) {
+	// 		return res.status(400).send(err);
+	// 	} else {
+	// 		res.status(200);
+	// 	}
+	// })
 });
 
 
@@ -153,18 +146,23 @@ app.post('/api/product_update', (req, res) => {
 	})
 });
 
+//
+//
+// // DELETE //
+// app.delete('/api/delete_product', (req, res) => {
+// 	let id = req.query.id;
+// 	Product.findByIdAndRemove(id, (err, doc) => {
+// 		if (err) {
+// 			return res.status(400).send(err);
+// 		} else {
+// 			res.json(true);
+// 		}
+// 	})
+// });
+//
+//
 
-
-// DELETE //
-app.delete('/api/delete_product', (req, res) => {
-	let id = req.query.id;
-	Product.findByIdAndRemove(id, (err, doc) => {
-		if (err) {
-			return res.status(400).send(err);
-		} else {
-			res.json(true);
-		}
-	})
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
+	console.log('SERVER RUNNING');
 });
-
-
