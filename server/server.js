@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const config = require('./config/config').get(process.env.NODE_ENV);
 const app = express();
+let path = require('path');
 
 mongoose.Promise = global.Promise;
 
@@ -39,7 +40,7 @@ app.get('/api/GetAllProducts', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-	res.sendFile(path.resolve(__dirname, './client/public/', 'index.html'));
+	res.sendFile(path.resolve(__dirname, '../client/public', 'index.html'));
 });
 
 app.get('/api/user_boards', (req, res) => {
