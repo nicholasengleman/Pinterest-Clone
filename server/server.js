@@ -6,7 +6,10 @@ const config = require('./config/config').get(process.env.NODE_ENV);
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.DATABASE);
+
+let url = process.env.MONGOLAB_URI;
+
+mongoose.connect(url);
 
 const {User} = require('./models/user');
 const {Product} = require('./models/product');
@@ -15,6 +18,7 @@ const { auth } = require('./middleware/auth');
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+require('dotenv').config();
 // GET //
 // app.get('/api/getProduct', (req, res) => {
 // 	let id = req.query.id;
