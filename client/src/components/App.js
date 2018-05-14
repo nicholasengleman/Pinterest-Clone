@@ -13,6 +13,9 @@ import ProductComments from "./ProductComments/ProductComments";
 import IndividualBoard from "./Boards/IndividualBoard/IndividualBoard";
 import AllPins from "./AllPins/AllPins";
 
+import { FindCookie } from "../Functions/CookieFunctions";
+import { deleteComment } from "../Functions/CommentFunctions";
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -44,6 +47,8 @@ class App extends Component {
 			MeetsTagFilters: [],
 			adminMode: false
 		};
+
+		deleteComment = deleteComment.bind(this);
 	}
 
 	componentWillMount() {
@@ -75,6 +80,28 @@ class App extends Component {
 					t.setState({DisplayedProductList: ProjectData});
 				});
 			});
+
+
+		fetch('/api/loggedInUserReturning', {
+			method: 'POST',
+			body: JSON.stringify({
+				token: FindCookie()
+			}),
+			credentials: 'include',
+			headers: new Headers({
+				'Content-Type': 'application/json'
+			})
+		}).then(res => res.json())
+			.catch(error => console.log('Error: ', error))
+			.then(response => {
+				if (response.firstName) {
+					t.setUserData({
+						boards : response.boards,
+						name : response.firstName,
+						userId: response.email
+					});
+				}
+			})
 
 	}
 
@@ -110,30 +137,31 @@ class App extends Component {
 		this.setState({LoginRegisterModalisOpen: !this.state.LoginRegisterModalisOpen});
 	};
 
-	deleteComment = (productID, commentId) => {
-		let ProductList = this.state.DisplayedProductList;
-		ProductList.forEach(product => {
-			if (product.productID === productID) {
-				console.log("yes");
-				product.productComments = product.productComments.filter((comment) => {
-					return comment.commentId !== commentId;
-				});
-				console.log(product.productComments);
-				axios.post('/api/product_update', {
-					productKey: productID,
-					comments: product.productComments
-				})
-					.then(function (response) {
-						console.log(response);
-					})
-					.catch(function (error) {
-						console.log(error);
-					})
-			}
-		});
-		this.setState({DisplayedProductList: ProductList});
+	// deleteComment = (productID, commentId) => {
+	// 	let ProductList = this.state.DisplayedProductList;
+	// 	ProductList.forEach(product => {
+	// 		if (product.productID === productID) {
+	// 			console.log("yes");
+	// 			product.productComments = product.productComments.filter((comment) => {
+	// 				return comment.commentId !== commentId;
+	// 			});
+	// 			console.log(product.productComments);
+	// 			axios.post('/api/product_update', {
+	// 				productKey: productID,
+	// 				comments: product.productComments
+	// 			})
+	// 				.then(function (response) {
+	// 					console.log(response);
+	// 				})
+	// 				.catch(function (error) {
+	// 					console.log(error);
+	// 				})
+	// 		}
+	// 	});
+	// 	this.setState({DisplayedProductList: ProductList});
+	// };
 
-	};
+
 
 	openEditCommentWindow = (productID, commentId) => {
 		let ProductList = this.state.DisplayedProductList;
@@ -189,7 +217,7 @@ class App extends Component {
 				this.displayConfirmationToast(productImage, 'Saved to', board.name);
 
 				axios.post('/api/board_update', {
-					_id: this.state.UserData.userID,
+					email: this.state.UserData.userID,
 					boards: JSON.stringify(UserData.Boards)
 				})
 					.then(function (response) {
@@ -222,7 +250,7 @@ class App extends Component {
 		this.displayConfirmationToast(productImage, 'Deleted from', "board");
 
 		axios.post('/api/board_update', {
-			_id: this.state.UserData.userID,
+			email: this.state.UserData.userID,
 			boards: JSON.stringify(UserData.Boards)
 		})
 			.then(function (response) {
@@ -236,6 +264,7 @@ class App extends Component {
 
 	addPinToNewBoard = (productName, productDescription, productImage, productID, boardName) => {
 		let UserData = this.state.UserData;
+		if(!UserData.Boards)  { UserData.Boards = []; }
 		UserData.Boards.push({
 			name: boardName,
 			boardID: Math.random(),
@@ -247,7 +276,7 @@ class App extends Component {
 		this.displayConfirmationToast(productImage, 'Saved to', boardName);
 
 		axios.post('/api/board_update', {
-			_id: this.state.UserData.userID,
+			email: this.state.UserData.userID,
 			boards: JSON.stringify(UserData.Boards)
 		})
 			.then(function (response) {
@@ -261,6 +290,7 @@ class App extends Component {
 
 	createNewBoard = (boardName) => {
 		let UserData = this.state.UserData;
+		if(!UserData.Boards)  { UserData.Boards = []; }
 		UserData.Boards.push({
 			name: boardName,
 			boardID: Math.random()
@@ -269,7 +299,7 @@ class App extends Component {
 		this.displayConfirmationToast('', 'New Board Created', boardName);
 
 		axios.post('/api/board_update', {
-			_id: this.state.UserData.userID,
+			email: this.state.UserData.userID,
 			boards: JSON.stringify(UserData.Boards)
 		})
 			.then(function (response) {
@@ -297,7 +327,7 @@ class App extends Component {
 		this.displayConfirmationToast('', 'Your board', 'has been updated');
 
 		axios.post('/api/board_update', {
-			_id: this.state.UserData.userID,
+			email: this.state.UserData.userID,
 			boards: JSON.stringify(UserData.Boards)
 		})
 			.then(function (response) {
@@ -325,7 +355,7 @@ class App extends Component {
 		this.displayConfirmationToast('', `"${boardname}" board`, 'has been deleted');
 
 		axios.post('/api/board_update', {
-			_id: this.state.UserData.userID,
+			email: this.state.UserData.userID,
 			boards: JSON.stringify(UserData.Boards)
 		})
 			.then(function (response) {
@@ -338,14 +368,16 @@ class App extends Component {
 	};
 
 	setUserData = (userInfo) => {
+		console.log(userInfo);
 		let UserData = this.state.UserData;
 		if (userInfo.boards) {
 			userInfo.boards = JSON.parse(userInfo.boards);
 			UserData.Boards = userInfo.boards || [];
 			this.justThePins(UserData);
 		}
-		UserData.userID = userInfo.id;
+		UserData.userID = userInfo.email;
 		UserData.name = userInfo.name;
+
 		this.setState({UserData});
 	};
 
@@ -665,7 +697,7 @@ class App extends Component {
 							addPinToExistingBoard={this.addPinToExistingBoard}
 							addPinToNewBoard={this.addPinToNewBoard}
 							boards={this.state.UserData.Boards}
-							deleteComment={this.deleteComment}
+							deleteComment={deleteComment}
 							editComment={this.editComment}
 							openEditCommentWindow={this.openEditCommentWindow}
 							userData={this.state.UserData}

@@ -43,6 +43,7 @@ class LoginRegisterModal extends React.Component {
 				email: this.state.logInEmail,
 				password: this.state.logInPassword
 			}),
+			credentials: 'include',
 			headers: new Headers({
 				'Content-Type': 'application/json'
 			})

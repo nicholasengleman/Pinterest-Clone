@@ -10,28 +10,29 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://engleman:11july2017@ds119650.mlab.com:19650/pinterest-7512');
 const {User} = require('./models/user');
 const {Product} = require('./models/product');
-const { auth } = require('./middleware/auth');
+const {auth} = require('./middleware/auth');
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
 
 // GET //
-// app.get('/api/getProduct', (req, res) => {
-// 	let id = req.query.id;
-// 	Product.findById(id, (err, doc) => {
-// 		if (err) {
-// 			return res.status(400).send(err);
-// 		} else {
-// 			res.send(doc);
-// 		}
-// 	})
-// });
+app.get('/api/getProduct', (req, res) => {
+	let id = req.query.id;
+	Product.findById(id, (err, doc) => {
+		if (err) {
+			return res.status(400).send(err);
+		} else {
+			res.send(doc);
+		}
+	})
+});
 
 app.get('/api/GetAllProducts', (req, res) => {
 	Product.find().exec((err, doc) => {
@@ -45,8 +46,8 @@ app.get('/api/GetAllProducts', (req, res) => {
 
 
 app.get('/api/user_boards', (req, res) => {
-	User.find({_id: req.query.user }).exec((err, docs) => {
-		if(err) {
+	User.find({email: req.query.user}).exec((err, docs) => {
+		if (err) {
 			return res.status(400).send(err);
 		} else {
 			res.send(docs[0].boards);
@@ -55,8 +56,8 @@ app.get('/api/user_boards', (req, res) => {
 });
 
 app.get('/api/product_comments', (req, res) => {
-	Product.find({_id: req.query.product }).exec((err, docs) => {
-		if(err) {
+	Product.find({_id: req.query.product}).exec((err, docs) => {
+		if (err) {
 			return res.status(400).send(err);
 		} else {
 			res.send(docs[0].comments);
@@ -67,7 +68,7 @@ app.get('/api/product_comments', (req, res) => {
 app.get('/api/logout', auth, (req, res) => {
 	res.send(req.user);
 	req.user.deleteToken(req.token, (err, user) => {
-		if(err) {
+		if (err) {
 			return res.status(400).send(err);
 		} else {
 			res.status(200);
@@ -84,12 +85,18 @@ app.post('/api/register', (req, res) => {
 		if (err) {
 			return res.json({error: err});
 		} else {
-			res.status(200).json({
-				success: true,
-				id: doc._id,
-				name: doc.firstName,
-				email: doc.email
-			})
+			user.generateToken((err, user) => {
+				if (err) {
+					return res.status(400).send(err);
+				} else {
+					res.cookie('pinterest-auth', user.token).json({
+						success: true,
+						id: doc._id,
+						name: doc.firstName,
+						email: doc.email
+					});
+				}
+			});
 		}
 	})
 });
@@ -110,7 +117,7 @@ app.post('/api/login', (req, res) => {
 					if (err) {
 						return res.status(400).send(err);
 					} else {
-						res.cookie('auth', user.token).json({
+						res.cookie('pinterest-auth', user.token).json({
 							isAuth: true,
 							boards: user.boards,
 							id: user._id,
@@ -124,11 +131,35 @@ app.post('/api/login', (req, res) => {
 	});
 });
 
+app.post('/api/loggedInUserReturning', (req, res) => {
+	User.findByToken(req.body.token, (err, isMatch) => {
+		if (err) {
+			return res.status(400).send(err);
+		}
+		if (!isMatch) {
+			return res.json({
+				isAuth: false,
+				message: 'Token not found'
+			});
+		} else {
+			return res.json({
+				isAuth: true,
+				boards: user.boards,
+				id: user._id,
+				name: user.firstName,
+				email: user.email
+			});
+		}
+	});
+});
+
+
 
 // UPDATE //
 //update user boards
 app.post('/api/board_update', (req, res) => {
-	User.findOneAndUpdate(req.body._id, req.body, {new: true, upsert: true}, (err, doc) => {
+	console.log(req.body);
+	User.findOneAndUpdate(req.body.email, req.body, {new: true, upsert: true}, (err, doc) => {
 		if (err) {
 			return res.status(400).send(err);
 		} else {
@@ -143,7 +174,7 @@ app.post('/api/board_update', (req, res) => {
 
 //update product comments
 app.post('/api/product_update', (req, res) => {
-	Product.findOneAndUpdate(req.body.id, req.body, {new: true, upsert: true}, (err, doc) => {
+	Product.findOneAndUpdate(req.body.productKey, req.body, {new: true, upsert: true}, (err, doc) => {
 		if (err) {
 			return res.status(400).send(err);
 		} else {
@@ -172,7 +203,7 @@ app.post('/api/product_update', (req, res) => {
 //
 
 app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname+'../client/build/index.html'));
+	res.sendFile(path.join(__dirname + '../client/build/index.html'));
 });
 
 const port = process.env.PORT || 3001;

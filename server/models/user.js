@@ -30,7 +30,7 @@ const userSchema = mongoose.Schema({
 	token: {
 		type: String
 	}
-});
+}, { timestamps: true });
 
 
 userSchema.pre('save', function(next){
@@ -69,7 +69,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 userSchema.methods.generateToken = function(cb) {
 	let user = this;
 
-	let token = jwt.sign(user._id.toHexString(),"secret");
+	let token = jwt.sign(user._id.toHexString(),config.SECRET);
 
 	user.token = token;
 	user.save(function(err, user) {
@@ -84,15 +84,11 @@ userSchema.methods.generateToken = function(cb) {
 
 userSchema.statics.findByToken = function(token, cb) {
 	let user = this;
-
-	console.log("TOKEN:" + token);
-	jwt.verify(token, "secert", function(err, decode) {
-		console.log("ERRR" + err);
+	jwt.verify(token, config.SECRET, function(err, decode) {
 		user.findOne({ "_id": decode, "token": token}, function (err, user) {
 			if(err) {
 				return cb(err);
 			} else {
-
 				cb(user);
 			}
 		})
