@@ -54,38 +54,47 @@ class LoginRegisterModal extends React.Component {
 					a.props.toggleLoginRegisterModal();
 					a.props.history.push('/');
 				} else {
-					a.setState({statusSignIn: response.data.message});
+					a.setState({statusSignIn: response.message});
 				}
 			})
 	};
 
 
 	onSignUp = (event) => {
-		let a = this;
-		event.event.preventDefault();
-		fetch('/api/register', {
-			method: 'POST',
-			body: JSON.stringify({
-				email: this.state.signUpEmail,
-				firstName: this.state.signUpName,
-				password: this.state.signUpPassword
-			}),
-			credentials: 'include',
-			headers: new Headers({
-				'Content-Type': 'application/json'
-			})
-		}).then(res => res.json())
-			.catch(error => console.log('Error: ', error))
-			.then(response => {
-				console.log(response);
-				if (response.success) {
-					a.props.setUserData(response);
-					a.props.toggleLoginRegisterModal();
-					a.props.history.push('/');
-				} else {
-					// a.setState({statusSignIn: response.data.message});
-				}
-			})
+		if(this.validateEmail(this.state.signUpEmail)) {
+			let a = this;
+			event.event.preventDefault();
+			fetch('/api/register', {
+				method: 'POST',
+				body: JSON.stringify({
+					email: this.state.signUpEmail,
+					firstName: this.state.signUpName,
+					password: this.state.signUpPassword
+				}),
+				credentials: 'include',
+				headers: new Headers({
+					'Content-Type': 'application/json'
+				})
+			}).then(res => res.json())
+				.then(response => {
+					console.log(response);
+					if (response.success) {
+						a.props.setUserData(response);
+						a.props.toggleLoginRegisterModal();
+						a.props.history.push('/');
+					} else {
+						console.log(response.error.message);
+						a.setState({statusCreateAccount: response.error.message});
+					}
+				})
+		} else {
+			this.setState({statusCreateAccount: "Email is not in a valid format"});
+		}
+	};
+
+	 validateEmail = (email) => {
+		const re = /\S+@\S+\.\S+/;
+		return re.test(email);
 	};
 
 
@@ -121,14 +130,15 @@ class LoginRegisterModal extends React.Component {
 					<Text size="md" align="center" color="gray">Find and comment on products you like.</Text>
 					<Text size="md" align="center" color="gray">Save to boards the products you like the most.</Text>
 				</header>
+				<div className="loginRegisterModal__loginForm_error">{this.state.statusSignIn}</div>
 				<div className="loginRegisterModal__loginForm">
-					<div className="loginRegisterModal__loginForm_error">{this.state.statusSignIn}</div>
 					<input name="email"
 						   type="email"
 						   ref={input => (this.logInEmail = input)}
 						   onChange={this.onInputChange}
 						   value={this.state.logInEmail}
 						   placeholder="enter your email"
+						   required
 					/>
 					<input name="password"
 						   type="password"
@@ -136,7 +146,7 @@ class LoginRegisterModal extends React.Component {
 						   onChange={this.onInputChange}
 						   value={this.state.logInPassword}
 						   placeholder="enter your password"
-
+						   required
 					/>
 					<Button text="Sign In"
 							onClick={this.onSignIn}
@@ -149,6 +159,7 @@ class LoginRegisterModal extends React.Component {
 						   onChange={this.onInputChange}
 						   value={this.state.signUpEmail}
 						   placeholder="enter your email"
+						   required
 					/>
 					<input name="name"
 						   type="text"
@@ -156,6 +167,7 @@ class LoginRegisterModal extends React.Component {
 						   onChange={this.onInputChange}
 						   value={this.state.signUpName}
 						   placeholder="enter a first name"
+						   required
 					/>
 					<input name="password"
 						   type="password"
@@ -163,16 +175,14 @@ class LoginRegisterModal extends React.Component {
 						   onChange={this.onInputChange}
 						   value={this.state.signUpPassword}
 						   placeholder="create a password"
-
+						   required
 					/>
 					<Button text="Create Account"
 							onClick={this.onSignUp}
 							color="blue"
 					/>
-					<div className="loginRegisterModal__loginForm_error">{this.state.statusCreateAccount}</div>
-
-
 				</div>
+				<div className="loginRegisterModal__loginForm_error">{this.state.statusCreateAccount}</div>
 			</ReactModal>
 		)
 	}
