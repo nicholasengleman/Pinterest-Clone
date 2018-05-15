@@ -22,7 +22,7 @@ class ProductComments extends React.Component {
 
 	static getDerivedStateFromProps(nextProps) {
 		let product = nextProps.productList.filter(product => {
-			if (product.productID == nextProps.productID) {
+			if (product.productID === parseInt(nextProps.productID, 10)) {
 				return true;
 			} else {
 				return false;

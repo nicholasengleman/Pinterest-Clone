@@ -18,12 +18,10 @@ const ProductsContainer = (props) => {
 				/>
 				{props.products.length > 0 ?
 					props.products.map(product => (
-						<Link to={`/products/${product.productID}`}>
+						<Link key={product.productID} to={`/products/${product.productID}`}>
 							<Product
 								{...props}
 								{...product}
-
-								key={product.productID}
 							/>
 						</Link>
 					)) : <p>Sorry, we are out of products!</p>

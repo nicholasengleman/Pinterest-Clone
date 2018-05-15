@@ -233,7 +233,7 @@ class App extends Component {
 	deletePinFromBoard = (boardID, productID, productImage) => {
 		let UserData = this.state.UserData;
 		for (let board of UserData.Boards) {
-			if (board.boardID == boardID) {
+			if (board.boardID === parseFloat(boardID)) {
 				board.pins = board.pins.filter(pin => {
 					if (pin.productID !== productID) {
 						return true;

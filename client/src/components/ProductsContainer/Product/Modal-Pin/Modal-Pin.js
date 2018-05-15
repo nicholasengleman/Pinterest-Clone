@@ -171,7 +171,9 @@ class ModalPin extends React.Component {
 							</div>
 							{this.props.boards && this.props.boards.map(board => (
 								<div className='board'
-									 onClick={(event) => this.addPinToExistingBoard(event, board.boardID)}>
+									 onClick={(event) => this.addPinToExistingBoard(event, board.boardID)}
+									 key={board.boardID}
+								>
 									<div>
 										<img src={board.pic} alt=''/>
 										<span className='boardTitle'>

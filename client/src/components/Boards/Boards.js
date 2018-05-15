@@ -71,13 +71,13 @@ class Boards extends React.Component {
 						</div>
 					</div>
 					{this.props.Boards && this.props.Boards.map(board => (
-						<Link to={`/boards/${board.boardID}`}>
+						<Link key={board.boardID} to={`/boards/${board.boardID}`}>
 							<div className='myBoard'>
 								<div className='myBoardView'>
 									<div className="boardCoverImageContainer">
 										{
 											board.pins && board.pins.map(pin => (
-												<div className='boardCoverImage'>
+												<div key={pin.productID} className='boardCoverImage'>
 													<img src={pin.productImage} alt="test"/>
 												</div>
 											))

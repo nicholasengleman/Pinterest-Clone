@@ -5,9 +5,9 @@
 	box-sizing: border-box;
 	position: relative;
 	font-size: 14px;
-	transition: box-shadow 0.1s linear;
-	box-shadow: 0 0 0 0 white;
+	transition: all 0.1s linear;
     margin: 25px;
+	display: inline-block;
 }
 
 .productBox:hover {
@@ -22,6 +22,7 @@
 	top: 20px;
 	right: 30px;
 	opacity: 0;
+	transition: all 0.15s linear;
 }
 
 .productBox:hover .saveIcon {
@@ -35,6 +36,8 @@
 .productPic img {
 	width: 100%;
 	border-radius: 10px;
+	transition: all 0.1s linear;
+
 }
 
 .productBox:hover .productPic img {

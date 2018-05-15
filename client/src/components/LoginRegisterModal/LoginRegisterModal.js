@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactModal from "react-modal";
 import {withRouter} from 'react-router-dom';
-import axios from 'axios';
 import {Heading, Text, Button} from 'gestalt';
 
 import 'gestalt/dist/gestalt.css';

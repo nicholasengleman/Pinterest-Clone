@@ -1,9 +1,8 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
-import { DeleteCookie } from "../../Functions/CookieFunctions";
+import {DeleteCookie} from "../../Functions/CookieFunctions";
 
-import PropTypes from 'prop-types';
 import {Text} from 'gestalt';
 
 import SearchBar from './SearchBar/SearchBar';
@@ -13,24 +12,13 @@ import 'gestalt/dist/gestalt.css';
 import './Header.css';
 
 
-class Header extends React.Component {
-	constructor(props) {
-		super(props);
+const Header = (props) => {
 
-	}
-
-	static propTypes = {
-		filterProducts: PropTypes.func,
-		addNewContent: PropTypes.func,
-	};
-
-
-	logout = (event) => {
-		let a = this;
+	const logout = (event) => {
 		event.preventDefault();
 		axios.get('/api/logout')
 			.then(function (response) {
-				a.props.removeUserData();
+				props.removeUserData();
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -38,60 +26,57 @@ class Header extends React.Component {
 		DeleteCookie();
 	};
 
-	gotoBoards = () => {
-		if (this.props.name) {
-			this.props.history.push('/boards');
+	const gotoBoards = () => {
+		if (props.name) {
+			props.history.push('/boards');
 		} else {
-			this.props.toggleLoginRegisterModal();
+			props.toggleLoginRegisterModal();
 		}
 	};
 
-	gotoPins = () => {
-		if (this.props.name) {
-			this.props.history.push('/pins');
+	const gotoPins = () => {
+		if (props.name) {
+			props.history.push('/pins');
 		} else {
-			this.props.toggleLoginRegisterModal();
+			props.toggleLoginRegisterModal();
 		}
 	};
 
+	return (
+		<header className='header'>
+			<SearchBar filterProducts={props.filterProducts} name={props.name}/>
 
-	render() {
-		return (
-			<header className='header'>
-				<SearchBar filterProducts={this.props.filterProducts} name={this.props.name}/>
+			<div className='header__headerLink' onClick={gotoBoards}>
+				<Text inline bold size="lg" color="gray">My Boards</Text>
+				<div
+					className='header__headerLink_notification-boards'>{(props.boards && props.boards.length) || 0}</div>
+			</div>
 
-				<div className='header__headerLink' onClick={this.gotoBoards}>
-					<Text inline bold size="lg" color="gray">My Boards</Text>
-					<div className='header__headerLink_notification'>{this.props.boards && this.props.boards.length || 0}</div>
+			<div className='header__headerLink' onClick={gotoPins}>
+				<Text inline bold size="lg" color="gray">My Pins</Text>
+				<div
+					className='header__headerLink_notification-pins'>{(props.pinsCount && props.pinsCount.length) || 0}</div>
+			</div>
+
+
+			{props.name
+				? <div className='header__headerLink' onClick={logout}>
+					<Text inline size="lg" color="red">Log Out</Text>
 				</div>
-
-				<div className='header__headerLink' onClick={this.gotoPins}>
-					<Text inline bold size="lg" color="gray">My Pins</Text>
-					<div className='header__headerLink_notification'>{this.props.pinsCount && this.props.pinsCount.length || 0}</div>
+				: <div>
+					<div className='header__headerLink' onClick={props.toggleLoginRegisterModal}>
+						<Text inline size="lg" color="red">Login/Register</Text>
+					</div>
+					<LoginRegisterModal
+						isOpen={props.LoginRegisterModalisOpen}
+						toggleLoginRegisterModal={props.toggleLoginRegisterModal}
+						setUserData={props.setUserData}
+					/>
 				</div>
-
-
-				{
-					this.props.name
-						? <div className='header__headerLink' onClick={this.logout}>
-							<Text inline size="lg" color="red">Log Out</Text>
-						</div>
-						: <div>
-							<div className='header__headerLink' onClick={this.props.toggleLoginRegisterModal}>
-								<Text inline size="lg" color="red">Login/Register</Text>
-							</div>
-							<LoginRegisterModal
-								isOpen={this.props.LoginRegisterModalisOpen}
-								toggleLoginRegisterModal={this.props.toggleLoginRegisterModal}
-								setUserData={this.props.setUserData}
-							/>
-						</div>
-				}
-
-			</header>
-		)
-	}
-}
+			}
+		</header>
+	)
+};
 
 
 export default withRouter(Header);

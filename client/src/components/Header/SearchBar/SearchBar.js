@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Text } from "gestalt";
+import { Icon } from "gestalt";
 
 import "gestalt/dist/gestalt.css";
 import "./SearchBar.css";

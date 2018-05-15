@@ -32,24 +32,30 @@
 	cursor: pointer;
 }
 
-.header__headerLink_notification {
+.header__headerLink_notification-boards,
+.header__headerLink_notification-pins {
 	width: 17px;
 	height: 17px;
 	position: absolute;
-	top: 0;
-	right: 5px;
 	border-radius: 50%;
 	background-color: #0084FF;
 	color: white;
+	top: 0;
 	font-weight: bold;
 	border: 1px solid grey;
 	font-size: 10px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 }
 
+.header__headerLink_notification-boards {
+	right: 5px;
+}
+
+.header__headerLink_notification-pins {
+	right: 17px;
+}
 
 
 
