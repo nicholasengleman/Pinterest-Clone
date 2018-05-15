@@ -89,7 +89,7 @@ app.post('/api/register', (req, res) => {
 				if (err) {
 					return res.status(400).send(err);
 				} else {
-					res.cookie('pinterest-auth', user.token).json({
+					res.cookie('auth', user.token).json({
 						success: true,
 						id: doc._id,
 						name: doc.firstName,
@@ -117,7 +117,7 @@ app.post('/api/login', (req, res) => {
 					if (err) {
 						return res.status(400).send(err);
 					} else {
-						res.cookie('pinterest-auth', user.token).json({
+						res.cookie('auth', user.token).json({
 							isAuth: true,
 							boards: user.boards,
 							id: user._id,

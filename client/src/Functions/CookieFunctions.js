@@ -2,9 +2,9 @@
 export function FindCookie() {
 	if (document.cookie) {
 		let pinterestCookie = '';
-		let pinterestCookieNameLength = 'pinterest-auth'.length + 1;
+		let pinterestCookieNameLength = 'auth'.length + 1;
 		let cookies = document.cookie;
-		let begin = cookies.search('pinterest-auth');
+		let begin = cookies.search('auth');
 		let end = cookies.indexOf(';', begin);
 
 		if (end === -1) {
@@ -17,5 +17,5 @@ export function FindCookie() {
 }
 
 export function DeleteCookie() {
-	document.cookie = "pinterest-auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+	document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
