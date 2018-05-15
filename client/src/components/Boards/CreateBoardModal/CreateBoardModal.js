@@ -31,6 +31,7 @@ class CreateBoardModal extends React.Component {
 				onRequestClose={this.toggleCreateNewBoardModal}
 				contentLabel="create New Board Modal"
 				overlayClassName="Overlay"
+				bodyOpenClassName="ReactModal__Body--open"
 			>
 				<div className="Modal_CreateBoard_Header">
 					<Heading size="xs">Create Board</Heading>

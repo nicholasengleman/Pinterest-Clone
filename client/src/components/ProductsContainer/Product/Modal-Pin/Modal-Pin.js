@@ -12,7 +12,7 @@ class ModalPin extends React.Component {
 			newBoardName: '',
 			createBoard: false,
 			editModalProductDescription: false,
-			newProductDescription: ''
+			newProductDescription: this.props.productDescription
 		};
 	}
 
@@ -86,9 +86,10 @@ class ModalPin extends React.Component {
 				className="modalPin"
 				overlayClassName="Overlay"
 				contentLabel="Pin Modal"
+				bodyOpenClassName="ReactModal__Body--open"
 			>
 				<div className="modalPin_ProductSummary" onClick={this.submitNewPersonalizedDescription}>
-					<div className="productPic">
+					<div className="modalPin_productPic">
 						<img src={this.props.productImage} alt=""/>
 					</div>
 					<div>
@@ -98,7 +99,6 @@ class ModalPin extends React.Component {
 									id="description"
 									rows="6"
 									placeholder="Description"
-									ref={input => (this.newdescription = input)}
 									value={this.state.newProductDescription}
 									onChange={this.editProductDescription}
 								/>
@@ -110,7 +110,7 @@ class ModalPin extends React.Component {
 									<Text color="midnight"
 										  bold={true}
 										  size="sm">
-										{this.props.productDescription}
+										{this.state.newProductDescription}
 									</Text>
 								</div>
 								<div className="modalPin_productDescriptionEdit">

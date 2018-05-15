@@ -9,21 +9,18 @@
 	z-index: 5;
 }
 
-.pinHeader {
-	margin: 70px 100px;
-}
-
 .pinContainer {
 	width: 90%;
 	display: flex;
 	justify-content: flex-start;
-	margin: 150px auto 0;
+	flex-wrap: wrap;
+	margin: 75px auto 0;
 }
 
 .pinContainer a {
 	text-decoration: none;
 	width: 15%;
-	margin: 0 30px 60px 0;
+	margin: 30px;
 }
 
 .pinContainer .pin {
@@ -53,4 +50,25 @@
 
 .pinContainer .pin:hover img {
 	filter: brightness(0.8);
+}
+
+@media (max-width: 670px) {
+	.pinContainer a {
+		width: 25%;
+		margin: 15px;
+	}
+}
+
+@media (max-width: 500px) {
+	.pinContainer a {
+		width: 40%;
+		margin: 15px;
+	}
+}
+
+@media (max-width: 350px) {
+	.pinContainer a {
+		width: 90%;
+		margin: 15px;
+	}
 }

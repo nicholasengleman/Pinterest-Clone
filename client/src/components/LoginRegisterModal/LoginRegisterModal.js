@@ -113,6 +113,7 @@ class LoginRegisterModal extends React.Component {
 				className="loginRegisterModal"
 				overlayClassName="Overlay"
 				contentLabel="Login/Register Modal"
+				bodyOpenClassName="ReactModal__Body--open"
 			>
 				<header className='loginRegisterModal__header'>
 					<Heading size="xs" color="red">Welcome to <br/>Pinterest Clone</Heading>

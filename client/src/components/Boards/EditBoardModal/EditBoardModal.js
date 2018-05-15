@@ -53,6 +53,7 @@ class EditBoardModal extends React.Component {
 				onRequestClose={this.props.toggleEditBoardModal}
 				contentLabel="create New Board Modal"
 				overlayClassName="Overlay"
+				bodyOpenClassName="ReactModal__Body--open"
 			>
 				<div className="Modal_EditBoard_Container" onClick={(event) => event.preventDefault()}>
 					<div className="Modal_EditBoard_Header">

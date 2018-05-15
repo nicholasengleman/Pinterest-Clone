@@ -41,11 +41,9 @@ class App extends Component {
 				ToastAction: '',
 				ToastActionDestination: ''
 			},
-			activeIndex: 0,
 			DisplayedProductList: [],
 			MeetsPriceFilters: {},
 			MeetsTagFilters: [],
-			adminMode: false
 		};
 
 	}
@@ -399,35 +397,6 @@ class App extends Component {
 		}.bind(this), 3500);
 	};
 
-
-	removeProduct = (productToRemove) => {
-		this.baseproductList = this.baseproductList.filter(product => {
-			if (product.productID !== productToRemove) {
-				return true;
-			} else {
-				return false;
-			}
-		});
-
-		this.removeFromFavorites(productToRemove);
-
-		this.basetags = [];
-		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
-		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
-		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
-	};
-
-	editProduct = (productToRemove) => {
-		this.baseproductList = this.baseproductList.filter(product => {
-			if (product.productID !== productToRemove) {
-				return true;
-			} else {
-				return false;
-			}
-		});
-	};
-
-
 	updateSearchParameter = (searchParameter) => {
 		this.searchFilterParameter = searchParameter;
 		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
@@ -614,35 +583,6 @@ class App extends Component {
 		this.setState({MeetsTagFilters: tagsCount});
 	};
 
-	addNewContent = () => {
-		this.baseproductList.unshift({
-			productImageAddress: '',
-			productName: '',
-			productPrice: '',
-			productDescription: '',
-			productTags: [],
-			productID: Math.random()
-		});
-		this.setState({DisplayedProductList: this.baseproductList});
-	};
-
-	submitNewProductInfo = (productID, newTags, newImgSrc, newName, newPrice, newDescription) => {
-		this.baseproductList.forEach(product => {
-			if (product.productID === productID) {
-				product.productImageAddress = newImgSrc;
-				newTags.length > 0 && newTags[0] !== ""
-					? product.productTags = newTags.split(',')
-					: product.productTags = [];
-				product.productName = newName;
-				product.productPrice = newPrice;
-				product.productDescription = newDescription;
-			}
-		});
-		this.basetags = [];
-		this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});
-		this.findNumPoductsMatchPriceFilter(this.FilteredProductList);
-		this.findNumPoductsMatchTagFilter(this.FilteredProductList);
-	};
 
 	justThePins = (UserData) => {
 		let userdata = UserData;

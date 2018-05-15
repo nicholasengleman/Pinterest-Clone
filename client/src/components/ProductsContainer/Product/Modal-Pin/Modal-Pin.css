@@ -17,38 +17,42 @@
 	transform: translate(-50%, -50%);
 }
 
-
-
-.ReactModalPin__Body--open {
-	overflow: hidden;
-}
-
 .modalPin_ProductSummary {
 	width: 50%;
 	height: 100%;
+	padding: 20px;
 	text-align: center;
-	padding: 10%;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 	border-right: 1px solid lightgrey;
 }
 
+.modalPin_productPic {
+	height: 70%;
+	overflow: hidden;
+}
+
+.modalPin_productPic img{
+	height: 100%;
+	border-radius: 10px;
+}
+
 .modalPin_productDescription {
-	width: 80%;
-	float: left;
+	text-align: center;
+	margin: 0 auto;
+	width: 90%;
+	padding: 15px;
+	height: 20%;
 	cursor: pointer;
 }
 
 .modalPin_productDescription textarea {
-	max-height: 50px;
+	max-height: 30px;
 	width: 100%;
 }
 
 .modalPin_productDescriptionEdit {
 	display: inline-block;
 	cursor: pointer;
+	float: right;
 }
 
 .modalPin_Boards {
@@ -116,8 +120,8 @@
 }
 
 .createBoardContainer:active {
-	border-top: 3px solid blue;
-	border-bottom: 3px solid blue;
+	border-top: 3px solid #8bd0ff;
+	border-bottom: 3px solid #8bd0ff;
 }
 
 .createBoardContainer span {
@@ -149,6 +153,34 @@
 	width: 100%;
 	box-sizing: border-box;
 }
+
+
+/*@media (max-width: 800px) {*/
+	/*.modalPin {*/
+		/*width: 50%;*/
+		/*height: 50%;*/
+		/*outline: none;*/
+		/*border-radius: 10px;*/
+		/*overflow: hidden;*/
+		/*border: none;*/
+		/*display: flex;*/
+		/*justify-content: space-between;*/
+		/*padding: 0;*/
+		/*border: 0;*/
+		/*background: white;*/
+		/*position: absolute;*/
+		/*top: 50%;*/
+		/*left: 50%;*/
+		/*transform: translate(-50%, -50%);*/
+	/*}*/
+
+	/*.modalPin_ProductSummary {*/
+		/*width: 90%;*/
+	/*}*/
+	/*.modalPin_Boards {*/
+		/*width: 90%;*/
+	/*}*/
+/*}*/
 
 
 

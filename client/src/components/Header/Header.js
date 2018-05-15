@@ -47,13 +47,15 @@ const Header = (props) => {
 			<SearchBar filterProducts={props.filterProducts} name={props.name}/>
 
 			<div className='header__headerLink' onClick={gotoBoards}>
-				<Text inline bold size="lg" color="gray">My Boards</Text>
+				<div className='header__headerLink_desktop'><Text inline bold size="lg" color="gray">My Boards</Text></div>
+				<div className='header__headerLink_mobile'><Text inline bold size="sm" color="gray">Boards</Text></div>
 				<div
 					className='header__headerLink_notification-boards'>{(props.boards && props.boards.length) || 0}</div>
 			</div>
 
 			<div className='header__headerLink' onClick={gotoPins}>
-				<Text inline bold size="lg" color="gray">My Pins</Text>
+				<div className='header__headerLink_desktop'><Text inline bold size="lg" color="gray">My Pins</Text></div>
+				<div className='header__headerLink_mobile'><Text inline bold size="sm" color="gray">Pins</Text></div>
 				<div
 					className='header__headerLink_notification-pins'>{(props.pinsCount && props.pinsCount.length) || 0}</div>
 			</div>
@@ -61,11 +63,13 @@ const Header = (props) => {
 
 			{props.name
 				? <div className='header__headerLink' onClick={logout}>
-					<Text inline size="lg" color="red">Log Out</Text>
+					<div className='header__headerLink_desktop'><Text inline size="lg" color="red">Log Out</Text></div>
+					<div className='header__headerLink_mobile'><Text inline size="sm" color="red">Log Out</Text></div>
 				</div>
 				: <div>
 					<div className='header__headerLink' onClick={props.toggleLoginRegisterModal}>
-						<Text inline size="lg" color="red">Login/Register</Text>
+						<div className='header__headerLink_desktop'><Text inline size="lg" color="red">Login/Register</Text></div>
+						<div className='header__headerLink_mobile'><Text inline size="sm" color="red">Login/Register</Text></div>
 					</div>
 					<LoginRegisterModal
 						isOpen={props.LoginRegisterModalisOpen}

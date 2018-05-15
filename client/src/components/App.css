@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 
 .homepage {
   display: flex;
@@ -18,4 +22,33 @@
   overflow: hidden;
   z-index: 2;
 }
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.homepageLink {
+  width: 110px;
+  height: 40px;
+  border-radius: 50px;
+  margin: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+
+.homepageLink:hover {
+  background: lightgrey;
+}
+
+.pinHeader {
+  display: inline-block;
+  margin: 20px 100px;
+}
+
+
+
 
