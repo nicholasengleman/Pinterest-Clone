@@ -14,7 +14,7 @@ class Boards extends React.Component {
 		super(props);
 		this.state = {
 			displayModal_CreateBoard: false,
-			displayModal_EditBoard: false,
+			displayModal_EditBoard: {}
 		};
 
 	}
@@ -23,9 +23,13 @@ class Boards extends React.Component {
 		this.setState({displayModal_CreateBoard: !this.state.displayModal_CreateBoard});
 	};
 
-	toggleEditBoardModal = (event) => {
-		event.event.preventDefault();
-		this.setState({displayModal_EditBoard: !this.state.displayModal_EditBoard});
+	toggleEditBoardModal = (event, boardID) => {
+		if(event) {
+			event.event.preventDefault();
+		}
+		let displayModal_EditBoard = this.state.displayModal_EditBoard;
+		displayModal_EditBoard[boardID] = !displayModal_EditBoard[boardID];
+		this.setState({ displayModal_EditBoard });
 	};
 
 
@@ -88,10 +92,10 @@ class Boards extends React.Component {
 
 									<IconButton accessibilityLabel="edit Board"
 												icon="edit"
-												onClick={this.toggleEditBoardModal}
+												onClick={(event) => this.toggleEditBoardModal(event, board.boardID)}
 									/>
 									<EditBoardModal
-										displayModal={this.state.displayModal_EditBoard}
+										displayModal={this.state.displayModal_EditBoard[board.boardID]}
 										toggleEditBoardModal={this.toggleEditBoardModal}
 										deleteBoard={this.props.deleteBoard}
 										editBoard={this.props.editBoard}

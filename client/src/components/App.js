@@ -14,7 +14,7 @@ import IndividualBoard from "./Boards/IndividualBoard/IndividualBoard";
 import AllPins from "./AllPins/AllPins";
 
 import { FindCookie } from "../Functions/CookieFunctions";
-import { deleteComment } from "../Functions/CommentFunctions";
+// import { deleteComment } from "../Functions/CommentFunctions";
 
 class App extends Component {
 	constructor(props) {
@@ -48,7 +48,6 @@ class App extends Component {
 			adminMode: false
 		};
 
-		deleteComment = deleteComment.bind(this);
 	}
 
 	componentWillMount() {
@@ -137,29 +136,29 @@ class App extends Component {
 		this.setState({LoginRegisterModalisOpen: !this.state.LoginRegisterModalisOpen});
 	};
 
-	// deleteComment = (productID, commentId) => {
-	// 	let ProductList = this.state.DisplayedProductList;
-	// 	ProductList.forEach(product => {
-	// 		if (product.productID === productID) {
-	// 			console.log("yes");
-	// 			product.productComments = product.productComments.filter((comment) => {
-	// 				return comment.commentId !== commentId;
-	// 			});
-	// 			console.log(product.productComments);
-	// 			axios.post('/api/product_update', {
-	// 				productKey: productID,
-	// 				comments: product.productComments
-	// 			})
-	// 				.then(function (response) {
-	// 					console.log(response);
-	// 				})
-	// 				.catch(function (error) {
-	// 					console.log(error);
-	// 				})
-	// 		}
-	// 	});
-	// 	this.setState({DisplayedProductList: ProductList});
-	// };
+	deleteComment = (productID, commentId) => {
+		let ProductList = this.state.DisplayedProductList;
+		ProductList.forEach(product => {
+			if (product.productID === productID) {
+				console.log("yes");
+				product.productComments = product.productComments.filter((comment) => {
+					return comment.commentId !== commentId;
+				});
+				console.log(product.productComments);
+				axios.post('/api/product_update', {
+					productKey: productID,
+					comments: product.productComments
+				})
+					.then(function (response) {
+						console.log(response);
+					})
+					.catch(function (error) {
+						console.log(error);
+					})
+			}
+		});
+		this.setState({DisplayedProductList: ProductList});
+	};
 
 
 
@@ -697,7 +696,7 @@ class App extends Component {
 							addPinToExistingBoard={this.addPinToExistingBoard}
 							addPinToNewBoard={this.addPinToNewBoard}
 							boards={this.state.UserData.Boards}
-							deleteComment={deleteComment}
+							deleteComment={this.deleteComment}
 							editComment={this.editComment}
 							openEditCommentWindow={this.openEditCommentWindow}
 							userData={this.state.UserData}

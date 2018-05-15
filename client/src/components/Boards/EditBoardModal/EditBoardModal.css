@@ -8,6 +8,11 @@
 	outline: none;
 }
 
+.Modal_EditBoard_Container {
+	height: 100%;
+	width: 100%;
+}
+
 .Modal_EditBoard_Header {
 	display: flex;
 	justify-content: space-between;
