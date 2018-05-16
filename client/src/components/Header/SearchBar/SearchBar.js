@@ -5,7 +5,6 @@ import "gestalt/dist/gestalt.css";
 import "./SearchBar.css";
 
 const SearchBar = props => {
-
   const searchInputChange = event => {
     props.filterProducts(event.target.value);
     event.preventDefault();
@@ -13,12 +12,8 @@ const SearchBar = props => {
 
   return (
     <div className="searchContainer">
-      <div className='iconContainer'>
-        <Icon
-          accessibilityLabel="search"
-          icon="search"
-          size={20}
-        />
+      <div className="iconContainer">
+        <Icon accessibilityLabel="search" icon="search" size={20} />
       </div>
       <form id="search">
         <input
@@ -27,10 +22,11 @@ const SearchBar = props => {
           name="search"
           className="searchInput"
           onChange={searchInputChange}
-          placeholder={props.name
-                            ? `Hello ${props.name}, looking for something?`
-                            : "Search"
-                      }
+          placeholder={
+            props.name
+              ? `Hello ${props.name}, looking for something?`
+              : "Search"
+          }
         />
       </form>
     </div>

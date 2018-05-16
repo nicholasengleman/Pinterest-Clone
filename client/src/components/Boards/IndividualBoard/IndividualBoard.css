@@ -1,74 +1,73 @@
 .wider {
-	width: 200px;
+  width: 200px;
 }
 
 .deletePinButton {
-	position: absolute;
-	top: 0;
-	right: 0;
-	z-index: 5;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 5;
 }
 
 .pinContainer {
-	width: 90%;
-	display: flex;
-	justify-content: flex-start;
-	flex-wrap: wrap;
-	margin: 75px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 75px auto 0;
+  width: 90%;
 }
 
 .pinContainer a {
-	text-decoration: none;
-	width: 15%;
-	margin: 30px;
+  margin: 30px;
+  text-decoration: none;
+  width: 15%;
 }
 
 .pinContainer .pin {
-	width: 100%;
-	position: relative;
-	transition: all 0.1s linear;
-	border-radius: 5px;
+  border-radius: 5px;
+  position: relative;
+  transition: all 0.1s linear;
+  width: 100%;
 }
 
 .pinContainer .pin:hover {
-	box-shadow: 0 0 0 15px  #f3f3f3;
-	background: #f3f3f3;
-	cursor: zoom-in;
+  background: #f3f3f3;
+  box-shadow: 0 0 0 15px #f3f3f3;
+  cursor: zoom-in;
 }
 
-
 .pinImage {
-	overflow: hidden;
-	max-height: 80%;
-	border-radius: 10px;
+  border-radius: 10px;
+  max-height: 80%;
+  overflow: hidden;
 }
 
 .pinImage img {
-	width: 100%;
-	transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  width: 100%;
 }
 
 .pinContainer .pin:hover img {
-	filter: brightness(0.8);
+  filter: brightness(0.8);
 }
 
 @media (max-width: 670px) {
-	.pinContainer a {
-		width: 25%;
-		margin: 15px;
-	}
+  .pinContainer a {
+    margin: 15px;
+    width: 25%;
+  }
 }
 
 @media (max-width: 500px) {
-	.pinContainer a {
-		width: 40%;
-		margin: 15px;
-	}
+  .pinContainer a {
+    margin: 15px;
+    width: 40%;
+  }
 }
 
 @media (max-width: 350px) {
-	.pinContainer a {
-		width: 90%;
-		margin: 15px;
-	}
+  .pinContainer a {
+    margin: 15px;
+    width: 90%;
+  }
 }

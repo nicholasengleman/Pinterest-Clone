@@ -1,67 +1,66 @@
 .editBoardModal {
-	width: 600px;
-	height: 400px;
-	background: white;
-	margin: 100px auto;
-	border: 1px solid transparent;
-	border-radius: 7px;
-	outline: none;
+  background: white;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  height: 400px;
+  margin: 100px auto;
+  outline: none;
+  width: 600px;
 }
 
 .Modal_EditBoard_Container {
-	height: 100%;
-	width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 .Modal_EditBoard_Header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-bottom: 1px solid lightgrey;
-	padding: 0 25px;
-	height: 20%;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+  display: flex;
+  height: 20%;
+  justify-content: space-between;
+  padding: 0 25px;
 }
 
-.Modal_EditBoard_EditName, .Modal_EditBoard_EditDescription {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 30%;
-	border-bottom: 1px solid lightgrey;
-	padding: 0 25px;
+.Modal_EditBoard_EditName,
+.Modal_EditBoard_EditDescription {
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+  display: flex;
+  height: 30%;
+  justify-content: space-between;
+  padding: 0 25px;
 }
 
 .Modal_EditBoard_EditName input,
 .Modal_EditBoard_EditDescription textarea {
-	width: 70%;
-	padding: 12px;
-	border-radius: 5px;
-	border: 1px solid lightgrey;
-	outline: none;
-	font-family: apple-system,BlinkMacSystemFont,Segoe UI;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  font-family: apple-system, BlinkMacSystemFont, Segoe UI;
+  outline: none;
+  padding: 12px;
+  width: 70%;
 }
 
 .Modal_EditBoard_EditName input:focus,
 .Modal_EditBoard_EditDescription textarea:focus {
-	border: 1px solid rgb(181, 181, 181);
-	border-radius: 5px;
-	box-shadow: rgba(0, 132, 255, 0.5) 0 0 0 4px;
+  border: 1px solid rgb(181, 181, 181);
+  border-radius: 5px;
+  box-shadow: rgba(0, 132, 255, 0.5) 0 0 0 4px;
 }
 
 .Modal_EditBoard_EditDescription textarea {
-	resize: none;
+  resize: none;
 }
 
 .Modal_EditBoard_Footer {
-	height: 20%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0 25px;
+  align-items: center;
+  display: flex;
+  height: 20%;
+  justify-content: space-between;
+  padding: 0 25px;
 }
 
-.Modal_EditBoard_Footer Button:first-child {
-	margin-right: 15px;
+.Modal_EditBoard_Footer button:first-child {
+  margin-right: 15px;
 }
-
-

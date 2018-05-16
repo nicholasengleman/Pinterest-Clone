@@ -1,55 +1,53 @@
 .sideBarButton {
-	width: 90%;
-	margin: 5px auto;
-	height: 30px;
-	position: relative;
-	font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
+  height: 30px;
+  margin: 5px auto;
+  position: relative;
+  width: 90%;
 }
 
 .sideBarButton button {
-	width: 100%;
-	line-height: 30px;
-	font-size: 1em;
-	border: none;
-	outline: none;
-	cursor: pointer;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  line-height: 30px;
+  outline: none;
+  width: 100%;
 }
 
 .sideBarButton__NotSelected button {
-	background: lightgrey;
+  background: lightgrey;
 }
 
 .sideBarButton__NotSelected button:hover {
-	background: #ababab;
+  background: #ababab;
 }
 
 .sideBarButton__Selected button {
-	background: #ababab;
+  background: #ababab;
 }
 
 .sideBarButton__Selected button:hover {
-	background: #808080;
+  background: #808080;
 }
 
-
 .filterBadge {
-	display: inline-block;
-	border: 1px solid black;
-	height: 16px;
-	width: 16px;
-	line-height: 16px;
-	font-size: 0.7em;
-	border-radius: 25%;
-	background: darkslategrey;
-	color: lightskyblue;
-	position: absolute;
-	top: 7px;
-	right: 7px;
+  background: darkslategrey;
+  border: 1px solid black;
+  border-radius: 25%;
+  color: lightskyblue;
+  display: inline-block;
+  font-size: 0.7em;
+  height: 16px;
+  line-height: 16px;
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  width: 16px;
 }
 
 @media (max-width: 600px) {
-	.sideBarButton {
-		width: 95%;
-	}
+  .sideBarButton {
+    width: 95%;
+  }
 }
-

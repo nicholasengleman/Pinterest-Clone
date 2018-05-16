@@ -1,82 +1,80 @@
 .productBox {
-	border-radius: 10px;
-	text-align: left;
-	break-inside: avoid;
-	box-sizing: border-box;
-	position: relative;
-	font-size: 14px;
-	transition: all 0.1s linear;
-    margin: 25px;
-	display: inline-block;
+  border-radius: 10px;
+  box-sizing: border-box;
+  break-inside: avoid;
+  display: inline-block;
+  font-size: 14px;
+  margin: 25px;
+  position: relative;
+  text-align: left;
+  transition: all 0.1s linear;
 }
 
 .productBox:hover {
-	box-shadow: 0 0 0 10px #e8e8e8;
-	background: #e8e8e8;
-	cursor: zoom-in;
+  background: #e8e8e8;
+  box-shadow: 0 0 0 10px #e8e8e8;
+  cursor: zoom-in;
 }
 
 .saveIcon {
-	position: absolute;
-	height: 40px;
-	top: 20px;
-	right: 30px;
-	opacity: 0;
-	transition: all 0.15s linear;
+  height: 40px;
+  opacity: 0;
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  transition: all 0.15s linear;
 }
 
 .productBox:hover .saveIcon {
-	opacity: 1;
+  opacity: 1;
 }
 
 .saveIcon:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .productPic img {
-	width: 100%;
-	border-radius: 10px;
-	transition: all 0.1s linear;
-
+  border-radius: 10px;
+  transition: all 0.1s linear;
+  width: 100%;
 }
 
 .productBox:hover .productPic img {
-	filter: brightness(0.8);
+  filter: brightness(0.8);
 }
 
 .tagContainer {
-	display: flex;
-	flex-wrap: wrap;
-	align-content: flex-start;
-	align-items: flex-start;
-	justify-content: center;
-	width: 85%;
-	margin: 5px auto;
+  align-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 5px auto;
+  width: 85%;
 }
 
-.productBox h1,.productPrice, .productDescription  {
-	margin: 10px;
-	color: #555555;
+.productBox h1,
+.productPrice,
+.productDescription {
+  color: #555555;
+  margin: 10px;
 }
 
-.productBox h1  {
-	font-size: 1.4em;
-	font-weight: bold;
+.productBox h1 {
+  font-size: 1.4em;
+  font-weight: bold;
 }
 
 .productPrice {
-	font-size: 1.8em;
+  font-size: 1.8em;
 }
 
 .productDescription {
-	font-size: 1em;
+  font-size: 1em;
 }
-
 
 @media (max-width: 400px) {
-	.editPanel button {
-		font-size: 0.8em;
-	}
+  .editPanel button {
+    font-size: 0.8em;
+  }
 }
-
-

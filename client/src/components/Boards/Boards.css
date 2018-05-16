@@ -1,103 +1,99 @@
 .myBoardsContainer {
-	margin: 100px;
-	display: flex;
-	justify-content: flex-start;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 100px;
 }
 
 .myBoardsContainer a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 .myBoard {
-	width: 400px;
-	height: 300px;
-	margin: 25px;
-	border-radius: 5px;
-	transition: all 0.1s linear;
+  border-radius: 5px;
+  height: 300px;
+  margin: 25px;
+  transition: all 0.1s linear;
+  width: 400px;
 }
 
 .myBoard:hover {
-	box-shadow: 0 0 0 15px #f3f3f3;
-	background: #f3f3f3;
+  background: #f3f3f3;
+  box-shadow: 0 0 0 15px #f3f3f3;
 }
 
 .myBoard:hover .myBoardView {
-	filter: brightness(0.9);
+  filter: brightness(0.9);
 }
 
 .myBoardView {
-	background: #EFEFEF;
-	height: 85%;
-	border-radius: 7px;
-	border: 1px solid transparent;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: all 0.1s linear;
+  align-items: center;
+  background: #efefef;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  display: flex;
+  height: 85%;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.1s linear;
 }
 
 .myBoardView .boardCoverImageContainer {
-	width: 90%;
-	height: 90%;
-	margin: 0 auto;
-	display: flex;
-	justify-content:center;
-	flex-wrap: wrap;
-	overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  height: 90%;
+  justify-content: center;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 90%;
 }
 
 .myBoardView .boardCoverImage {
-	width: 30%;
-	height: 50%;
-	overflow: hidden;
-	display: flex;
-	align-items: center;
+  align-items: center;
+  display: flex;
+  height: 50%;
+  overflow: hidden;
+  width: 30%;
 }
 
 .myBoardView img {
-	width: 100%;
-	height: auto;
-	border: 1px solid white;
+  border: 1px solid white;
+  height: auto;
+  width: 100%;
 }
 
 .myBoardFooter {
-	height: 15%;
-	padding: 5px 25px 0;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  align-items: center;
+  display: flex;
+  height: 15%;
+  justify-content: space-between;
+  padding: 5px 25px 0;
 }
 
 @media (max-width: 1200px) {
-	.myBoardsContainer {
-		margin: 50px;
-	}
-	.myBoard {
-		margin: 20px;
-	}
+  .myBoardsContainer {
+    margin: 50px;
+  }
+  .myBoard {
+    margin: 20px;
+  }
 }
 
 @media (max-width: 940px) {
-	.myBoardsContainer {
-		justify-content: center;
-	}
+  .myBoardsContainer {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 550px) {
-	.myBoardsContainer {
-		margin: 0;
-		padding: 0;
-		width: 100%;
-	}
-	.myBoard {
-		margin: 15px auto;
-		padding: 0;
-		width: 80%;
-	}
+  .myBoardsContainer {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .myBoard {
+    margin: 15px auto;
+    padding: 0;
+    width: 80%;
+  }
 }
-
-
-
-

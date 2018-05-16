@@ -1,70 +1,67 @@
 .commentsContainerContainer {
-	background: #EEEEEE;
-	width: 100%;
-	min-height: 100%;
-	position: absolute;
-	top: 0;
+  background: #eeeeee;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .commentsContainer {
-	width: 800px;
-	height: 100%;
-	background: #ffffff;
-	margin: 50px auto;
-	border-radius: 10px;
-	padding: 20px;
-	display: flex;
-	justify-content: space-between;
+  background: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  margin: 50px auto;
+  padding: 20px;
+  width: 800px;
 }
 
 .commentsContainer .productSummary {
-	width: 50%;
-	height: 90%;
+  height: 90%;
+  width: 50%;
 }
 
 .productComments__toggleSaveProductModalButton {
-	display: flex;
-	justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
-
 .commentsContainer .productImage {
-	overflow: hidden;
-	height: 70%;
-	border-radius: 20px;
+  border-radius: 20px;
+  height: 70%;
+  overflow: hidden;
 }
 
 .commentsContainer .productImage img {
-	width: 100%;
+  width: 100%;
 }
 
 .commentsContainer .comments {
-	width: 45%;
+  width: 45%;
 }
 
 .commentsContainer .addCommentInput {
-	width: 80%;
-	margin-top: 25px;
-	padding: 5px 10px;
-	outline: none;
-	border-radius: 10px;
-	border: 1px solid lightgrey;
-	resize: none;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  margin-top: 25px;
+  outline: none;
+  padding: 5px 10px;
+  resize: none;
+  width: 80%;
 }
 
 .commentsContainer .addCommentInput:focus {
-	border: 1px solid rgb(181,181,181);
-	border-radius: 5px;
-	box-shadow: rgba(0, 132, 255, 0.5) 0 0 0 4px;
-	height: 80px;
+  border: 1px solid rgb(181, 181, 181);
+  border-radius: 5px;
+  box-shadow: rgba(0, 132, 255, 0.5) 0 0 0 4px;
+  height: 80px;
 }
 
-
-
 .commentsContainer .commentBox {
-	display: flex;
-	width: 90%;
-	align-items: start;
-	flex-direction: column;
-	padding-top: 20px;
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  width: 90%;
 }

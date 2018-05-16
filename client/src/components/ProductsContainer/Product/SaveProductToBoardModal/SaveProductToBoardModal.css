@@ -1,0 +1,181 @@
+.modalPin {
+  background: white;
+  border: none;
+  border: 0;
+  border-radius: 10px;
+  display: flex;
+  height: 50%;
+  justify-content: space-between;
+  left: 50%;
+  min-width: 700px;
+  outline: none;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+}
+
+.modalPin_ProductSummary {
+  border-right: 1px solid lightgrey;
+  height: 100%;
+  padding: 20px;
+  text-align: center;
+  width: 50%;
+}
+
+.modalPin_productPic {
+  height: 70%;
+  overflow: hidden;
+}
+
+.modalPin_productPic img {
+  border-radius: 10px;
+  height: 100%;
+}
+
+.modalPin_productDescription {
+  cursor: pointer;
+  height: 20%;
+  margin: 0 auto;
+  padding: 15px;
+  text-align: center;
+  width: 90%;
+}
+
+.modalPin_productDescription textarea {
+  max-height: 30px;
+  width: 100%;
+}
+
+.modalPin_productDescriptionEdit {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+}
+
+.modalPin_Boards {
+  height: 100%;
+  position: relative;
+  width: 50%;
+}
+
+.boardheading {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.board {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.board:hover,
+.createBoardContainer:hover {
+  background: #efefef;
+  cursor: pointer;
+}
+
+.board img {
+  border-radius: 5px;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+}
+
+.board div {
+  align-items: center;
+  display: flex;
+}
+
+.board .boardTitle {
+  color: #555555;
+  font-family: apple-system, BlinkMacSystemFont, Segoe UI;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+.boardSaveButton {
+  display: none;
+}
+
+.board:hover .boardSaveButton {
+  display: inline;
+}
+
+.createBoardContainer {
+  align-items: center;
+  border-top: 1px solid lightgrey;
+  display: flex;
+  height: 70px;
+  padding-left: 20px;
+}
+
+.createBoardContainer:active {
+  border-bottom: 3px solid #8bd0ff;
+  border-top: 3px solid #8bd0ff;
+}
+
+.createBoardContainer span {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.createBoardInputContainer {
+  border-bottom: 1px solid lightgrey;
+  padding: 20px;
+}
+
+.createBoardInputContainer input {
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  margin-top: 10px;
+  outline: none;
+  padding-left: 5px;
+  width: 100%;
+}
+
+.submitNewBoard {
+  bottom: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+}
+
+/*@media (max-width: 800px) {*/
+/*.modalPin {*/
+/*width: 50%;*/
+/*height: 50%;*/
+/*outline: none;*/
+/*border-radius: 10px;*/
+/*overflow: hidden;*/
+/*border: none;*/
+/*display: flex;*/
+/*justify-content: space-between;*/
+/*padding: 0;*/
+/*border: 0;*/
+/*background: white;*/
+/*position: absolute;*/
+/*top: 50%;*/
+/*left: 50%;*/
+/*transform: translate(-50%, -50%);*/
+/*}*/
+
+/*.modalPin_ProductSummary {*/
+/*width: 90%;*/
+/*}*/
+/*.modalPin_Boards {*/
+/*width: 90%;*/
+/*}*/
+/*}*/
