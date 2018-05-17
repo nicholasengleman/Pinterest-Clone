@@ -3,7 +3,6 @@ export function toggleLoginRegisterModal() {
 }
 
 export function setUserData(userInfo) {
-	console.log(userInfo);
 	let UserData = this.state.UserData;
 	if (userInfo.boards) {
 		userInfo.boards = JSON.parse(userInfo.boards);

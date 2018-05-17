@@ -173,8 +173,7 @@ app.post('/api/product', (req, res) => {
 // UPDATE //
 //update user boards
 app.post('/api/board_update', (req, res) => {
-	console.log(req.body);
-	User.findOneAndUpdate(req.body.email, req.body, {new: true, upsert: true}, (err, doc) => {
+	User.findOneAndUpdate({ email: req.body.email }, { boards: req.body.boards }, {new: true, upsert: true}, (err, doc) => {
 		if (err) {
 			return res.status(400).send(err);
 		} else {
@@ -189,7 +188,7 @@ app.post('/api/board_update', (req, res) => {
 
 //update product comments
 app.post('/api/product_update', (req, res) => {
-	Product.findOneAndUpdate(req.body.productKey, req.body, {new: true, upsert: true}, (err, doc) => {
+	Product.findOneAndUpdate({ productKey: req.body.productKey }, { comments: req.body.comments }, {new: true, upsert: true}, (err, doc) => {
 		if (err) {
 			return res.status(400).send(err);
 		} else {
@@ -201,21 +200,6 @@ app.post('/api/product_update', (req, res) => {
 	})
 });
 
-//
-//
-// // DELETE //
-// app.delete('/api/delete_product', (req, res) => {
-// 	let id = req.query.id;
-// 	Product.findByIdAndRemove(id, (err, doc) => {
-// 		if (err) {
-// 			return res.status(400).send(err);
-// 		} else {
-// 			res.json(true);
-// 		}
-// 	})
-// });
-//
-//
 
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname + '../client/build/index.html'));

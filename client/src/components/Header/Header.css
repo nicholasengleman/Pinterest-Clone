@@ -55,11 +55,11 @@
 }
 
 .header__headerLink_notification-boards {
-  right: 5px;
+  right: 2px;
 }
 
 .header__headerLink_notification-pins {
-  right: 12px;
+  right: 14px;
 }
 
 @media (max-width: 1400px) {

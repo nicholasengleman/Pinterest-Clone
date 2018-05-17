@@ -15,7 +15,6 @@ export function createNewBoard(boardName){
 		boards: JSON.stringify(UserData.Boards)
 	})
 		.then(function (response) {
-			console.log(response);
 		})
 		.catch(function (error) {
 			console.log(error);

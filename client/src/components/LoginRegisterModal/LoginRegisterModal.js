@@ -78,13 +78,11 @@ class LoginRegisterModal extends React.Component {
       })
         .then(res => res.json())
         .then(response => {
-          console.log(response);
           if (response.success) {
             a.props.setUserData(response);
             a.props.toggleLoginRegisterModal();
             a.props.history.push("/");
           } else {
-            console.log(response.error.message);
             a.setState({ statusCreateAccount: response.error.message });
           }
         });
