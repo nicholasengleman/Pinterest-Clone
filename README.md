@@ -1,26 +1,19 @@
-# Info
+## User Features
 
-This is a store/cms front-end built all in React. There is no backend so there is no authentication and data resets on page load.
+1. Click a product's Save button to edit the product description, and then save the product to an existing board or to a new board.
+2. View a product to leave a comment.
+3. Click the Board's tab at the top to create a new board, view your existing boards, edit the title or description of your boards or delete them. Click each board to see the products saved to that board.
+4. Click the Pin's tab at the top to see all your saved products. Remove any saved product by clicking the X.
+5. Find products via any combination of price filters, tag filters and search terms
+6. Create an account to save your comments, boards and pins.
 
-Becauase all product fields are optional, price and data fields can be left empty when creating content, resulting in more of a CMS system than a store.
+## Technical Features
 
-# Features
-
-The features fall into 3 categories:
-
-1. Content SearchBar
-    * Find products by selecting different combinations of tag and price filters
-    * Add a search term to further refine your search
-2. Favorite System
-    * Click the heart in the top-left corner of each product to save it to the list of favorites
-    * Access this list by clicking the favorites's count in the header. This opens the favorites modal.
-    * Inside the favorite modal you can remove favorites from the favorite list
-    * Products can also be removed from the favorite list by clicking on the heart a second time
-3. Product Administration
-    * On hover of content, buttons appear to edit or remove
-    * The cancel button automatically rolls back any changes made to the content while in edit-mode
-    * New content can be added by clicking the "add new product" button in the top left of the header
-    * If content is added with tags not previously used by other content, those tags are automatically addd to the sidebar
-
+1. Multi-page, responsive web application built with React, Node, Express, Mongoose and MongoDB containing 3 modals and 16 react components
+2. Created 8 Express Post and Get APIs for loading product data, creating and editing user boards, saving and editing user comments and registering, logging-in and logging-out users
+3. Created React functionality for creating and editing boards, which the user can then save products to from across the application
+4. Developed React Commenting UI, allowing users to post, edit and delete comments on each product
+5. Designed React toast system for alerting users when their requested action has completed
+6. Created React functionality for finding products via any combination of price filters, tag filters and search terms
 
 
