@@ -14,6 +14,10 @@ class CreateBoardModal extends React.Component {
     };
   }
 
+	componentWillMount() {
+		Modal.setAppElement('body');
+	};
+
   onChangeOfcreateNewBoardInputValue = () => {
     this.setState({ createNewBoardInputValue: this.input.value });
   };

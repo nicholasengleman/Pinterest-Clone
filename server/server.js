@@ -8,6 +8,7 @@ const path = require('path');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://engleman:11july2017@ds119650.mlab.com:19650/pinterest-7512');
+
 const {User} = require('./models/user');
 const {Product} = require('./models/product');
 const {auth} = require('./middleware/auth');

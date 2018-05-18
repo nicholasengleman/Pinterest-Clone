@@ -16,6 +16,10 @@ class SaveProductToBoardModal extends React.Component {
     };
   }
 
+	componentWillMount() {
+		ReactModal.setAppElement('body');
+	};
+
   submitNewPersonalizedDescription = event => {
     if (
       this.state.editModalProductDescription &&

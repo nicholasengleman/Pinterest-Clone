@@ -37,7 +37,7 @@ class SideBarButton extends React.Component {
         className={
           this.state.selected
             ? "sideBarButton sideBarButton__Selected"
-            : "sideBarButton" + " sideBarButton__NotSelected"
+            : "sideBarButton sideBarButton__NotSelected"
         }
       >
         <div className="filterBadge">{this.props.ProductsThatMeetFilter}</div>

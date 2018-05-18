@@ -20,6 +20,10 @@ class LoginRegisterModal extends React.Component {
     };
   }
 
+	componentWillMount() {
+		ReactModal.setAppElement('body');
+	};
+
   closeModal = () => {
     this.setState({
       logInEmail: "",
