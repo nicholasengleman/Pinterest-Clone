@@ -20,7 +20,8 @@ const productSchema = mongoose.Schema({
 		trim: true
 	},
 	tags: {
-		type: String
+		type: String,
+		required: true
 	},
 	comments: {
 		type: Array

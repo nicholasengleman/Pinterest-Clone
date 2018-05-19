@@ -78,7 +78,6 @@ export function addPinToNewBoard(productName, productDescription, productImage, 
 		boards: JSON.stringify(UserData.Boards)
 	})
 		.then(function (response) {
-			console.log(response);
 		})
 		.catch(function (error) {
 			console.log(error);

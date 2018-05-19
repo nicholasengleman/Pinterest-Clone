@@ -41,7 +41,7 @@ class AllPins extends React.Component {
         <div className="pinContainer">
           {this.props.pins ? (
             this.props.pins.map(pin => (
-              <Link to={`/products/${pin.productID}`}>
+              <Link to={`/products/${pin.productID}`} key={pin.productID}>
                 <div className="pin">
                   <span className="deletePinButton">
                     <IconButton

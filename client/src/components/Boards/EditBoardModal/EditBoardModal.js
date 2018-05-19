@@ -15,11 +15,8 @@ class EditBoardModal extends React.Component {
     };
   }
 
-	componentWillMount() {
-		Modal.setAppElement('body');
-	};
-
   static getDerivedStateFromProps = nextProps => {
+	  Modal.setAppElement('body');
     return {
       newName: nextProps.board.name,
       newDescription: nextProps.board.description || ""
