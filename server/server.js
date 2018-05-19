@@ -154,20 +154,20 @@ app.post('/api/loggedInUserReturning', (req, res) => {
 	});
 });
 
-app.post('/api/product', (req, res) => {
-	const product = new Product(req.body);
-
-	product.save((err, doc) => {
-		if(err) {
-			return res.status(400).send(err);
-		} else {
-			res.status(200).json({
-				post: true,
-				productId: doc._id
-			})
-		}
-	});
-});
+// app.post('/api/product', (req, res) => {
+// 	const product = new Product(req.body);
+//
+// 	product.save((err, doc) => {
+// 		if(err) {
+// 			return res.status(400).send(err);
+// 		} else {
+// 			res.status(200).json({
+// 				post: true,
+// 				productId: doc._id
+// 			})
+// 		}
+// 	});
+// });
 
 
 
