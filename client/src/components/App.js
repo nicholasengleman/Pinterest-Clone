@@ -116,7 +116,7 @@ class App extends Component {
             productPrice: databaseData[property1].price,
             productImageAddress: databaseData[property1].productImageAddress,
             productTags: databaseData[property1].tags.split(","),
-            productDescription: databaseData[property1].description,
+              productDescription: databaseData[property1].description,
             productID: databaseData[property1].productKey,
             productComments: databaseData[property1].comments
           });

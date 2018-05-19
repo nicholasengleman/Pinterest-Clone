@@ -20,15 +20,15 @@
 }
 
 .sideBarButton__NotSelected button:hover {
-  background: #ababab;
+  background: lightgrey;
 }
 
 .sideBarButton__Selected button {
-  background: #ababab;
+  background: #797979;
 }
 
 .sideBarButton__Selected button:hover {
-  background: #808080;
+  background: #a5a5a5;
 }
 
 .filterBadge {

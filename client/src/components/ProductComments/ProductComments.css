@@ -1,67 +1,108 @@
 .commentsContainerContainer {
-  background: #eeeeee;
-  min-height: 100%;
-  position: absolute;
-  top: 0;
-  width: 100%;
+	background: #eeeeee;
+	min-height: 100%;
+	position: absolute;
+	top: 0;
+	width: 100%;
 }
 
 .commentsContainer {
-  background: #ffffff;
-  border-radius: 10px;
-  display: flex;
-  height: 100%;
-  justify-content: space-between;
-  margin: 50px auto;
-  padding: 20px;
-  width: 800px;
+	background: #ffffff;
+	border-radius: 10px;
+	display: flex;
+	height: 100%;
+	justify-content: space-between;
+	margin: 50px auto;
+	padding: 20px;
+	width: 800px;
 }
 
 .commentsContainer .productSummary {
-  height: 90%;
-  width: 50%;
+	height: 90%;
+	width: 50%;
 }
 
 .productComments__toggleSaveProductModalButton {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .commentsContainer .productImage {
-  border-radius: 20px;
-  height: 70%;
-  overflow: hidden;
+	border-radius: 20px;
+	height: 70%;
+	overflow: hidden;
+	margin-bottom: 10px;
 }
 
 .commentsContainer .productImage img {
-  width: 100%;
+	width: 100%;
 }
 
 .commentsContainer .comments {
-  width: 45%;
+	width: 45%;
 }
 
 .commentsContainer .addCommentInput {
-  border: 1px solid lightgrey;
-  border-radius: 10px;
-  margin-top: 25px;
-  outline: none;
-  padding: 5px 10px;
-  resize: none;
-  width: 80%;
+	border: 1px solid lightgrey;
+	border-radius: 10px;
+	outline: none;
+	padding: 5px 10px;
+	resize: none;
+	width: 80%;
 }
 
 .commentsContainer .addCommentInput:focus {
-  border: 1px solid rgb(181, 181, 181);
-  border-radius: 5px;
-  box-shadow: rgba(0, 132, 255, 0.5) 0 0 0 4px;
-  height: 80px;
+	border: 1px solid rgb(181, 181, 181);
+	border-radius: 5px;
+	box-shadow: rgba(0, 132, 255, 0.5) 0 0 0 4px;
+	height: 80px;
 }
 
 .commentsContainer .commentBox {
-  align-items: start;
-  display: flex;
-  flex-direction: column;
-  padding-top: 20px;
-  width: 90%;
+	align-items: start;
+	display: flex;
+	flex-direction: column;
+	padding-top: 20px;
+	width: 90%;
+}
+
+@media (max-width: 1000px) {
+	.commentsContainer {
+		width: 80%;
+	}
+}
+
+@media (max-width: 800px) {
+	.commentsContainer {
+		width: 60%;
+		flex-direction: column;
+		align-items: center;
+		position: relative;
+	}
+	.commentsContainer	.productSummary {
+		width: 90%;
+		padding-bottom: 20px;
+		margin-bottom: 20px;
+		border-bottom: 1px solid grey;
+	}
+	.productComments__toggleSaveProductModalButton {
+		position: absolute;
+		top: 40px;
+		right: 60px;
+	}
+	.commentsContainer .comments {
+		width: 90%;
+	}
+}
+
+@media (max-width: 500px) {
+	.commentsContainer {
+		width: 80%;
+	}
+	.commentsContainer	.productSummary {
+		width: 95%;
+	}
+	.commentsContainer .comments {
+		width: 95%;
+	}
 }

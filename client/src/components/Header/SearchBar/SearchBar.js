@@ -15,7 +15,7 @@ const SearchBar = props => {
       <div className="iconContainer">
         <Icon accessibilityLabel="search" icon="search" size={20} />
       </div>
-      <form id="search">
+      <form id="searchInput">
         <input
           type="search"
           id="search"

@@ -112,7 +112,7 @@ class ProductComments extends React.Component {
             <div className="productImage">
               <img src={this.state.productImageAddress} alt="" />
             </div>
-            <Heading size="sm">{this.state.productName}</Heading>
+            <Heading size="xs">{this.state.productName}</Heading>
             <br />
             <Text>{this.state.productDescription}</Text>
             <br />
