@@ -147,6 +147,7 @@
 
   .header__RegisterLink {
     width: 90px;
+    padding: 0 3px;
   }
   .header__BoardPinLink {
     width: 70px;
