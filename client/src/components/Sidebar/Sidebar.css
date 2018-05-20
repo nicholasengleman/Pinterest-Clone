@@ -6,31 +6,10 @@
   width: 12%;
 }
 
-.addNewContent {
-  background: #ffa390;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 2px 2px lightgrey;
-  color: darkslategrey;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Arial, serif;
-  font-size: 1em;
-  letter-spacing: 1px;
-  margin: 30px auto 0 auto;
-  outline: none;
-  padding: 8px 16px;
-  transition: all 0.1s;
-}
-
-.addNewContent:hover {
-  background: #ff7763;
-  box-shadow: 0 2px 2px grey;
-  color: black;
-}
 
 @media (max-width: 600px) {
   .sidebarContainer {
-    min-width: 150px;
+    font-size: 10px;
+    min-width: 100px;
   }
 }

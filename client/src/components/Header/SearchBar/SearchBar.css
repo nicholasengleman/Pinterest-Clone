@@ -38,6 +38,10 @@
 
 @media (max-width: 560px) {
   .searchContainer {
-    margin-right: 10px;
+    margin-right: 3px;
+    width: 30%;
+  }
+  .searchInput {
+    padding-left: 37px;
   }
 }

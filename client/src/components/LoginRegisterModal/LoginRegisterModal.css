@@ -8,10 +8,10 @@
   justify-content: flex-start;
   left: 50%;
   outline: none;
-  overflow: hidden;
   padding: 15px 50px;
   position: absolute;
-  top: 50%;
+  top: 60%;
+  height: auto;
   transform: translate(-50%, -50%);
 }
 
@@ -71,7 +71,7 @@
     padding-top: 0;
   }
   .loginRegisterModal {
-    padding: 15px 25px;
+    padding: 15px 25px 0 25px;
   }
 }
 

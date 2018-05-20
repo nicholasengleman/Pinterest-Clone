@@ -37,7 +37,7 @@ const Header = props => {
     <header className="header">
       <SearchBar filterProducts={props.filterProducts} name={props.name} />
 
-      <div className="header__headerLink" onClick={gotoBoards}>
+      <div className="header__BoardPinLink" onClick={gotoBoards}>
         <div className="header__headerLink_desktop">
           <Text inline bold size="lg" color="gray">
             My Boards
@@ -53,7 +53,7 @@ const Header = props => {
         </div>
       </div>
 
-      <div className="header__headerLink" onClick={gotoPins}>
+      <div className="header__BoardPinLink" onClick={gotoPins}>
         <div className="header__headerLink_desktop">
           <Text inline bold size="lg" color="gray">
             My Pins
@@ -70,7 +70,7 @@ const Header = props => {
       </div>
 
       {props.name !== "User" ? (
-        <div className="header__headerLink" onClick={logout}>
+        <div className=".header__RegisterLink" onClick={logout}>
           <div className="header__headerLink_desktop">
             <Text inline size="lg" color="red">
               Log Out
@@ -85,7 +85,7 @@ const Header = props => {
       ) : (
         <div>
           <div
-            className="header__headerLink"
+            className="header__RegisterLink"
             onClick={props.toggleLoginRegisterModal}
           >
             <div className="header__headerLink_desktop">
@@ -95,7 +95,7 @@ const Header = props => {
             </div>
             <div className="header__headerLink_mobile">
               <Text inline size="sm" color="red">
-                Login/Register
+                  Login/Register
               </Text>
             </div>
           </div>

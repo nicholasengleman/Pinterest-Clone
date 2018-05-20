@@ -7,6 +7,7 @@ a {
   display: flex;
   margin: 0 auto 100px auto;
   width: 95%;
+  box-sizing: border-box;
 }
 
 .Overlay {
@@ -16,7 +17,6 @@ a {
   left: 0;
   overflow: hidden;
   position: fixed;
-  right: 0;
   top: 0;
   width: 100%;
   z-index: 2;

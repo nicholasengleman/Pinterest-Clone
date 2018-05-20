@@ -50,4 +50,8 @@
   .sideBarButton {
     width: 95%;
   }
+  .sideBarButton button {
+    text-align: left;
+  }
+
 }

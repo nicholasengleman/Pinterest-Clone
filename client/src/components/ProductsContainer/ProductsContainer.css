@@ -9,3 +9,10 @@
 .productContainer a {
   text-decoration: none;
 }
+
+@media (max-width: 500px) {
+  .productContainer {
+    padding: 0 5px 0 0;
+    margin-left: -2px;
+  }
+}

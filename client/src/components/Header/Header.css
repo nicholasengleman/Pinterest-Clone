@@ -2,7 +2,6 @@
   align-items: center;
   background: #ffffff;
   box-shadow: 0 2px 4px grey;
-  box-sizing: border-box;
   display: flex;
   font-size: 14px;
   height: 70px;
@@ -10,6 +9,8 @@
   padding: 0 60px;
   position: fixed;
   top: 0;
+  left: 0;
+  box-sizing: border-box;
   width: 100%;
   z-index: 2;
 }
@@ -18,7 +19,8 @@
   text-decoration: none;
 }
 
-.header__headerLink {
+.header__RegisterLink,
+.header__BoardPinLink {
   border-radius: 30px;
   height: 40px;
   line-height: 40px;
@@ -27,13 +29,15 @@
   text-align: center;
   width: 130px;
   background: #efefef;
+  box-sizing: border-box;
 }
 
 .header__headerLink_mobile {
   display: none;
 }
 
-.header__headerLink:hover {
+.header__RegisterLink:hover,
+.header__BoardPinLink:hover {
   background: #dfdfdf;
   cursor: pointer;
 }
@@ -95,9 +99,6 @@
     margin: 0 0 0 30px;
     width: 30%;
   }
-  .addNewContent {
-    margin: 0 45px 0 0;
-  }
   .header__headerLink_notification-boards {
     right: 5px;
   }
@@ -123,12 +124,6 @@
     min-width: 200px;
     width: 20%;
   }
-  .favoritesSummary {
-    margin-right: 20px;
-  }
-  .addNewContent {
-    display: none;
-  }
   .searchInput {
     height: 30px;
   }
@@ -141,16 +136,24 @@
   header {
     font-size: 5px;
     padding: 0 5px;
+    height: 40px;
   }
-  .header__headerLink {
-    margin: 0 5px;
+  .header__BoardPinLink,
+  .header__RegisterLink {
+    margin: 0 5px 0 0;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  .header__RegisterLink {
+    width: 90px;
+  }
+  .header__BoardPinLink {
+    width: 70px;
   }
   .headerSearchAddInput {
     margin: 0 10px;
     min-width: 150px;
-  }
-  .favoritesSummary {
-    font-size: 1.2em;
   }
   .header__headerLink_notification-boards {
     right: 0;
@@ -161,14 +164,18 @@
 }
 
 @media (max-width: 430px) {
+  .header {
+    padding:0 5px;
+    margin: 0;
+  }
+  .header__BoardPinLink {
+    width: 55px;
+  }
   .closeModalButton {
     font-size: 0.8em;
     margin-left: 43%;
     margin-top: 10px;
     padding: 2px 5px;
-  }
-  .favoritesSummary {
-    padding: 2px 5px 2px 50px;
   }
   .header__headerLink_notification-boards {
     right: -5px;
