@@ -27,7 +27,7 @@ class Comment extends React.Component {
   deleteComment = event => {
     event.preventDefault();
     this.toggleCommentEditMenu(event);
-    this.props.deleteComment(this.props.productID, this.props.commentId);
+    this.props.deleteComment(this.props.productID, this.props.commentId, this.props.name !== "User");
   };
 
   editComment = event => {
@@ -35,7 +35,8 @@ class Comment extends React.Component {
       this.props.editComment(
         this.props.productID,
         this.props.commentId,
-        this.state.newComment
+        this.state.newComment,
+          this.props.name !== "User"
       );
     }
   };

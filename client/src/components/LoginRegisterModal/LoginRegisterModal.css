@@ -58,7 +58,7 @@
   margin-bottom: 10px;
   outline: none;
   padding: 4px 10px;
-  width: 92%;
+  width:  200px;
 }
 
 .loginRegisterModal__loginForm input:focus {
@@ -67,6 +67,9 @@
 }
 
 @media (max-width: 500px) {
+  .loginRegisterModal__header {
+    padding-top: 0;
+  }
   .loginRegisterModal {
     padding: 15px 25px;
   }

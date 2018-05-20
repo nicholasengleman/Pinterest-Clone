@@ -1,27 +1,30 @@
 import axios from 'axios';
 
-export function createNewBoard(boardName){
+export function createNewBoard(boardName, loggedInUser) {
 	let UserData = this.state.UserData;
-	if(!UserData.Boards)  { UserData.Boards = []; }
+	if (!UserData.Boards) {
+		UserData.Boards = [];
+	}
 	UserData.Boards.push({
 		name: boardName,
 		boardID: Math.random()
 	});
 	this.setState({UserData});
 	this.displayConfirmationToast('', 'New Board Created', boardName);
-
-	axios.post('/api/board_update', {
-		email: this.state.UserData.userID,
-		boards: JSON.stringify(UserData.Boards)
-	})
-		.then(function (response) {
+	if (loggedInUser) {
+		axios.post('/api/board_update', {
+			email: this.state.UserData.userID,
+			boards: JSON.stringify(UserData.Boards)
 		})
-		.catch(function (error) {
-			console.log(error);
-		})
+			.then(function (response) {
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+	}
 }
 
-export function editBoard(boardID, newBoardName, newBoardDescription) {
+export function editBoard(boardID, newBoardName, newBoardDescription, loggedInUser) {
 	let UserData = this.state.UserData;
 	UserData.Boards.forEach(board => {
 		if (board.boardID === boardID) {
@@ -37,19 +40,21 @@ export function editBoard(boardID, newBoardName, newBoardDescription) {
 
 	this.displayConfirmationToast('', 'Your board', 'has been updated');
 
-	axios.post('/api/board_update', {
-		email: this.state.UserData.userID,
-		boards: JSON.stringify(UserData.Boards)
-	})
-		.then(function (response) {
-			console.log(response);
+	if (loggedInUser) {
+		axios.post('/api/board_update', {
+			email: this.state.UserData.userID,
+			boards: JSON.stringify(UserData.Boards)
 		})
-		.catch(function (error) {
-			console.log(error);
-		})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+	}
 }
 
-export function deleteBoard(boardID) {
+export function deleteBoard(boardID, loggedInUser) {
 	let UserData = this.state.UserData;
 	let boardname;
 	UserData.Boards = UserData.Boards.filter(board => {
@@ -65,14 +70,16 @@ export function deleteBoard(boardID) {
 
 	this.displayConfirmationToast('', `"${boardname}" board`, 'has been deleted');
 
-	axios.post('/api/board_update', {
-		email: this.state.UserData.userID,
-		boards: JSON.stringify(UserData.Boards)
-	})
-		.then(function (response) {
-			console.log(response);
+	if (loggedInUser) {
+		axios.post('/api/board_update', {
+			email: this.state.UserData.userID,
+			boards: JSON.stringify(UserData.Boards)
 		})
-		.catch(function (error) {
-			console.log(error);
-		});
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}
 }

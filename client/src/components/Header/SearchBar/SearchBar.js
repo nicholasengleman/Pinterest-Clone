@@ -23,9 +23,9 @@ const SearchBar = props => {
           className="searchInput"
           onChange={searchInputChange}
           placeholder={
-            props.name
+            props.name !== "User"
               ? `Hello ${props.name}, looking for something?`
-              : "Search"
+              : `Hello ${props.name}...register to save your boards, pins and comments...otherwise they will disappear when the browser refreshes.`
           }
         />
       </form>

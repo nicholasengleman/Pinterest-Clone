@@ -24,7 +24,7 @@ class EditBoardModal extends React.Component {
   };
 
   deleteBoard = () => {
-    this.props.deleteBoard(this.props.board.boardID);
+    this.props.deleteBoard(this.props.board.boardID, this.props.name !== "User");
     this.props.toggleEditBoardModal();
   };
 
@@ -40,7 +40,8 @@ class EditBoardModal extends React.Component {
     this.props.editBoard(
       this.props.board.boardID,
       this.state.newName,
-      this.state.newDescription
+      this.state.newDescription,
+        this.props.name !== "User"
     );
     this.setState({
       newName: "",

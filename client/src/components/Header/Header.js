@@ -26,19 +26,11 @@ const Header = props => {
   };
 
   const gotoBoards = () => {
-    if (props.name) {
-      props.history.push("/boards");
-    } else {
-      props.toggleLoginRegisterModal();
-    }
+	  props.history.push("/boards");
   };
 
   const gotoPins = () => {
-    if (props.name) {
-      props.history.push("/pins");
-    } else {
-      props.toggleLoginRegisterModal();
-    }
+	  props.history.push("/pins");
   };
 
   return (
@@ -77,7 +69,7 @@ const Header = props => {
         </div>
       </div>
 
-      {props.name ? (
+      {props.name !== "User" ? (
         <div className="header__headerLink" onClick={logout}>
           <div className="header__headerLink_desktop">
             <Text inline size="lg" color="red">

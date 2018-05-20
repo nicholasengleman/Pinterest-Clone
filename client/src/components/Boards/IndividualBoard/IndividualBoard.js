@@ -34,7 +34,7 @@ class IndividualBoard extends React.Component {
 
   deletePinFromBoard = (event, productID, imageAddress) => {
     event.event.preventDefault();
-    this.props.deletePinFromBoard(this.props.boardID, productID, imageAddress);
+    this.props.deletePinFromBoard(this.props.boardID, productID, imageAddress, this.props.name !== "User");
   };
 
   render() {

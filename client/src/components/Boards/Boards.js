@@ -34,7 +34,7 @@ class Boards extends React.Component {
   };
 
   createNewBoard = createNewBoardInputValue => {
-    this.props.createNewBoard(createNewBoardInputValue);
+    this.props.createNewBoard(createNewBoardInputValue, this.props.name !== "User");
     this.setState({ displayModal_CreateBoard: false });
   };
 
@@ -71,6 +71,7 @@ class Boards extends React.Component {
                 displayModal={this.state.displayModal_CreateBoard}
                 toggleCreateNewBoardModal={this.toggleCreateNewBoardModal}
                 createNewBoard={this.createNewBoard}
+                name={this.props.name}
               />
             </div>
             <div className="myBoardFooter">
@@ -118,6 +119,7 @@ class Boards extends React.Component {
                       deleteBoard={this.props.deleteBoard}
                       editBoard={this.props.editBoard}
                       board={board}
+                      name={this.props.name}
                     />
                   </div>
                 </div>

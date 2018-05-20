@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function deleteComment(productID, commentId){
+export function deleteComment(productID, commentId, loggedInUser){
 	let ProductList = this.state.DisplayedProductList;
 	ProductList.forEach(product => {
 		if (product.productID === productID) {
@@ -8,16 +8,18 @@ export function deleteComment(productID, commentId){
 				return comment.commentId !== commentId;
 			});
 
-			axios.post('/api/product_update', {
-				productKey: productID,
-				comments: product.productComments
-			})
-				.then(function (response) {
-					console.log(response);
+			if(loggedInUser) {
+				axios.post('/api/product_update', {
+					productKey: productID,
+					comments: product.productComments
 				})
-				.catch(function (error) {
-					console.log(error);
-				})
+					.then(function (response) {
+						console.log(response);
+					})
+					.catch(function (error) {
+						console.log(error);
+					})
+			}
 		}
 	});
 	this.setState({DisplayedProductList: ProductList});
@@ -37,7 +39,7 @@ export function openEditCommentWindow(productID, commentId) {
 	this.setState({DisplayedProductList: ProductList});
 }
 
-export function editComment(productID, commentId, newCommentText) {
+export function editComment(productID, commentId, newCommentText, loggedInUser) {
 	let ProductList = this.state.DisplayedProductList;
 	ProductList.forEach(product => {
 		if (product.productID === productID) {
@@ -47,22 +49,24 @@ export function editComment(productID, commentId, newCommentText) {
 					comment.edit = false;
 				}
 			});
-			axios.post('/api/product_update', {
-				productKey: productID,
-				comments: product.productComments
-			})
-				.then(function (response) {
-					console.log(response);
+			if(loggedInUser) {
+				axios.post('/api/product_update', {
+					productKey: productID,
+					comments: product.productComments
 				})
-				.catch(function (error) {
-					console.log(error);
-				})
+					.then(function (response) {
+						console.log(response);
+					})
+					.catch(function (error) {
+						console.log(error);
+					})
+			}
 		}
 	});
 	this.setState({DisplayedProductList: ProductList});
 }
 
-export function addNewComment(productID, comment, name, userId, date) {
+export function addNewComment(productID, comment, name, userId, date, loggedInUser) {
 	let ProductList = this.state.DisplayedProductList;
 	const commentId = Math.random();
 	ProductList.forEach(product => {
@@ -72,16 +76,18 @@ export function addNewComment(productID, comment, name, userId, date) {
 			} else {
 				product.productComments = [{name, userId, comment, date, commentId}];
 			}
-			axios.post('/api/product_update', {
-				productKey: productID,
-				comments: product.productComments
-			})
-				.then(function (response) {
-					console.log(response);
+			if(loggedInUser) {
+				axios.post('/api/product_update', {
+					productKey: productID,
+					comments: product.productComments
 				})
-				.catch(function (error) {
-					console.log(error);
-				})
+					.then(function (response) {
+						console.log(response);
+					})
+					.catch(function (error) {
+						console.log(error);
+					})
+			}
 		}
 	});
 

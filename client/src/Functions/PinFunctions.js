@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function addPinToExistingBoard(productName, productDescription, productImage, productID, boardID) {
+export function addPinToExistingBoard(productName, productDescription, productImage, productID, boardID, loggedInUser) {
 	let UserData = this.state.UserData;
 	for (let board of UserData.Boards) {
 		if (board.boardID === boardID) {
@@ -28,7 +28,7 @@ export function addPinToExistingBoard(productName, productDescription, productIm
 	}
 }
 
-export function deletePinFromBoard(boardID, productID, productImage) {
+export function deletePinFromBoard(boardID, productID, productImage, loggedInUser) {
 	let UserData = this.state.UserData;
 	for (let board of UserData.Boards) {
 		if (board.boardID === parseFloat(boardID)) {
@@ -58,7 +58,7 @@ export function deletePinFromBoard(boardID, productID, productImage) {
 		});
 }
 
-export function addPinToNewBoard(productName, productDescription, productImage, productID, boardName) {
+export function addPinToNewBoard(productName, productDescription, productImage, productID, boardName, loggedInUser) {
 	let UserData = this.state.UserData;
 	if (!UserData.Boards) {
 		UserData.Boards = [];

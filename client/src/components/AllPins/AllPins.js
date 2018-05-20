@@ -16,7 +16,7 @@ class AllPins extends React.Component {
 
   deletePinFromBoard = (event, boardID, productID, imageAddress) => {
     event.event.preventDefault();
-    this.props.deletePinFromBoard(boardID, productID, imageAddress);
+    this.props.deletePinFromBoard(boardID, productID, imageAddress, this.props.name !== "User");
   };
 
   render() {
