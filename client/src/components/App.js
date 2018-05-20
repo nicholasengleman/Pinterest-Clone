@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import Joyride from 'react-joyride';
 
 import "./App.css";
 
@@ -64,6 +65,14 @@ class App extends Component {
 			"$500 & above": false
 		};
 		this.state = {
+			run: false,
+			steps: [
+				{
+					target: '.homepage',
+					content: 'This if my awesome feature!',
+					placement: 'bottom',
+				}
+			],
 			UserData: {
 				Boards: [
 					{
@@ -142,6 +151,14 @@ class App extends Component {
 		this.removeUserData = removeUserData.bind(this);
 	}
 
+	componentDidMount() {
+		this.setState({run: true});
+	}
+
+	// callback = (tour) => {
+	// 	const {action, index, type} = data;
+	// };
+
 	componentWillMount() {
 		let t = this;
 		axios.get("/api/GetAllProducts").then(function (response) {
@@ -216,6 +233,8 @@ class App extends Component {
 	};
 
 	render() {
+		const {steps, run} = this.state;
+
 		return (
 			<Router>
 				<div>

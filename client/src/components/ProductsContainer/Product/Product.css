@@ -78,3 +78,13 @@
     font-size: 0.8em;
   }
 }
+
+@media (max-width: 1024px) {
+  .productBox {
+    background: #e8e8e8;
+    box-shadow: 0 0 0 10px #e8e8e8;
+  }
+  .productBox .saveIcon {
+    opacity: 1;
+  }
+}

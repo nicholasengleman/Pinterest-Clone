@@ -55,7 +55,7 @@ class Product extends React.Component {
 						</div>
 					)}
 
-					<div className="saveIcon">
+					<div className="saveIcon" onClick={(event) => event.preventDefault()}>
 						<Button onClick={this.toggleModal} text="Save" color="red" inline/>
 						<SaveProductToBoardModal
 							modalStatus={this.state.displayModal}

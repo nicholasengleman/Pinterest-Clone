@@ -18,6 +18,7 @@ const ProductsContainer = props => {
         props.products.map(product => (
           <Link key={product.productID} to={`/products/${product.productID}`}>
             <Product {...props} {...product} />
+
           </Link>
         ))
       ) : (
