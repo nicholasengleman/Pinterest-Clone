@@ -1,7 +1,8 @@
 import axios from 'axios';
+import _cloneDeep from 'lodash.clonedeep';
 
 export function createNewBoard(boardName, loggedInUser) {
-	let UserData = this.state.UserData;
+	let UserData = _cloneDeep(this.state.UserData);
 	if (!UserData.Boards) {
 		UserData.Boards = [];
 	}
@@ -10,6 +11,9 @@ export function createNewBoard(boardName, loggedInUser) {
 		boardID: Math.random()
 	});
 	this.setState({UserData});
+
+
+
 	this.displayConfirmationToast('', 'New Board Created', boardName);
 	if (loggedInUser) {
 		axios.post('/api/board_update', {
@@ -25,7 +29,7 @@ export function createNewBoard(boardName, loggedInUser) {
 }
 
 export function editBoard(boardID, newBoardName, newBoardDescription, loggedInUser) {
-	let UserData = this.state.UserData;
+	let UserData = _cloneDeep(this.state.UserData);
 	UserData.Boards.forEach(board => {
 		if (board.boardID === boardID) {
 			if (newBoardName) {
@@ -55,7 +59,7 @@ export function editBoard(boardID, newBoardName, newBoardDescription, loggedInUs
 }
 
 export function deleteBoard(boardID, loggedInUser) {
-	let UserData = this.state.UserData;
+	let UserData = _cloneDeep(this.state.UserData);
 	let boardname;
 	UserData.Boards = UserData.Boards.filter(board => {
 		if (board.boardID !== boardID) {

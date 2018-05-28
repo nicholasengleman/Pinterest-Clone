@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import axios from "axios";
-import Joyride from 'react-joyride';
 
 import "./App.css";
 
@@ -151,13 +150,6 @@ class App extends Component {
 		this.removeUserData = removeUserData.bind(this);
 	}
 
-	componentDidMount() {
-		this.setState({run: true});
-	}
-
-	// callback = (tour) => {
-	// 	const {action, index, type} = data;
-	// };
 
 	componentWillMount() {
 		let t = this;
@@ -233,8 +225,6 @@ class App extends Component {
 	};
 
 	render() {
-		const {steps, run} = this.state;
-
 		return (
 			<Router>
 				<div>

@@ -1,9 +1,11 @@
+import _cloneDeep from 'lodash.clonedeep';
+
 export function toggleLoginRegisterModal() {
 	this.setState({LoginRegisterModalisOpen: !this.state.LoginRegisterModalisOpen});
 }
 
 export function setUserData(userInfo) {
-	let UserData = this.state.UserData;
+	let UserData = _cloneDeep(this.state.UserData);
 	if (userInfo.boards) {
 		userInfo.boards = JSON.parse(userInfo.boards);
 		UserData.Boards = userInfo.boards || [];

@@ -1,3 +1,5 @@
+
+
 export function updateSearchParameter(searchParameter) {
 	this.searchFilterParameter = searchParameter;
 	this.setState({DisplayedProductList: this.filterProductsByTag(this.filterProductsByPrice(this.filterProductsBySearch()))});

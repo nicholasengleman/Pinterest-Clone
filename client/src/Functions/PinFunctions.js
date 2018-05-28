@@ -1,7 +1,8 @@
 import axios from 'axios';
+import _cloneDeep from 'lodash.clonedeep';
 
 export function addPinToExistingBoard(productName, productDescription, productImage, productID, boardID, loggedInUser) {
-	let UserData = this.state.UserData;
+	let UserData = _cloneDeep(this.state.UserData);
 	for (let board of UserData.Boards) {
 		if (board.boardID === boardID) {
 			if (board.pins) {
@@ -29,7 +30,7 @@ export function addPinToExistingBoard(productName, productDescription, productIm
 }
 
 export function deletePinFromBoard(boardID, productID, productImage, loggedInUser) {
-	let UserData = this.state.UserData;
+	let UserData = _cloneDeep(this.state.UserData);
 	for (let board of UserData.Boards) {
 		if (board.boardID === parseFloat(boardID)) {
 			board.pins = board.pins.filter(pin => {
@@ -59,7 +60,7 @@ export function deletePinFromBoard(boardID, productID, productImage, loggedInUse
 }
 
 export function addPinToNewBoard(productName, productDescription, productImage, productID, boardName, loggedInUser) {
-	let UserData = this.state.UserData;
+	let UserData = _cloneDeep(this.state.UserData);
 	if (!UserData.Boards) {
 		UserData.Boards = [];
 	}

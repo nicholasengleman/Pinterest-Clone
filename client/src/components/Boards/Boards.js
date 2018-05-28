@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import _cloneDeep from 'lodash.clonedeep';
 
 import EditBoardModal from "./EditBoardModal/EditBoardModal";
 import CreateBoardModal from "./CreateBoardModal/CreateBoardModal";
@@ -28,7 +29,7 @@ class Boards extends React.Component {
     if (event) {
       event.event.preventDefault();
     }
-    let displayModal_EditBoard = this.state.displayModal_EditBoard;
+    let displayModal_EditBoard = _cloneDeep(this.state.displayModal_EditBoard);
     displayModal_EditBoard[boardID] = !displayModal_EditBoard[boardID];
     this.setState({ displayModal_EditBoard });
   };
